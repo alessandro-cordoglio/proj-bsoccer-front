@@ -10,17 +10,17 @@ export default {
 <template>
   <header>
     <div class="logo">
-      <router-link :to="{ name: 'home' }">
-        <h2>ProjectLogo</h2>
-      </router-link>
+      <!-- <router-link :to="{ name: 'home' }"> -->
+      <h2>ProjectLogo</h2>
+      <!-- </router-link> -->
     </div>
     <div class="nav">
       <ul>
         <li>
-          <router-link :to="{ name: 'contact-us' }"> Contatti </router-link>
+          <a> Contatti </a>
         </li>
         <li>
-          <router-link :to="{ name: 'about-us' }"> About-Us </router-link>
+          <a> About-Us </a>
         </li>
       </ul>
     </div>

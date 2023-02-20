@@ -34,7 +34,7 @@
 //       name: "page-404",
 //       component: Page404,
 //     },
-//   ],
+// ],
 //   scrollBehavior(to, from, savedPosition) {
 //     // always scroll to top
 //     return { top: 0 };
