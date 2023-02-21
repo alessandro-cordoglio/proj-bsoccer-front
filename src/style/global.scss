@@ -18,13 +18,21 @@
 
 /* COMMON */
 
+    /* relative & absolute */
+    .relative{
+        position: relative;
+    }
+    .absolute{
+        position: absolute;
+    }
+
     /* main components  */
    .top_header{
         background-color: $alt-color;
         width: 100%;
         position: fixed;
         z-index: 50;
-        box-shadow: 0 4px 2px -1px gray;
+        box-shadow: 0px 15px 10px -15px #111; 
    }
 
     /* colors_class */
