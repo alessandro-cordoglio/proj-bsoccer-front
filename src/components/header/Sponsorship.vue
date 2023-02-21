@@ -43,6 +43,7 @@ import PlayerCard from "../commons/PlayerCard.vue";
                 ]
             };
         },
+       
     }
 </script>
 
@@ -62,12 +63,6 @@ import PlayerCard from "../commons/PlayerCard.vue";
                     :role="player.role"
                     :rate="player.rate"  
                 />
-            </div>
-            <div class="next">
-                <i class="fa-solid fa-circle-chevron-right"></i>
-            </div>
-            <div class="prev">
-                <i class="fa-solid fa-circle-chevron-left"></i>
             </div>
         </div>
     </div>
@@ -92,29 +87,15 @@ import PlayerCard from "../commons/PlayerCard.vue";
     }
     .carousel_card{
         border-radius: 10px;
-        width: 1000px;
-        height: 600px;
-        top:0; bottom: 100px; left: 450px; right: 0;
+        width: 700px;
+        height: calc(100% - 160px);
+        top:140px; bottom: 0px; left: 0px; right: 0px;
+        overflow-y:scroll;
         .sponsor_card{
             position: absolute;
-            top: 150px; bottom: 0; left: 200px; right: 0;
+            top: 0px; bottom: 0; left: 30px; right: 0;
             width: min-content;
             height: min-content;
-        }
-        .prev, .next {
-            max-width: fit-content;
-            margin: 10px 0;
-            position: absolute;
-            cursor: pointer;
-            z-index: 40;
-            top: 400px;
-            i{
-                font-size: 30px;
-                color: lightcoral;
-            }
-        }
-        .next{
-            right: 0px;
         }
     }
 

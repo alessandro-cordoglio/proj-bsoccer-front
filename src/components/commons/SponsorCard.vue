@@ -25,7 +25,7 @@
                       <h2>{{role}}</h2>
                   </div>
                   <div class="item_star">
-                      <i class="fa-solid fa-star" v-for="n in rate" ></i>
+                      <i class="fa-solid fa-star" v-for="i in rate" ></i>
                       <i class="fa-regular fa-star" v-for="n in 5 - rate" ></i>
                   </div>
               </div>
