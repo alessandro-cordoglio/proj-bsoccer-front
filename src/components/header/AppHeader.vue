@@ -214,7 +214,7 @@ ul {
 /* -------------------
   SPONSOR
 --------------------*/
-.sponsored_player {
-  padding-top: 200px;
+.sponsored_player{
+  padding-top: 95.86px;
 }
 </style>
