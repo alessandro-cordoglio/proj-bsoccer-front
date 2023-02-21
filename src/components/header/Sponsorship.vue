@@ -8,7 +8,40 @@ import PlayerCard from "../commons/PlayerCard.vue";
             SponsorCard,
         },
         data() {
-            return {};
+            return {
+                players:[
+                    {
+                        "name": "Matteo Castori",
+                        "role": "Attaccante",
+                        "rate": '3' 
+                    },
+                    {
+                        "name": "Matteo Bisonit",
+                        "role": "Difensore",
+                        "rate": '5' 
+                    },
+                    {
+                        "name": "Lugia Castori",
+                        "role": "Centrocampista",
+                        "rate": '2'
+                    },
+                    {
+                        "name": "Mamma Mamma",
+                        "role": "Attaccante",
+                        "rate": '5' 
+                    },
+                    {
+                        "name": "Maradona",
+                        "role": "Cecchino",
+                        "rate": '5' 
+                    },
+                    {
+                        "name": "Matteo Castori",
+                        "role": "Attaccante",
+                        "rate": '3' 
+                    }
+                ]
+            };
         },
     }
 </script>
@@ -23,7 +56,12 @@ import PlayerCard from "../commons/PlayerCard.vue";
         </div>
         <div class="carousel_card absolute">
             <div class="sponsor_card">
-                <SponsorCard/>
+                <SponsorCard
+                    v-for="player in players"
+                    :name="player.name"  
+                    :role="player.role"
+                    :rate="player.rate"  
+                />
             </div>
             <div class="next">
                 <i class="fa-solid fa-circle-chevron-right"></i>

@@ -1,6 +1,12 @@
 <script>
     export default {
-        
+        props:{
+        name:String,
+        role:String,
+        rate:String,
+    },
+  components: {
+  }
     }
 </script>
 
@@ -12,16 +18,15 @@
           </div>
           <div class="item_text">
               <div class="item_name">
-                  <h1 class="fw-bold">MARCO CAZZI</h1>
+                  <h1 class="fw-bold">{{ name  }}</h1>
               </div>
               <div class="item_bottom">
                   <div class="item_role d-flex align-items-center">
-                      <h2>ATTACCANTE</h2>
+                      <h2>{{role}}</h2>
                   </div>
                   <div class="item_star">
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star-half-stroke"></i>
+                      <i class="fa-solid fa-star" v-for="n in rate" ></i>
+                      <i class="fa-regular fa-star" v-for="n in 5 - rate" ></i>
                   </div>
               </div>
           </div>
