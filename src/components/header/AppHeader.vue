@@ -1,7 +1,6 @@
 <script>
-import Sponsorship from './Sponsorship.vue';
+import Sponsorship from "./Sponsorship.vue";
 export default {
-  
   components: {
     Sponsorship,
   },
@@ -15,10 +14,12 @@ export default {
 <template>
   <header>
     <section class="top_header">
-      <nav class="container d-flex justify-content-between align-items-center navbar">
+      <nav
+        class="container d-flex justify-content-between align-items-center navbar"
+      >
         <div class="header_left">
           <a class="" href="#">
-            <img src="src/assets/pngwing.com.png" alt="">
+            <img src="src/assets/pngwing.com.png" alt="" />
           </a>
         </div>
         <div class="search_bar">
@@ -28,8 +29,11 @@ export default {
                 <i class="fa-solid fa-magnifying-glass"></i>
               </button>
             </label>
-            <input class="w-100" type="text" placeholder="cerca un ruolo/ una città o un giocatore">
-            
+            <input
+              class="w-100"
+              type="text"
+              placeholder="cerca un ruolo/ una città o un giocatore"
+            />
           </form>
         </div>
         <div class="header_right navbar_layout">
@@ -46,44 +50,41 @@ export default {
         </div>
       </nav>
     </section>
-    
+
     <section class="sponsored_player">
-      <Sponsorship/>
+      <Sponsorship />
     </section>
   </header>
 </template>
 
 <style lang="scss" scoped>
-
-  nav{
-    .search_bar{
-      width: 60%;
-      label{
-        border-radius: 10px 0 0 10px;
-        color: black;
-        background-color: white;
-        padding: 0px 10px 0px 10px;
-        height: 100%;
-      }
-      input{
-        outline: none;
-        border-left: 1px solid black ;
-        text-align: center;
-        border-radius: 0px 10px 10px 0 ;
-      }
+nav {
+  .search_bar {
+    width: 60%;
+    label {
+      border-radius: 10px 0 0 10px;
+      color: black;
+      background-color: white;
+      padding: 0px 10px 0px 10px;
+      height: 100%;
     }
-    color: grey;
-    .header_left{
-      width: max-content;
-      img{
-        width: 80px;
-      }
+    input {
+      outline: none;
+      border-left: 1px solid black;
+      text-align: center;
+      border-radius: 0px 10px 10px 0;
     }
   }
-
-  .sponsored_player{
-    padding-top: 200px;
+  color: grey;
+  .header_left {
+    width: max-content;
+    img {
+      width: 80px;
+    }
   }
+}
 
-
+.sponsored_player {
+  padding-top: 200px;
+}
 </style>
