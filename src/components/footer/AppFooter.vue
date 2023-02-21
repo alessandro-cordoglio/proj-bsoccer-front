@@ -9,12 +9,15 @@ export default {
 
 <template>
   <footer class="alt-color">
-    <div class="register text-center ">
-      <h2 class="m-0" >Unisciti alla Community</h2>
+    <div class="register text-center d-flex ">
+      <div class="text-content">
+        <h2 class="m-0" >Unisciti alla Community</h2>
       <div class="free fw-bold my-2">It's Free!</div>
       <p class="m-0">In qualsiasi Città c'è sempre un nuovo giocatore pronto ad indossare la maglia della tua squadra</p>
       <a href="#" class="btn ms-btn my-3">Registrati</a>
       <small class="d-block">Copyrights 2021 Bsoccer s.r.l</small>
+      </div>
+      
     </div>
   </footer>
 </template>
@@ -26,7 +29,10 @@ export default {
     background-repeat: no-repeat;
     background-position: left, center;
     background-size: contain;
+    margin: auto;
    .register{
+    justify-content: center;
+    
       .free{
         
         font-size: 50px;
