@@ -1,9 +1,12 @@
 <script>
 import { store } from "../../store";
+import PlayerCard from "../commons/PlayerCard.vue";
 
 export default {
   name: "AppMain",
-  components: {},
+  components: {
+    PlayerCard,
+  },
   data() {
     return {
       store,
@@ -14,7 +17,8 @@ export default {
 
 <template>
   <main>
-    <router-view></router-view>
+    <PlayerCard />
+    <!-- <router-view></router-view> -->
   </main>
 </template>
 
