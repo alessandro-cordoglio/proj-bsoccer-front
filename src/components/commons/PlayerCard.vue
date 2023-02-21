@@ -10,6 +10,15 @@ export default {
 <template>
   <section class="player-card">
     <div class="card">
+      <div class="card-top">
+        <img
+          src="https://media.licdn.com/dms/image/C5603AQHxaq0QqYCwcA/profile-displayphoto-shrink_800_800/0/1537560592777?e=2147483647&v=beta&t=jEK2x0KzdgVAXg6iVGIMpIWxv21yo4SjeQkCkQbRVCU"
+          alt="player-name"
+        />
+      </div>
+      <div class="card-bottom">
+        <h3>FRANCO MADRIGALI</h3>
+      </div>
       <div class="left-corner"></div>
       <div class="right-corner"></div>
       <div class="bottom-left"></div>
@@ -30,8 +39,7 @@ export default {
     margin-bottom: 50px;
     width: 300px;
     height: 500px;
-    // background-color: rgb(144, 255, 127);
-    background-color: #35682d;
+
     .left-corner,
     .right-corner {
       position: absolute;
@@ -62,6 +70,35 @@ export default {
     .bottom-right {
       right: -1px;
       border-radius: 100% 0 0 0;
+    }
+    .card-top {
+      height: 50%;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .card-bottom {
+      height: 50%;
+      padding: 10px 20px;
+      background-image: linear-gradient(
+        to right bottom,
+        #fdf9e4,
+        #e4dcb3,
+        #d4cc9f,
+        #d9cd9a,
+        #cebf7f,
+        #bfaf70,
+        #b09f60,
+        #a19052,
+        #928143
+      );
+      h3 {
+        font-size: 26px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #746b43;
+      }
     }
   }
 }
