@@ -37,6 +37,7 @@ export default {
     position: relative;
     margin-top: 50px;
     margin-bottom: 50px;
+    overflow: hidden;
     width: 300px;
     height: 500px;
 
