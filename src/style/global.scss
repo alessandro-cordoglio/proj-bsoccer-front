@@ -1,8 +1,63 @@
 /* ---------------------
     IMPORT PARTIALS
 ----------------------*/
-@import "./partials/variables.scss";
+@import "/node_modules/bootstrap/scss/bootstrap";
 @import "./partials/mixins.scss";
-@import "./partials/reset.scss";
 @import "./partials/typography.scss";
 @import "./partials/layout.scss";
+
+/* VARIABLES */
+    /* container size */
+    $main_c: 1200px;
+    $hero_c: 700px;
+    $smaller_c: 1000px;
+    /* colours */
+    $main-color: #F6F6F6;
+    $secondary-color:#E0154A;
+    $alt-color:#111111;
+
+/* COMMON */
+
+    /* main components  */
+   .top_header{
+        background-color: $alt-color;
+        width: 100%;
+        position: fixed;
+        z-index: 50;
+        box-shadow: 0 4px 2px -1px gray;
+   }
+
+    /* colors_class */
+    .alt-color{
+        background-color: $alt-color;
+    }
+    .main-color{
+        background-color: $main-color;
+    }
+    .secondary-color{
+        background-color: $secondary-color
+    }
+
+    /* navbar orizzontale */
+    .navbar_layout{
+        ul{
+            @include reset-list;
+            @include link_reset;
+            display: flex;
+            li{ 
+                margin-left: 20px;
+                cursor: pointer;
+                padding: 13px ;
+                &:hover{
+                    color: #E0154A
+                }
+            }
+        }
+    }
+    
+    /* buttons without style */
+    .button_layout{
+        @include button-reset;
+    }
+
+

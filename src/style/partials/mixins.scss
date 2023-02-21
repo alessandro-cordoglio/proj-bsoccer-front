@@ -1,3 +1,19 @@
 /* --------------------
     MIXINS 
 -------------------- */
+@mixin reset-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+@mixin link_reset {
+    a{
+        text-decoration: none;
+        color: inherit;
+    }
+}
+@mixin button-reset {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+}
