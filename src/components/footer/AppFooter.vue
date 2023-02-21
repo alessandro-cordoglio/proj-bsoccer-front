@@ -22,6 +22,10 @@ export default {
 <style lang="scss" scoped>
   footer {
     padding: 40px 0;
+    background-image: url(src/assets/pngwing.com.png);
+    background-repeat: no-repeat;
+    background-position: left, center;
+    background-size: contain;
    .register{
       .free{
         
@@ -40,7 +44,9 @@ export default {
       .ms-btn{
         padding: 10px 60px;
         border-radius: 15px;
-        background-color: white;
+        color: white;
+        background-color: 
+        rgb(144, 255, 127);
 
       }
 
