@@ -17,7 +17,7 @@ export default {
 
 <template>
   <main>
-    <!-- <PlayerCard /> -->
+    <PlayerCard />
     <!-- <router-view></router-view> -->
   </main>
 </template>

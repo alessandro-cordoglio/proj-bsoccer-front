@@ -48,17 +48,17 @@ export default {
     .bottom-left,
     .bottom-right {
       position: absolute;
-      bottom: 0;
+      bottom: -2px;
       height: 60px;
       width: 50%;
       background-color: white;
     }
     .bottom-left {
-      left: 0;
+      left: -1px;
       border-radius: 0 100% 0 0;
     }
     .bottom-right {
-      right: 0;
+      right: -1px;
       border-radius: 100% 0 0 0;
     }
   }
