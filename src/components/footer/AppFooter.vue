@@ -13,9 +13,9 @@ export default {
       <div class="text-content">
         <h2 class="m-0" >Unisciti alla Community</h2>
       <div class="free fw-bold my-2">It's Free!</div>
-      <p class="m-0">In qualsiasi Città c'è sempre un nuovo giocatore pronto ad indossare la maglia della tua squadra</p>
-      <a href="#" class="btn ms-btn my-3">Registrati</a>
-      <small class="d-block">Copyrights 2021 Bsoccer s.r.l</small>
+      <p class="mb-2 fw-bold">In qualsiasi Città c'è sempre un nuovo giocatore pronto ad indossare la maglia della tua squadra.</p>
+      <a href="#" class="btn ms-btn ">Registrati</a>
+      <small class="d-block mt-1">Copyrights 2021 Bsoccer s.r.l</small>
       </div>
       
     </div>
@@ -27,16 +27,20 @@ export default {
     padding: 40px 0;
     background-image: url(src/assets/pngwing.com.png);
     background-repeat: no-repeat;
-    background-position: left, center;
-    background-size: contain;
+    background-position: left;
+    background-size: 180px;
     margin: auto;
    .register{
     justify-content: center;
     
+      @media screen and (max-width: 576px) {
+      justify-content: end;
+      margin-right: 40px;
+      }
+    
       .free{
-        
-        font-size: 50px;
-        color: #E0154A;
+        font-size: 60px;
+        color: #f3e7c6;
       }
 
       h4, h2{
@@ -47,17 +51,35 @@ export default {
         color: grey;
       }
 
+      p{
+        @media screen and (max-width: 1100px) {
+        display: none;
+        }
+        font-size: 19px;
+      
+      }
+
       .ms-btn{
-        padding: 10px 60px;
+        font-size: 28px;
+        margin: 16px 0;
+        @media screen and (max-width: 1100px) {
+        margin-top: 0px;
+        }
+        padding: 4px 60px;
         border-radius: 15px;
         color: white;
-        background-color: 
-        rgb(144, 255, 127);
+        // box-shadow: 1px 3px 10px 1px #35682d;
+        background-color: #35682d;
+        border: 2px solid #f3e7c6;
 
       }
 
 
-   }
+    }
+
+   
     
   }
+
+      
 </style>

@@ -30,7 +30,8 @@ export default {
     margin-bottom: 50px;
     width: 300px;
     height: 500px;
-    background-color: rgb(144, 255, 127);
+    // background-color: rgb(144, 255, 127);
+    background-color: #35682d;
     .left-corner,
     .right-corner {
       position: absolute;
