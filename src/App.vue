@@ -19,7 +19,7 @@ export default {
 </script>
 
 <template>
-  <AppHeader/>
+  <AppHeader />
   <AppMain />
   <AppFooter />
 </template>

@@ -1,4 +1,5 @@
 <script>
+import { store } from "../../store";
 import Sponsorship from "./Sponsorship.vue";
 export default {
   components: {
@@ -6,7 +7,15 @@ export default {
   },
   name: "AppHeader",
   data() {
-    return {};
+    return {
+      store,
+      hamburgerAnimation: false,
+    };
+  },
+  methods: {
+    animateBurger() {
+      this.hamburgerAnimation = !this.hamburgerAnimation;
+    },
   },
 };
 </script>
@@ -37,7 +46,15 @@ export default {
           </form>
         </div>
         <div class="header_right navbar_layout">
-          <ul>
+          <!-- Hamburger Menu -->
+          <div class="hamburger" @click="animateBurger">
+            <div
+              class="hamburger-menu"
+              :class="{ 'ham-animation': this.hamburgerAnimation }"
+            ></div>
+            <!-- /Hamburger Menu -->
+          </div>
+          <ul :class="{ 'show-ul': hamburgerAnimation }">
             <li>
               <i class="fa-solid fa-house"></i>
               HOME
@@ -82,8 +99,121 @@ nav {
       width: 80px;
     }
   }
+  .header_right {
+    display: flex;
+  }
+}
+/* -------------------
+  HAMBERGER MENU
+--------------------*/
+.hamburger {
+  cursor: pointer;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+.hamburger-menu {
+  position: relative;
+  width: 1.875rem;
+  height: 0.3125rem;
+  background-color: #fff;
+  border-radius: 0.3125rem;
+  z-index: 999;
+  display: none;
+  transition: 0.2s background-color linear 0.2s;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    height: 0.3125rem;
+    background-color: #fff;
+    border-radius: 0.3125rem;
+    transition: 0.4s transform, width linear;
+  }
+  &::after {
+    top: 0.625rem;
+    left: 0;
+    width: 1.5625rem;
+  }
+  &::before {
+    top: -0.625rem;
+    left: 0;
+    width: 1.25rem;
+  }
+
+  @media screen and (max-width: 1100px) {
+    display: block;
+  }
+}
+.ham-animation {
+  background-color: transparent;
+
+  &::after {
+    top: 0;
+    width: 1.875rem;
+    transform: rotate(225deg);
+  }
+  &::before {
+    top: 0;
+    width: 1.875rem;
+    transform: rotate(-225deg);
+  }
+}
+.active {
+  position: relative;
+  color: #fff;
+
+  &::after {
+    position: absolute;
+    content: "";
+    height: 0.3125rem;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+  }
 }
 
+/* -------------------
+  UL-ANIMATION
+--------------------*/
+ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  z-index: 100;
+  transition: right 0.4s ease-out;
+
+  li {
+    cursor: pointer;
+    padding: 3.125rem 0;
+    transition: all 0.3s ease-out;
+    margin-right: 1.875rem;
+
+    @media screen and (max-width: 1100px) {
+      background-color: #000;
+      padding: 1.875rem 0;
+      font-size: 0.875rem;
+      width: 100%;
+      text-align: center;
+    }
+  }
+  @media screen and (max-width: 1100px) {
+    flex-direction: column;
+    position: fixed;
+    top: 95px;
+    right: -270px;
+    width: 240px;
+    box-shadow: -10px 7px 10px 0px #000000;
+  }
+}
+.show-ul {
+  right: -10px;
+}
+/* -------------------
+  SPONSOR
+--------------------*/
 .sponsored_player {
   padding-top: 200px;
 }
