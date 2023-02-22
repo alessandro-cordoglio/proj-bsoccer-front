@@ -106,8 +106,8 @@ nav {
 /* -------------------
   SPONSOR
 --------------------*/
-.sponsored_player{
-  padding-top: 95.60px ;
+.sponsored_player {
+  padding-top: 95.6px;
 }
 /* -------------------
   HAMBERGER MENU
@@ -198,7 +198,7 @@ ul {
     margin-right: 1.875rem;
 
     @media screen and (max-width: 1100px) {
-      background-color: #000;
+      background-color: #111111;
       padding: 1.875rem 0;
       font-size: 0.875rem;
       width: 100%;
@@ -217,6 +217,4 @@ ul {
 .show-ul {
   right: -10px;
 }
-
-
 </style>
