@@ -107,7 +107,7 @@ nav {
   SPONSOR
 --------------------*/
 .sponsored_player{
-  padding-top: 96px ;
+  padding-top: 95.60px ;
 }
 /* -------------------
   HAMBERGER MENU
