@@ -17,7 +17,9 @@ export default {
         />
       </div>
       <div class="card-bottom">
-        <h3>FRANCO MADRIGALI</h3>
+        <h3 class="text-center">FRANCO MADRIGALI</h3>
+        <h5>RUOLO:</h5>
+        <h5>RATING:</h5>
       </div>
       <div class="left-corner"></div>
       <div class="right-corner"></div>
@@ -29,47 +31,46 @@ export default {
 
 <style lang="scss" scoped>
 .player-card {
-  text-align: center;
   display: flex;
   justify-content: center;
   width: 100%;
   .card {
     position: relative;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 3.125rem;
+    margin-bottom: 3.125rem;
     overflow: hidden;
-    width: 300px;
-    height: 500px;
+    width: 18.75rem;
+    height: 31.25rem;
 
     .left-corner,
     .right-corner {
       position: absolute;
-      top: -25px;
-      width: 80px;
-      height: 80px;
+      top: -1.5625rem;
+      width: 5rem;
+      height: 5rem;
       border-radius: 50%;
       background-color: white;
     }
     .left-corner {
-      left: -35px;
+      left: -2.1875rem;
     }
     .right-corner {
-      right: -35px;
+      right: -2.1875rem;
     }
     .bottom-left,
     .bottom-right {
       position: absolute;
-      bottom: -2px;
-      height: 60px;
+      bottom: -0.125rem;
+      height: 3.75rem;
       width: 50%;
       background-color: white;
     }
     .bottom-left {
-      left: -1px;
+      left: -0.0625rem;
       border-radius: 0 100% 0 0;
     }
     .bottom-right {
-      right: -1px;
+      right: -0.0625rem;
       border-radius: 100% 0 0 0;
     }
     .card-top {
@@ -82,7 +83,7 @@ export default {
     }
     .card-bottom {
       height: 50%;
-      padding: 10px 20px;
+      padding: 0.625rem 1.25rem;
       background-image: linear-gradient(
         to right bottom,
         #fdf9e4,
@@ -96,9 +97,12 @@ export default {
         #928143
       );
       h3 {
-        font-size: 26px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #746b43;
+        font-size: 1.625rem;
+        padding-bottom: 0.625rem;
+        border-bottom: 0.0625rem solid #746b43;
+      }
+      h5 {
+        padding-top: 0.625rem;
       }
     }
   }
