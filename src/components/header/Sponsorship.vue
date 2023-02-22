@@ -41,8 +41,18 @@ import PlayerCard from "../commons/PlayerCard.vue";
                         "rate": '3' 
                     }
                 ]
-            };
+            }
         },
+        mounted(){
+            this.pageScroll
+        },
+        methods:{
+            pageScroll() {
+                const carousel = document.querySelector('.carousel_card')
+                carousel.scrollDown(0,1);
+                scrolldelay = setTimeout(pageScroll,10);
+            }
+        }
        
     }
 </script>
@@ -55,7 +65,7 @@ import PlayerCard from "../commons/PlayerCard.vue";
         <div class="hero_title absolute">
             <img src="https://fontmeme.com/permalink/230221/f085f5f243c0fbdec578539547ed3ba6.png" alt="ea-sports-font" border="0">
         </div>
-        <div class="carousel_card absolute">
+        <div  class="carousel_card absolute">
             <div class="sponsor_card">
                 <SponsorCard
                     v-for="player in players"
