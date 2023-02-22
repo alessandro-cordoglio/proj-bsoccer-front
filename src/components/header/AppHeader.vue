@@ -104,6 +104,12 @@ nav {
   }
 }
 /* -------------------
+  SPONSOR
+--------------------*/
+.sponsored_player{
+  padding-top: 96px ;
+}
+/* -------------------
   HAMBERGER MENU
 --------------------*/
 .hamburger {
@@ -211,10 +217,6 @@ ul {
 .show-ul {
   right: -10px;
 }
-/* -------------------
-  SPONSOR
---------------------*/
-.sponsored_player{
-  padding-top: 95.86px;
-}
+
+
 </style>

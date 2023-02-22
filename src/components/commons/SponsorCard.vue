@@ -1,9 +1,7 @@
 <script>
     export default {
         props:{
-        name:String,
-        role:String,
-        rate:String,
+        player: Object,
     },
   components: {
   }
@@ -18,15 +16,15 @@
           </div>
           <div class="item_text">
               <div class="item_name">
-                  <h1 class="fw-bold">{{ name  }}</h1>
+                  <h1 class="fw-bold">{{ player.name  }}</h1>
               </div>
               <div class="item_bottom">
                   <div class="item_role d-flex align-items-center">
-                      <h2>{{role}}</h2>
+                      <h2>{{player.role}}</h2>
                   </div>
                   <div class="item_star">
-                      <i class="fa-solid fa-star" v-for="i in rate" ></i>
-                      <i class="fa-regular fa-star" v-for="n in 5 - rate" ></i>
+                      <i class="fa-solid fa-star" v-for="n in player.rate" ></i>
+                      <i class="fa-regular fa-star" v-for="n in 5 - player.rate" ></i>
                   </div>
               </div>
           </div>
