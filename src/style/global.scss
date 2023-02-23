@@ -66,16 +66,13 @@
     
     /* buttons without style */
     
-    /* .button_sponsor{
+    .button_register{
         @include button-reset;
         background-color: transparent;
         border: 1px black solid;
         padding: 10px;
         transition: 0.3s;
-        &:hover{
-            background-color: green;
-        }
-    } */
+    }
     .button_layout{
         @include button-reset;
     }

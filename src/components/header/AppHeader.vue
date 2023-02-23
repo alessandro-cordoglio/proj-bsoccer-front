@@ -1,9 +1,9 @@
 <script>
 import { store } from "../../store";
-import Sponsorship from "./Sponsorship.vue";
+import Hero from "./Hero.vue";
 export default {
   components: {
-    Sponsorship,
+    Hero,
   },
   name: "AppHeader",
   data() {
@@ -68,8 +68,8 @@ export default {
       </nav>
     </section>
 
-    <section class="sponsored_player">
-      <Sponsorship />
+    <section class="hero_header">
+      <Hero />
     </section>
   </header>
 </template>
@@ -87,9 +87,13 @@ nav {
     }
     input {
       outline: none;
+      border-top-style: none;
+      border-bottom-style: none;
+      border-right-style: none;
       border-left: 1px solid black;
       text-align: center;
       border-radius: 0px 10px 10px 0;
+
     }
   }
   color: grey;
@@ -106,7 +110,7 @@ nav {
 /* -------------------
   SPONSOR
 --------------------*/
-.sponsored_player {
+.hero_header {
   padding-top: 95.6px;
 }
 /* -------------------
