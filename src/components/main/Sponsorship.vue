@@ -47,8 +47,8 @@ export default {
             "https://tmssl.akamaized.net/images/foto/galerie/diego-maradona-1401100569-36.jpg?lm=1483605486",
         },
         {
-          name: "Matteo Castori",
-          role: "Attaccante",
+          name: "Franco Madrigali",
+          role: "Panchinaro",
           rate: 3,
           image:
             "https://media.licdn.com/dms/image/C5603AQHxaq0QqYCwcA/profile-displayphoto-shrink_800_800/0/1537560592777?e=2147483647&v=beta&t=jEK2x0KzdgVAXg6iVGIMpIWxv21yo4SjeQkCkQbRVCU",
