@@ -29,7 +29,6 @@ export default {
 
 <style lang="scss" scoped>
 .sponsored_player {
-  padding-top: 5rem;
   height: 43.75rem;
 }
 </style>
