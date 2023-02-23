@@ -14,10 +14,7 @@ export default {
   <section class="player-card">
     <div class="card">
       <div class="card-top">
-        <img
-          src="https://media.licdn.com/dms/image/C5603AQHxaq0QqYCwcA/profile-displayphoto-shrink_800_800/0/1537560592777?e=2147483647&v=beta&t=jEK2x0KzdgVAXg6iVGIMpIWxv21yo4SjeQkCkQbRVCU"
-          :alt="player.name"
-        />
+        <img :src="player.image" :alt="player.name" />
       </div>
       <div class="card-bottom">
         <h3 class="text-center">{{ player.name }}</h3>
@@ -54,7 +51,7 @@ export default {
       width: 5rem;
       height: 5rem;
       border-radius: 50%;
-      background-color: white;
+      background-color: var(--sponsor-color);
     }
     .left-corner {
       left: -2.1875rem;
@@ -68,7 +65,7 @@ export default {
       bottom: -0.125rem;
       height: 3.75rem;
       width: 50%;
-      background-color: white;
+      background-color: var(--sponsor-color);
     }
     .bottom-left {
       left: -0.0625rem;

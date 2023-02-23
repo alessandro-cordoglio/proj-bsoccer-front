@@ -30,5 +30,6 @@ export default {
 <style lang="scss" scoped>
 .sponsored_player {
   height: 43.75rem;
+  background-color: var(--sponsor-color);
 }
 </style>

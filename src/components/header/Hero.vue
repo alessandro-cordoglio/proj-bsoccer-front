@@ -1,14 +1,10 @@
 <script>
-import SponsorCard from "../commons/SponsorCard.vue";
-import PlayerCard from "../commons/PlayerCard.vue";
 export default {
   name: "Sponsorship",
-  components: {
-  },
+  components: {},
   data() {
     return {
-      players: [
-      ],
+      players: [],
     };
   },
   mounted() {},
@@ -19,23 +15,22 @@ export default {
 <template>
   <div class="background_image">
     <div class="hero_title">
-      <h1 >Unisciti alla Community</h1>
+      <h1>Unisciti alla Community</h1>
     </div>
     <div class="hero_text col">
       <div class="hero_text--subtitle">
-        <h2 class="text-center fw-bold">
-          It's Free!
-        </h2>
+        <h2 class="text-center fw-bold">It's Free!</h2>
       </div>
       <div class="hero_text--sponsor text-center text-white fs-2 pt-4">
         <p>
-          In qualsiasi Città c'è sempre un nuovo giocatore pronto ad indossare la maglia della tua squadra.
+          In qualsiasi Città c'è sempre un nuovo giocatore pronto ad indossare
+          la maglia della tua squadra.
         </p>
       </div>
     </div>
     <div class="register_button text-center">
-        <a href="#" class="button_register fw-bold fs-3">Registrati</a>
-      </div>
+      <a href="#" class="button_register fw-bold fs-3">Registrati</a>
+    </div>
   </div>
 </template>
 
@@ -61,21 +56,21 @@ export default {
     padding-top: 20px;
     padding-bottom: 20px;
   }
-  .hero_text--subtitle{
-    h2{
-        font-size: 60px;
-        color: #f3e7c6;
+  .hero_text--subtitle {
+    h2 {
+      font-size: 60px;
+      color: #f3e7c6;
     }
   }
-  .register_button{
+  .register_button {
     padding-bottom: 50px;
-    a{
+    a {
       color: rgb(201, 196, 196);
       background-color: rgb(133, 12, 36);
-      &:hover{
-            background-color: crimson;
-            color: white
-        }
+      &:hover {
+        background-color: crimson;
+        color: white;
+      }
     }
   }
 }

@@ -15,31 +15,43 @@ export default {
           name: "Matteo Castori",
           role: "Attaccante",
           rate: 3,
+          image:
+            "https://images2.gazzettaobjects.it/assets-mc/calcio/giocatori/cristiano_ronaldo_dos_santos_aveiro_05021985.png",
         },
         {
           name: "Matteo Bisonit",
           role: "Difensore",
           rate: 5,
+          image:
+            "https://static.fanpage.it/wp-content/uploads/sites/27/2022/10/messi-ritorno-barcellona-2023-1200x675.jpg",
         },
         {
           name: "Lugia Castori",
           role: "Centrocampista",
           rate: 2,
+          image:
+            "https://intermilan.bynder.com/m/44f1b949729d5f37/webimage-Lautaro_scheda.png",
         },
         {
           name: "Mamma Mamma",
           role: "Attaccante",
           rate: 5,
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiCND3NmOF7cilPOffcdgZwddA85zTtwFp8lNW4RyJTg&s",
         },
         {
           name: "Maradona",
           role: "Cecchino",
           rate: 5,
+          image:
+            "https://tmssl.akamaized.net/images/foto/galerie/diego-maradona-1401100569-36.jpg?lm=1483605486",
         },
         {
           name: "Matteo Castori",
           role: "Attaccante",
           rate: 3,
+          image:
+            "https://media.licdn.com/dms/image/C5603AQHxaq0QqYCwcA/profile-displayphoto-shrink_800_800/0/1537560592777?e=2147483647&v=beta&t=jEK2x0KzdgVAXg6iVGIMpIWxv21yo4SjeQkCkQbRVCU",
         },
       ],
     };
@@ -84,16 +96,19 @@ export default {
     opacity: 0;
     transition: opacity 0.1s;
     transition-timing-function: cubic-bezier(0.33, 0.94, 0.76, 1.61);
+    .bottom-right {
+      background-color: white !important;
+    }
   }
   .next-btn {
     padding: 0.3125rem 0.75rem;
-    background-color: #090808;
+    background-color: white;
     border-radius: 50%;
     cursor: pointer;
     position: absolute;
     top: 16.5625rem;
     right: 3.125rem;
-    color: white;
+    color: black;
   }
 }
 .player-active {
