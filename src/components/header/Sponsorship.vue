@@ -108,7 +108,6 @@ export default {
   .hero_text {
     padding-top: 50px;
     padding-bottom: 100px;
-    padding-left: 100px;
   }
 }
 </style>
