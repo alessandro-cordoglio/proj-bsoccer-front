@@ -30,7 +30,7 @@ export default {
           </ul>
         </div>
 
-          <div class="col-sm-12 col-md-6 col-lg-2 ms-col ms-color">
+          <div class="col-sm-6 col-sm-12 col-md-6 col-lg-2 ms-col ms-color text-center">
                 <h4 class="fw-bold ms-color" >Info</h4>
                 <a class=" text-decoration-none" href="#"><p>Scarica</p></a>
                 <a href="#" class=" text-decoration-none"><p>Perche BSoccer</p></a>
@@ -38,7 +38,7 @@ export default {
                 <a href="#" class=" text-decoration-none"><p>Assistenza</p></a>
           </div>
 
-          <div class="col-sm-12 col-md-6 col-lg-2  ms-col">
+          <div class="col-sm-6 col-sm-12 col-md-6 col-lg-2  ms-col text-center">
               <h4 class="fw-bold ms-color" >Chi Siamo</h4>
               <a class=" text-decoration-none" href="#"><p>Lavora con noi</p></a>
               <a class=" text-decoration-none" href="#"><p>Marchio</p></a>
@@ -47,7 +47,7 @@ export default {
               <a href="#" class=" text-decoration-none"><p>Negozio</p></a>
           </div>
 
-          <div class="col-sm-12 col-md-6 col-lg-2 ms-col">
+          <div class="col-sm col-sm-12 col-md-6 col-lg-2 ms-col text-center">
               <h4 class="fw-bold ms-color" >Lavora con Noi</h4>
               <a class=" text-decoration-none" href="#"><p>Scarica</p></a>
               <a href="#" class=" text-decoration-none"><p>Perche BSoccer</p></a>
@@ -57,11 +57,11 @@ export default {
           
       </div>
 
-      <div class="foooter-bar d-flex row align-items-center ">
-        <div class="card-logo d-flex align-items-center col-sm-12">
+      <div class="footer-bar d-flex align-items-center justify-content-between ">
+        <div class="card-logo">
           <img class=" img-fluid" src="src/assets/pngwing.com.png" alt="">
         </div>
-        <div class="button col-sm-12 col-md-6 ">
+        <div class="button">
           <a class="btn ms-btn" href="#">REGISTRATI</a>
         </div>
       </div>
@@ -135,7 +135,8 @@ export default {
         .ms-container {
         
           margin: auto;
-          width: 1100px;
+          max-width: 1100px;
+          width: 100%;
         }
 
         .card-logo{
