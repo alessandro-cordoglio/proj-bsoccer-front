@@ -56,7 +56,6 @@ export default {
       ],
     };
   },
-  mounted() {},
   methods: {
     nextPlayer() {
       if (this.activePlayer === this.players.length - 1) {
@@ -65,6 +64,15 @@ export default {
         this.activePlayer++;
       }
     },
+    autoPlay() {
+      this.interval = setInterval(this.nextPlayer, 3000);
+    },
+    stopInterval() {
+      clearInterval(this.interval);
+    },
+  },
+  mounted() {
+    this.autoPlay();
   },
 };
 </script>
@@ -73,12 +81,19 @@ export default {
   <div class="carousel_card">
     <div class="sponsor_card">
       <PlayerCard
+        @mouseenter="stopInterval"
+        @mouseleave="autoPlay"
         class="player_card"
         :class="{ 'player-active': activePlayer === index }"
         v-for="(player, index) in players"
         :player="player"
       />
-      <div class="next-btn" @click="nextPlayer(index)">
+      <div
+        class="next-btn"
+        @click="nextPlayer(index)"
+        @mouseenter="stopInterval"
+        @mouseleave="autoPlay"
+      >
         <i class="fa-solid fa-chevron-right"></i>
       </div>
     </div>
