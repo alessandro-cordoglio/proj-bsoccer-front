@@ -1,6 +1,9 @@
 <script>
 export default {
   name: "PlayerCard",
+  props: {
+    player: Object,
+  },
   data() {
     return {};
   },
@@ -13,13 +16,16 @@ export default {
       <div class="card-top">
         <img
           src="https://media.licdn.com/dms/image/C5603AQHxaq0QqYCwcA/profile-displayphoto-shrink_800_800/0/1537560592777?e=2147483647&v=beta&t=jEK2x0KzdgVAXg6iVGIMpIWxv21yo4SjeQkCkQbRVCU"
-          alt="player-name"
+          :alt="player.name"
         />
       </div>
       <div class="card-bottom">
-        <h3 class="text-center">FRANCO MADRIGALI</h3>
-        <h5>RUOLO:</h5>
-        <h5>RATING:</h5>
+        <h3 class="text-center">{{ player.name }}</h3>
+        <h5>RUOLO: {{ player.role }}</h5>
+        <h5>
+          RATING: <i class="fa-solid fa-star" v-for="n in player.rate"></i>
+          <i class="fa-regular fa-star" v-for="n in 5 - player.rate"></i>
+        </h5>
       </div>
       <div class="left-corner"></div>
       <div class="right-corner"></div>

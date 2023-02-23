@@ -1,10 +1,7 @@
 <script>
 import { store } from "../../store";
-import Sponsorship from "./Sponsorship.vue";
 export default {
-  components: {
-    Sponsorship,
-  },
+  components: {},
   name: "AppHeader",
   data() {
     return {
@@ -67,10 +64,6 @@ export default {
         </div>
       </nav>
     </section>
-
-    <section class="sponsored_player">
-      <Sponsorship />
-    </section>
   </header>
 </template>
 
@@ -106,9 +99,9 @@ nav {
 /* -------------------
   SPONSOR
 --------------------*/
-.sponsored_player {
-  padding-top: 95.6px;
-}
+// .sponsored_player {
+//   padding-top: 95.6px;
+// }
 /* -------------------
   HAMBERGER MENU
 --------------------*/
