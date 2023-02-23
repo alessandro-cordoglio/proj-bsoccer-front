@@ -1,15 +1,10 @@
 <script>
 import { store } from "../../store";
-<<<<<<< HEAD
 import Hero from "./Hero.vue";
 export default {
   components: {
     Hero,
   },
-=======
-export default {
-  components: {},
->>>>>>> prova-carosello
   name: "AppHeader",
   data() {
     return {
@@ -72,13 +67,9 @@ export default {
         </div>
       </nav>
     </section>
-<<<<<<< HEAD
-
     <section class="hero_header">
       <Hero />
     </section>
-=======
->>>>>>> prova-carosello
   </header>
 </template>
 
@@ -118,15 +109,9 @@ nav {
 /* -------------------
   SPONSOR
 --------------------*/
-<<<<<<< HEAD
 .hero_header {
   padding-top: 95.6px;
 }
-=======
-// .sponsored_player {
-//   padding-top: 95.6px;
-// }
->>>>>>> prova-carosello
 /* -------------------
   HAMBERGER MENU
 --------------------*/
