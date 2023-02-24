@@ -1,12 +1,10 @@
 <script>
-// import SponsorCard from "../commons/SponsorCard.vue";
 import axios from "axios";
 import PlayerCard from "../commons/PlayerCard.vue";
 export default {
   name: "Sponsorship",
   components: {
     PlayerCard,
-    // SponsorCard,
   },
   data() {
     return {
@@ -80,7 +78,6 @@ export default {
     axios.get(`http://localhost:8000/api/players`).then((resp) => {
       resp.data.forEach((giocatore) => {
         if (giocatore.sponsorships.length > 0) {
-          console.log(giocatore.sponsorships);
           this.giocatori.push(giocatore);
         }
       });
