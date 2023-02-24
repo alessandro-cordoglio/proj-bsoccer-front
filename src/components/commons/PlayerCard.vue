@@ -17,10 +17,13 @@ export default {
         <img :src="player.image" :alt="player.name" />
       </div>
       <div class="card-bottom">
-        <h3 class="text-center">{{ player.name }}</h3>
+        <h3 class="text-center">
+          {{ player.name }}
+        </h3>
         <h5>RUOLO: {{ player.role }}</h5>
         <h5>
-          RATING: <i class="fa-solid fa-star" v-for="n in player.rate"></i>
+          RATING:
+          <i class="fa-solid fa-star" v-for="n in player.rate"></i>
           <i class="fa-regular fa-star" v-for="n in 5 - player.rate"></i>
         </h5>
       </div>
