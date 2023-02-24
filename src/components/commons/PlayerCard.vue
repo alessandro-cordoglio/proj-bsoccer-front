@@ -68,11 +68,11 @@ export default {
       background-color: var(--sponsor-color);
     }
     .bottom-left {
-      left: -0.0625rem;
+      left: -0.125rem;
       border-radius: 0 100% 0 0;
     }
     .bottom-right {
-      right: -0.0625rem;
+      right: -0.125rem;
       border-radius: 100% 0 0 0;
     }
     .card-top {
