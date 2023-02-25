@@ -13,11 +13,16 @@ export default {
 <template>
   <div class="card">
     <div class="card-top">
-      <img :src="data.image_url" :alt="(data.user.name, data.user.surname)" />
+      <img
+        :src="data.profile_photo"
+        :alt="(data.user.name, data.user.surname)"
+      />
     </div>
     <div class="card-bottom">
       <h3 class="text-center">{{ data.user.name }} {{ data.user.surname }}</h3>
-      <h5>RUOLO:{{ data.roles[0].name }}</h5>
+      <h5>
+        RUOLO:<span v-for="role in data.roles">{{ role.name }}-</span>
+      </h5>
       <h5>
         RATING:
         <i class="fa-solid fa-star" v-for="n in 1"></i>
