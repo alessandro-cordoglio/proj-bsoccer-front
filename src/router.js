@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import AppHome from "./pages/AppHome.vue";
+import PlayersList from "./pages/PlayersList.vue";
 // import ShowProject from "./pages/ShowProject.vue";
 // import AppContact from "./pages/AppContact.vue";
 // import AppAboutUs from "./pages/AppAboutUs.vue";
@@ -13,6 +14,11 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: AppHome,
+    },
+    {
+      path: "/all-players",
+      name: "players",
+      component: PlayersList,
     },
     // {
     //   path: "/blog/:slug",

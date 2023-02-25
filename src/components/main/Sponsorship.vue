@@ -8,7 +8,7 @@ export default {
   },
   data() {
     return {
-      giocatori: [],
+      // giocatori: [],
       activePlayer: 0,
       players: [
         {
@@ -74,15 +74,15 @@ export default {
   mounted() {
     this.autoPlay();
   },
-  created() {
-    axios.get(`http://localhost:8000/api/players`).then((resp) => {
-      resp.data.forEach((giocatore) => {
-        if (giocatore.sponsorships.length > 0) {
-          this.giocatori.push(giocatore);
-        }
-      });
-    });
-  },
+  // created() {
+  //   axios.get(`http://localhost:8000/api/players`).then((resp) => {
+  //     resp.data.forEach((giocatore) => {
+  //       if (giocatore.sponsorships.length > 0) {
+  //         this.giocatori.push(giocatore);
+  //       }
+  //     });
+  //   });
+  // },
 };
 </script>
 

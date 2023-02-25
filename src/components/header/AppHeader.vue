@@ -56,8 +56,10 @@ export default {
           </div>
           <ul :class="{ 'show-ul': hamburgerAnimation }">
             <li>
-              <i class="fa-solid fa-house"></i>
-              HOME
+              <router-link :to="{ name: 'players' }">
+                <i class="fa-solid fa-house"></i>
+                Players
+              </router-link>
             </li>
             <li>
               <i class="fa-solid fa-futbol"></i>
@@ -92,7 +94,6 @@ nav {
       border-left: 1px solid black;
       text-align: center;
       border-radius: 0px 10px 10px 0;
-
     }
   }
   color: grey;
