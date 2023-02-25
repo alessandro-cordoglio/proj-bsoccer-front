@@ -7,6 +7,16 @@ export default {
   data() {
     return {};
   },
+  computed: {
+    mediaRating() {
+      const sum = this.data.stars.reduce(
+        (total, star) => total + star.rating,
+        0
+      );
+      const average = sum / this.data.stars.length;
+      return average.toFixed(0);
+    },
+  },
 };
 </script>
 
@@ -25,8 +35,8 @@ export default {
       </h5>
       <h5>
         RATING:
-        <i class="fa-solid fa-star" v-for="n in 1"></i>
-        <i class="fa-regular fa-star" v-for="n in 5 - 1"></i>
+        <i class="fa-solid fa-star" v-for="n in Number(mediaRating)"></i>
+        <i class="fa-regular fa-star" v-for="n in 5 - Number(mediaRating)"></i>
       </h5>
     </div>
     <div class="left-corner"></div>
