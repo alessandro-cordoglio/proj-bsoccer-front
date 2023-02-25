@@ -1,10 +1,8 @@
 <script>
 import { store } from "../../store";
-import Hero from "./Hero.vue";
+
 export default {
-  components: {
-    Hero,
-  },
+  
   name: "AppHeader",
   data() {
     return {
@@ -23,9 +21,7 @@ export default {
 <template>
   <header>
     <section class="top_header">
-      <nav
-        class="container d-flex justify-content-between align-items-center navbar"
-      >
+      <nav class="container d-flex justify-content-between align-items-center navbar">
         <div class="header_left">
           <a class="" href="#">
             <img src="src/assets/pngwing.com.png" alt="" />
@@ -69,9 +65,6 @@ export default {
         </div>
       </nav>
     </section>
-    <section class="hero_header">
-      <Hero />
-    </section>
   </header>
 </template>
 
@@ -110,7 +103,7 @@ nav {
 /* -------------------
   SPONSOR
 --------------------*/
-.hero_header {
+header{
   padding-top: 95.6px;
 }
 /* -------------------
