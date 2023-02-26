@@ -53,13 +53,13 @@ export default {
           <ul :class="{ 'show-ul': hamburgerAnimation }">
             <li>
               <router-link :to="{ name: 'players' }">
-                <i class="fa-solid fa-house"></i>
+                <i class="fa-solid fa-futbol"></i>
                 Players
               </router-link>
             </li>
             <li>
-              <i class="fa-solid fa-futbol"></i>
-              LOG IN
+              <i class="fa-solid fa-user"></i>
+              Login
             </li>
           </ul>
         </div>
@@ -121,7 +121,7 @@ nav {
   }
 
   // mixin error scss
-  
+
   // .navbar_layout {
   //   ul {
   //     @include reset-list;

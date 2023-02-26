@@ -25,7 +25,7 @@ export default {
               "nella tua città"
             </div>
 
-            <a class="btn btn-primary mt-5 text-uppercase px-5 " href="#">Registrati</a>
+            <a class="btn btn-primary mt-5 text-uppercase px-5 " href="http://127.0.0.1:8000/">Registrati</a>
             <a class="d-block mt-3" href="#"><img src="https://assets.fubles.com/images/home/google-play-badge.svg?v24"  style="max-width: 190px;" alt=""> </a>
             <a class="d-block mt-3" href="#"><img src="https://assets.fubles.com/images/home/app-store-badge.svg?v24"  style="max-width: 190px;" alt=""> </a>
           </div>
