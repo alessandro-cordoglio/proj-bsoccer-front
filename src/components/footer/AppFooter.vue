@@ -78,7 +78,7 @@ export default {
     
          .ms-container {
           margin: auto;
-          max-width: 1100px;
+          max-width: 1200px;
           width: 100%;
         }
 

@@ -32,7 +32,8 @@ $alt-color: #111111;
   background-color: $alt-color;
   width: 100%;
   position: fixed;
-  z-index: 50;
+  top: 0;
+  z-index: 999;
   box-shadow: 0px 15px 10px -15px #111;
 }
 
