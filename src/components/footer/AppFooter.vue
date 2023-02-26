@@ -55,7 +55,7 @@ export default {
           <img class=" img-fluid" src="src/assets/pngwing.com.png" alt="">
         </div>
         <div class="button">
-          <a class="btn ms-btn" href="#">REGISTRATI</a>
+          <a class="btn ms-btn" href="http://127.0.0.1:8000/">REGISTRATI</a>
         </div>
       </div>
 

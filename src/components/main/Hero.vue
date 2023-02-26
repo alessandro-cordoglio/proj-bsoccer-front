@@ -20,9 +20,9 @@ export default {
           <div class="hero-content">
 
             <div class="text">
-              "Il modo piu semplice per trovare il tuo"
+              "Il modo piu semplice per trovare il tuo
               <b>giocatore</b>
-              "nella tua città"
+              nella tua città"
             </div>
 
             <a class="btn btn-primary mt-5 text-uppercase px-5 " href="http://127.0.0.1:8000/">Registrati</a>
