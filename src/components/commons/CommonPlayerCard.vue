@@ -53,6 +53,11 @@ export default {
   margin-bottom: 3.125rem;
   width: 18.75rem;
   height: 31.25rem;
+  cursor: pointer;
+  transition: transform 0.2s linear;
+  &:hover {
+    transform: scale(1.04);
+  }
 
   .left-corner,
   .right-corner {
