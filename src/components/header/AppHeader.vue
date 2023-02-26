@@ -23,9 +23,9 @@ export default {
     <section class="top_header">
       <nav class="container d-flex justify-content-between align-items-center navbar">
         <div class="header_left">
-          <a class="" href="#">
+          <router-link :to ="{name:'home'}">
             <img src="src/assets/pngwing.com.png" alt="" />
-          </a>
+          </router-link>
         </div>
         <div class="search_bar">
           <form action="GET" class="d-flex align-items-center">
