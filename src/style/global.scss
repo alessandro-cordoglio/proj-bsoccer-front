@@ -8,10 +8,13 @@
 @import "./partials/layout.scss";
 
 /* VARIABLES */
+
 /* container size */
 $main_c: 1200px;
 $hero_c: 700px;
 $smaller_c: 1000px;
+
+
 /* colours */
 $main-color: #f6f6f6;
 $secondary-color: #e0154a;
@@ -19,23 +22,10 @@ $alt-color: #111111;
 
 /* COMMON */
 
-/* relative & absolute */
-.relative {
-  position: relative;
-}
-.absolute {
-  position: absolute;
-}
+
 
 /* main components  */
-.top_header {
-  background-color: $alt-color;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  z-index: 999;
-  box-shadow: 0px 15px 10px -15px #111;
-}
+
 
 /* colors_class */
 .alt-color {

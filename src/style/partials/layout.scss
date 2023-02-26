@@ -3,3 +3,12 @@
 @import "/node_modules/bootstrap/scss/maps";
 @import "/node_modules/bootstrap/scss/mixins";
 @import "/node_modules/bootstrap/scss/utilities";
+
+/* relative & absolute */
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+/* relative & absolute */

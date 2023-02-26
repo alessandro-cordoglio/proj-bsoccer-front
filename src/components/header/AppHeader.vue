@@ -69,7 +69,25 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+
+header{
+  padding-top: 95.6px;
+
+   .top_header {
+      background-color: #111;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0px 15px 10px -15px #111;
+    }
+}
+
+
+ 
+
 nav {
+  color: grey;
   .search_bar {
     width: 60%;
     label {
@@ -89,7 +107,9 @@ nav {
       border-radius: 0px 10px 10px 0;
     }
   }
-  color: grey;
+
+
+  
   .header_left {
     width: max-content;
     img {
@@ -99,13 +119,32 @@ nav {
   .header_right {
     display: flex;
   }
+
+  // mixin error scss
+  
+  // .navbar_layout {
+  //   ul {
+  //     @include reset-list;
+  //     @include link_reset;
+  //     display: flex;
+  //     li {
+  //       margin-left: 20px;
+  //       cursor: pointer;
+  //       padding: 13px;
+  //       &:hover {
+  //         // color: #E0154A
+  //         color: #f3e7c6;
+  //       }
+  //     }
+  //   }
+  // }
 }
-/* -------------------
-  SPONSOR
---------------------*/
-header{
-  padding-top: 95.6px;
-}
+
+
+
+
+
+
 /* -------------------
   HAMBERGER MENU
 --------------------*/
