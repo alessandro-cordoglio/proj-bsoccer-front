@@ -21,36 +21,48 @@ export default {
 </script>
 
 <template>
-  <div class="card">
-    <div class="card-top">
-      <img
-        :src="data.profile_photo"
-        :alt="(data.user.name, data.user.surname)"
-      />
+  <router-link :to="{ name: 'show-player', params: { id: data.id } }">
+    <div class="card">
+      <div class="card-top">
+        <img
+          :src="data.profile_photo"
+          :alt="(data.user.name, data.user.surname)"
+        />
+      </div>
+      <div class="card-bottom">
+        <h3 class="text-center">
+          {{ data.user.name }} {{ data.user.surname }}
+        </h3>
+        <h5>
+          RUOLO:<span v-for="role in data.roles">{{ role.name }}-</span>
+        </h5>
+        <h5>
+          RATING:
+          <i class="fa-solid fa-star" v-for="n in Number(mediaRating)"></i>
+          <i
+            class="fa-regular fa-star"
+            v-for="n in 5 - Number(mediaRating)"
+          ></i>
+        </h5>
+      </div>
+      <div class="left-corner"></div>
+      <div class="right-corner"></div>
+      <div class="bottom-left"></div>
+      <div class="bottom-right"></div>
     </div>
-    <div class="card-bottom">
-      <h3 class="text-center">{{ data.user.name }} {{ data.user.surname }}</h3>
-      <h5>
-        RUOLO:<span v-for="role in data.roles">{{ role.name }}-</span>
-      </h5>
-      <h5>
-        RATING:
-        <i class="fa-solid fa-star" v-for="n in Number(mediaRating)"></i>
-        <i class="fa-regular fa-star" v-for="n in 5 - Number(mediaRating)"></i>
-      </h5>
-    </div>
-    <div class="left-corner"></div>
-    <div class="right-corner"></div>
-    <div class="bottom-left"></div>
-    <div class="bottom-right"></div>
-  </div>
+  </router-link>
 </template>
 
 <style lang="scss" scoped>
+a {
+  text-decoration: none;
+  color: inherit;
+  &:hover {
+    color: inherit;
+  }
+}
 .card {
   position: relative;
-  margin-top: 3.125rem;
-  margin-bottom: 3.125rem;
   width: 18.75rem;
   height: 31.25rem;
   cursor: pointer;

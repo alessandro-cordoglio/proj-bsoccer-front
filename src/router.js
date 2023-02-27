@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import AppHome from "./pages/AppHome.vue";
 import PlayersList from "./pages/PlayersList.vue";
+import ShowPlayer from "./pages/ShowPlayer.vue";
 // import ShowProject from "./pages/ShowProject.vue";
 // import AppContact from "./pages/AppContact.vue";
 // import AppAboutUs from "./pages/AppAboutUs.vue";
@@ -20,11 +21,11 @@ const router = createRouter({
       name: "players",
       component: PlayersList,
     },
-    // {
-    //   path: "/blog/:slug",
-    //   name: "show-project",
-    //   component: ShowProject,
-    // },
+    {
+      path: "/blog/:id",
+      name: "show-player",
+      component: ShowPlayer,
+    },
     // {
     //   path: "/contattaci",
     //   name: "contact-us",

@@ -23,9 +23,9 @@ export default {
   <section class="all-players">
     <div class="players-container">
       <CommonPlayerCard
-        class="players-list"
         v-for="(player, index) in players"
         :data="player"
+        class="players-list"
       />
     </div>
   </section>
