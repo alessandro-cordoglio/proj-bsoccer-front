@@ -27,11 +27,11 @@ export default {
         .get(`http://localhost:8000/api/players/${this.$route.params.id}`)
         .then((resp) => {
           this.player = resp.data;
-          console.log(this.player);
+          
         })
-        .catch((err) => {
-          this.$router.push({ name: "page-404" });
-        });
+      //  .catch((err) => {
+      //     this.$router.push({ name: "page-404" });
+      //   }); 
     },
   },
   computed: {
@@ -48,12 +48,12 @@ export default {
 </script>
 
 <template>
-  <section>
+  <section v-if="player.user">
     <div class="card">
       <div class="card-top">
         <img
           :src="player.profile_photo"
-          :alt="(player.user.name, player.user.surname)"
+          alt=""
         />
       </div>
       <div class="card-bottom">
