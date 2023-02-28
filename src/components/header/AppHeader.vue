@@ -141,14 +141,13 @@ export default {
 
 
 header {
-  padding-top: 95.6px;
+  position: sticky;
+  top: 0;
+  z-index: 500;
 
   .top_header {
     background-color: #111;
     width: 100%;
-    position: fixed;
-    top: 0;
-    z-index: 999;
     box-shadow: 0px 15px 10px -15px #111;
   }
 }
