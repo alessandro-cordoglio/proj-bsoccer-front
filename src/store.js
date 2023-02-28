@@ -5,4 +5,5 @@ export const store = reactive({
   hamburgerAnimation: false,
   selectedRole: "",
   players: [],
+  roles :['Portiere', 'Difensore Centrale', 'Terzino Destro', 'Terzino Sinistro', 'Centrocampista', 'Esterno Destro', 'Esterno Sinistro', 'Punta', 'Attacante Sinistro', 'Attacante Destro'],
 });

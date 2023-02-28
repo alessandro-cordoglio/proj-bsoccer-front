@@ -6,6 +6,7 @@ export default {
   data() {
     return {
       store,
+      filteredRoles:[],
       hamburgerAnimation: false,
     };
   },
@@ -25,6 +26,22 @@ export default {
           this.store.players = response.data;
         });
     },
+    updateFilteredRoles() {
+      this.filteredRoles = this.store.roles.filter((role) =>
+        role.toLowerCase().includes(this.store.selectedRole.toLowerCase())
+      );
+    },
+      watch: {
+      "store.selectedRole"(newValue) {
+        this.updateFilteredRoles();
+      },
+    },
+    created() {
+    axios.get("http://localhost:8000/api/roles")
+      .then((response) => {
+        this.store.roles = response.data;
+      });
+  }
   },
 };
 </script>
@@ -56,7 +73,13 @@ export default {
               type="text"
               placeholder="Ricerca per ruolo giocatore"
               v-model="store.selectedRole"
+              @input="updateFilteredRoles"
             />
+            <ul class="search-dropdown" v-if="this.store.selectedRole.length > 0">
+              <li v-for="role in filteredRoles" :key="role">
+                {{ role }}
+              </li>
+            </ul>
           </form>
         </div>
         <div class="header_right navbar_layout">
@@ -87,6 +110,28 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+.search-dropdown {
+  position: absolute;
+  z-index: 999;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-top: none;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  top: 65px;
+}
+
+.search-dropdown li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.search-dropdown li:hover {
+  background-color: #f2f2f2;
+}
+
+
 header {
   padding-top: 95.6px;
 
