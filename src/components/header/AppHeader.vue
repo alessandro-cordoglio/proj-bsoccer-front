@@ -11,6 +11,9 @@ export default {
     };
   },
   methods: {
+    clearSearch() {
+        this.store.selectedRole = '';
+      },
     animateBurger() {
       this.hamburgerAnimation = !this.hamburgerAnimation;
     },
@@ -61,7 +64,7 @@ export default {
         class="container d-flex justify-content-between align-items-center navbar"
       >
         <div class="header_left">
-          <router-link :to="{ name: 'home' }">
+          <router-link :to="{ name: 'home' }" @click="clearSearch()">
             <img src="src/assets/pngwing.com.png" alt="" />
           </router-link>
         </div>
@@ -104,7 +107,7 @@ export default {
           </div>
           <ul :class="{ 'show-ul': hamburgerAnimation }">
             <li @click="getAllPlayer">
-              <router-link :to="{ name: 'players' }">
+              <router-link :to="{ name: 'players' }" @click="clearSearch()">
                 <i class="fa-solid fa-futbol"></i>
                 Players
               </router-link>
@@ -124,14 +127,15 @@ export default {
 
 .search-dropdown {
   position: absolute;
-  z-index: 999;
+  z-index: 50;
   background-color: #fff;
   border: 1px solid #ddd;
   border-top: none;
+  border-radius: 10px;
   width: 60%;
   max-height: 200px;
   overflow-y: auto;
-  top: 65px;
+  top: 70%;
 }
 
 .search-dropdown li {
@@ -145,13 +149,13 @@ export default {
 
 
 header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  width: 100%;
   z-index: 500;
 
   .top_header {
     background-color: #111;
-    width: 100%;
     box-shadow: 0px 15px 10px -15px #111;
   }
 }
@@ -179,13 +183,18 @@ nav {
   }
 
   .header_left {
-    width: max-content;
+    width: min-content;
     img {
       width: 80px;
     }
   }
   .header_right {
     display: flex;
+    ul{
+      li{
+        padding: 10px
+      }
+    }
   }
 
   // mixin error scss
@@ -284,39 +293,40 @@ nav {
   UL-ANIMATION
 --------------------*/
 
-
-ul {
-  display: flex;
-  align-items: center;
-  list-style: none;
-  z-index: 100;
-  transition: right 0.4s ease-out;
-
-  li {
-    cursor: pointer;
-    padding: 3.125rem 0;
-    transition: all 0.3s ease-out;
-    margin-right: 1.875rem;
-
+.header_right{
+  ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    z-index: 100;
+    transition: right 0.4s ease-out;
+  
+    li {
+      cursor: pointer;
+      padding: 3.125rem 0;
+      transition: all 0.3s ease-out;
+      margin-right: 1.875rem;
+  
+      @media screen and (max-width: 1100px) {
+        background-color: #111111;
+        padding: 1.875rem 0;
+        font-size: 0.875rem;
+        width: 100%;
+        text-align: center;
+      }
+    }
     @media screen and (max-width: 1100px) {
-      background-color: #111111;
-      padding: 1.875rem 0;
-      font-size: 0.875rem;
-      width: 100%;
-      text-align: center;
+      flex-direction: column;
+      position: fixed;
+      top: 95px;
+      right: -270px;
+      width: 240px;
+      box-shadow: -10px 7px 10px 0px #000000;
     }
   }
-  @media screen and (max-width: 1100px) {
-    flex-direction: column;
-    position: fixed;
-    top: 95px;
-    right: -270px;
-    width: 240px;
-    box-shadow: -10px 7px 10px 0px #000000;
+  .show-ul {
+    right: -10px;
   }
-}
-.show-ul {
-  right: -10px;
 }
 
 
