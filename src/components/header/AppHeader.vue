@@ -54,7 +54,7 @@ export default {
             <input
               class="w-100"
               type="text"
-              placeholder="cerca un ruolo/ una città o un giocatore"
+              placeholder="Ricerca per ruolo giocatore"
               v-model="store.selectedRole"
             />
           </form>
