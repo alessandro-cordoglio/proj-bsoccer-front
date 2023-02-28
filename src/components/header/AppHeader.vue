@@ -71,7 +71,7 @@ export default {
         <div class="search_bar">
           <form
             action="GET"
-            @submit.prevent="getPlayersByRole"
+            @submit.prevent="goToFilteredPlayers(role)"
             class="d-flex align-items-center"
           >
             <label for="search">
@@ -149,10 +149,10 @@ export default {
 
 
 header {
-  position: fixed;
-  top: 0;
+  position: sticky;
   width: 100%;
   z-index: 500;
+  top: 0;
 
   .top_header {
     background-color: #111;
