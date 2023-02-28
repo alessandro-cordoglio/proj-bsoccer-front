@@ -12,11 +12,6 @@ export default {
       store,
     };
   },
-  created() {
-    axios.get("http://localhost:8000/api/players").then((resp) => {
-      this.store.players = resp.data;
-    });
-  },
 };
 </script>
 

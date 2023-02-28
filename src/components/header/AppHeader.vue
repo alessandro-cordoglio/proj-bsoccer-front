@@ -32,7 +32,7 @@ export default {
         role.toLowerCase().includes(this.store.selectedRole.toLowerCase())
       );
     },
-      watch: {
+     watch: {
       "store.selectedRole"(newValue) {
         this.updateFilteredRoles();
       },
@@ -40,6 +40,8 @@ export default {
     goToFilteredPlayers(role) {
       this.store.selectedRole = role;
       this.filteredRoles= [];
+
+      this.getPlayersByRole();
     },
   },
 };
@@ -74,7 +76,7 @@ export default {
               v-model="store.selectedRole"
               @input="updateFilteredRoles"
             />
-            <ul class="search-dropdown" v-if="this.store.selectedRole.length > 0">
+            <ul class="search-dropdown" v-if="store.selectedRole.length > 0 && filteredRoles.length > 0">
               <li  v-for="role in filteredRoles" @click="goToFilteredPlayers(role)" :key="role">
                 {{ role }}
               </li>
