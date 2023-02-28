@@ -83,6 +83,9 @@ export default {
               v-model="store.selectedRole"
               @input="updateFilteredRoles"
             />
+            <div class="dropdown-text-search">
+
+            </div>
             <ul class="search-dropdown" v-if="store.selectedRole.length > 0 && filteredRoles.length > 0">
               <li  v-for="role in filteredRoles" @click="goToFilteredPlayers(role)" :key="role">
                 {{ role }}
@@ -118,13 +121,14 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+
 .search-dropdown {
   position: absolute;
   z-index: 999;
   background-color: #fff;
   border: 1px solid #ddd;
   border-top: none;
-  width: 100%;
+  width: 60%;
   max-height: 200px;
   overflow-y: auto;
   top: 65px;
@@ -279,6 +283,8 @@ nav {
 /* -------------------
   UL-ANIMATION
 --------------------*/
+
+
 ul {
   display: flex;
   align-items: center;
@@ -312,4 +318,6 @@ ul {
 .show-ul {
   right: -10px;
 }
+
+
 </style>
