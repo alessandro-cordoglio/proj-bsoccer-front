@@ -3,10 +3,10 @@ import { createRouter, createWebHistory } from "vue-router";
 import AppHome from "./pages/AppHome.vue";
 import PlayersList from "./pages/PlayersList.vue";
 import ShowPlayer from "./pages/ShowPlayer.vue";
+import Page404 from "./pages/Page404.vue";
 // import ShowProject from "./pages/ShowProject.vue";
 // import AppContact from "./pages/AppContact.vue";
 // import AppAboutUs from "./pages/AppAboutUs.vue";
-// import Page404 from "./pages/Page404.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -26,6 +26,11 @@ const router = createRouter({
       name: "show-player",
       component: ShowPlayer,
     },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "page-404",
+      component: Page404,
+    },
     // {
     //   path: "/contattaci",
     //   name: "contact-us",
@@ -35,11 +40,6 @@ const router = createRouter({
     //   path: "/chi-siamo",
     //   name: "about-us",
     //   component: AppAboutUs,
-    // },
-    // {
-    //   path: "/:pathMatch(.*)*",
-    //   name: "page-404",
-    //   component: Page404,
     // },
   ],
   scrollBehavior(to, from, savedPosition) {

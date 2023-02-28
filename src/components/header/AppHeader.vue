@@ -25,6 +25,11 @@ export default {
           this.store.players = response.data;
         });
     },
+    getAllPlayer() {
+      axios.get("http://localhost:8000/api/players").then((resp) => {
+        this.store.players = resp.data;
+      });
+    },
   },
 };
 </script>
@@ -69,7 +74,7 @@ export default {
             <!-- /Hamburger Menu -->
           </div>
           <ul :class="{ 'show-ul': hamburgerAnimation }">
-            <li>
+            <li @click="getAllPlayer">
               <router-link :to="{ name: 'players' }">
                 <i class="fa-solid fa-futbol"></i>
                 Players

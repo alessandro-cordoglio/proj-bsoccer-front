@@ -12,10 +12,15 @@ export default {
       store,
     };
   },
+  methods: {
+    getAllPlayer() {
+      axios.get("http://localhost:8000/api/players").then((resp) => {
+        this.store.players = resp.data;
+      });
+    },
+  },
   created() {
-    axios.get("http://localhost:8000/api/players").then((resp) => {
-      this.store.players = resp.data;
-    });
+    this.getAllPlayer();
   },
 };
 </script>
