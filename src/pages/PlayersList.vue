@@ -1,5 +1,6 @@
 <script>
 import axios from "axios";
+import { store } from "../store";
 import CommonPlayerCard from "../components/commons/CommonPlayerCard.vue";
 export default {
   name: "PlayersList",
@@ -8,12 +9,12 @@ export default {
   },
   data() {
     return {
-      players: [],
+      store,
     };
   },
   created() {
     axios.get("http://localhost:8000/api/players").then((resp) => {
-      this.players = resp.data;
+      this.store.players = resp.data;
     });
   },
 };
@@ -23,7 +24,7 @@ export default {
   <section class="all-players">
     <div class="players-container">
       <CommonPlayerCard
-        v-for="(player, index) in players"
+        v-for="(player, index) in this.store.players"
         :data="player"
         class="players-list"
       />

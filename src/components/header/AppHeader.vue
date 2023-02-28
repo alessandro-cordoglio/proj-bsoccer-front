@@ -1,8 +1,7 @@
 <script>
 import { store } from "../../store";
-
+import axios from "axios";
 export default {
-  
   name: "AppHeader",
   data() {
     return {
@@ -14,6 +13,18 @@ export default {
     animateBurger() {
       this.hamburgerAnimation = !this.hamburgerAnimation;
     },
+    getPlayersByRole() {
+      axios
+        .get("http://localhost:8000/api/players", {
+          params: {
+            role: this.store.selectedRole,
+          },
+        })
+        .then((response) => {
+          this.store.players = [];
+          this.store.players = response.data;
+        });
+    },
   },
 };
 </script>
@@ -21,14 +32,20 @@ export default {
 <template>
   <header>
     <section class="top_header">
-      <nav class="container d-flex justify-content-between align-items-center navbar">
+      <nav
+        class="container d-flex justify-content-between align-items-center navbar"
+      >
         <div class="header_left">
-          <router-link :to ="{name:'home'}">
+          <router-link :to="{ name: 'home' }">
             <img src="src/assets/pngwing.com.png" alt="" />
           </router-link>
         </div>
         <div class="search_bar">
-          <form action="GET" class="d-flex align-items-center">
+          <form
+            action="GET"
+            @submit.prevent="getPlayersByRole"
+            class="d-flex align-items-center"
+          >
             <label for="search">
               <button class="button_layout w-100" type="submit">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -38,6 +55,7 @@ export default {
               class="w-100"
               type="text"
               placeholder="cerca un ruolo/ una città o un giocatore"
+              v-model="store.selectedRole"
             />
           </form>
         </div>
@@ -69,22 +87,18 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-
-header{
+header {
   padding-top: 95.6px;
 
-   .top_header {
-      background-color: #111;
-      width: 100%;
-      position: fixed;
-      top: 0;
-      z-index: 999;
-      box-shadow: 0px 15px 10px -15px #111;
-    }
+  .top_header {
+    background-color: #111;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    box-shadow: 0px 15px 10px -15px #111;
+  }
 }
-
-
- 
 
 nav {
   color: grey;
@@ -108,8 +122,6 @@ nav {
     }
   }
 
-
-  
   .header_left {
     width: max-content;
     img {
@@ -139,11 +151,6 @@ nav {
   //   }
   // }
 }
-
-
-
-
-
 
 /* -------------------
   HAMBERGER MENU
