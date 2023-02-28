@@ -28,10 +28,10 @@ export default {
         .get(`http://localhost:8000/api/players/${this.$route.params.id}`)
         .then((resp) => {
           this.player = resp.data;
-        })
+        });
       //  .catch((err) => {
       //     this.$router.push({ name: "page-404" });
-      //   }); 
+      //   });
     },
   },
   computed: {
@@ -155,6 +155,7 @@ section {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: top;
     }
   }
   .card-bottom {
