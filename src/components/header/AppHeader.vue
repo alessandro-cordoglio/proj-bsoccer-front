@@ -188,14 +188,6 @@ nav {
       width: 80px;
     }
   }
-  .header_right {
-    display: flex;
-    ul{
-      li{
-        padding: 10px
-      }
-    }
-  }
 
   // mixin error scss
 
@@ -294,6 +286,7 @@ nav {
 --------------------*/
 
 .header_right{
+  display: flex;
   ul {
     display: flex;
     align-items: center;
@@ -303,7 +296,7 @@ nav {
   
     li {
       cursor: pointer;
-      padding: 3.125rem 0;
+      padding: 10px;
       transition: all 0.3s ease-out;
       margin-right: 1.875rem;
   

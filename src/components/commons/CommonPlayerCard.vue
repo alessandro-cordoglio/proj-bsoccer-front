@@ -34,16 +34,22 @@ export default {
           {{ data.user.name }} {{ data.user.surname }}
         </h3>
         <h5>
-          RUOLO:<span v-for="role in data.roles">{{ role.name }}-</span>
+          RUOLO:<span v-for="role in data.roles" class="ms-2">{{ role.name }} -</span>
         </h5>
-        <h5>
+        <h5 class="d-flex align-items-center">
           RATING:
-          <i class="fa-solid fa-star" v-for="n in Number(mediaRating)"></i>
-          <i
-            class="fa-regular fa-star"
-            v-for="n in 5 - Number(mediaRating)"
-          ></i>
+          <div v-if="data.stars.length" class="ms-2">
+            <i class="fa-solid fa-star" v-for="n in Number(mediaRating)"></i>
+            <i
+              class="fa-regular fa-star"
+              v-for="n in 5 - Number(mediaRating)"
+            ></i>
+          </div>
+          <div v-else>
+            //
+          </div>
         </h5>
+
       </div>
       <div class="left-corner"></div>
       <div class="right-corner"></div>
