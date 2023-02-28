@@ -24,6 +24,7 @@ export default {
         .then((response) => {
           this.store.players = [];
           this.store.players = response.data;
+          this.$router.push({ name: "players" });
         });
     },
     updateFilteredRoles() {
@@ -36,12 +37,6 @@ export default {
         this.updateFilteredRoles();
       },
     },
-    created() {
-    axios.get("http://localhost:8000/api/roles")
-      .then((response) => {
-        this.store.roles = response.data;
-      });
-  }
   },
 };
 </script>
@@ -76,7 +71,7 @@ export default {
               @input="updateFilteredRoles"
             />
             <ul class="search-dropdown" v-if="this.store.selectedRole.length > 0">
-              <li v-for="role in filteredRoles" :key="role">
+              <li @click=" getPlayersByRole()" v-for="role in filteredRoles" :key="role">
                 {{ role }}
               </li>
             </ul>
