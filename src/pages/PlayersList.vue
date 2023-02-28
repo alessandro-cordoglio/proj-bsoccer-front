@@ -12,16 +12,8 @@ export default {
       store,
     };
   },
-  methods: {
-    getAllPlayer() {
-      axios.get("http://localhost:8000/api/players").then((resp) => {
-        this.store.players = resp.data;
-      });
-    },
-  },
-  created() {
-    this.getAllPlayer();
-  },
+  methods: {},
+  created() {},
 };
 </script>
 
@@ -48,6 +40,12 @@ export default {
     .players-list {
       margin: 3.125rem 1.875rem;
       width: calc(100% / 3 - 3.75rem);
+      @media screen and (max-width: 62rem) {
+        width: calc(100% / 2 - 3.75rem);
+      }
+      @media screen and (max-width: 36rem) {
+        width: calc(100% - 3.75rem);
+      }
     }
   }
 }

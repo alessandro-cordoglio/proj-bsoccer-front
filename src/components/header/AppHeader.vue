@@ -23,6 +23,7 @@ export default {
         .then((response) => {
           this.store.players = [];
           this.store.players = response.data;
+          this.$router.push({ name: "players" });
         });
     },
     getAllPlayer() {
