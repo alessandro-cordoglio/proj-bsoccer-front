@@ -37,6 +37,9 @@ export default {
         this.updateFilteredRoles();
       },
     },
+    console(){
+      return console.log(this.role)
+    }
   },
 };
 </script>
@@ -71,8 +74,8 @@ export default {
               @input="updateFilteredRoles"
             />
             <ul class="search-dropdown" v-if="this.store.selectedRole.length > 0">
-              <li @click=" getPlayersByRole()" v-for="role in filteredRoles" :key="role">
-                {{ role }}
+              <li  v-for="role in filteredRoles"  :key="role">
+                <p @mouseenter=" role=this.store.selectedRole">{{ role }}</p>
               </li>
             </ul>
           </form>
