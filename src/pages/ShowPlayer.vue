@@ -1,6 +1,7 @@
 <script>
 import axios from "axios";
 import CommonPlayerCard from "../components/commons/CommonPlayerCard.vue";
+import { store } from "../store";
 export default {
   name: "ShowPlayer",
   components: {
@@ -9,12 +10,18 @@ export default {
   },
   data() {
     return {
+      store,
       player: {},
+      formData: {
+        name: "",
+        email: "",
+        content: "",
+      },
     };
   },
   created() {
     axios
-      .post(`http://localhost:8000/api/messages/${this.$route.params.id}`)
+      .post(`${this.store.api_url}/messages/${this.$route.params.id}`)
       .then((resp) => {
         console.log(resp.data);
       });
@@ -36,6 +43,17 @@ export default {
         })
         .catch((err) => {
           this.$router.push({ name: "page-404" });
+        });
+    },
+    addMessage() {
+      axios
+        .post(`${this.store.api_url}/messages/${this.player.id}`, {
+          name: this.formData.name,
+          email: this.formData.email,
+          content: this.formData.content,
+        })
+        .then((res) => {
+          console.log(res);
         });
     },
   },
@@ -127,6 +145,39 @@ export default {
           </div>
         </div>
       </div>
+      <form @submit.prevent="addMessage()" action="">
+        <div class="mt-3">
+          <label for="name">Nome</label>
+          <input
+            class="form-control"
+            type="text"
+            id="name"
+            placeholder="Inserisci nome"
+            v-model="formData.name"
+          />
+          <label for="email">Email</label>
+          <input
+            class="form-control"
+            type="text"
+            id="email"
+            placeholder="Inserisci email*"
+            v-model="formData.email"
+          />
+          <textarea
+            class="form-control"
+            name="content"
+            id="content"
+            cols="30"
+            rows="10"
+            placeholder="Inserisci messaggio*"
+            v-model="formData.content"
+            required
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          Aggiungi Messaggio
+        </button>
+      </form>
     </section>
   </section>
 </template>
