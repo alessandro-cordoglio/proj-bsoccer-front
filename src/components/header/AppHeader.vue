@@ -112,10 +112,25 @@ export default {
                 Players
               </router-link>
             </li>
+
+            <!-- OFFCAnvas component -->
             <li>
-              <i class="fa-solid fa-user"></i>
-              Login
+              <a class="btn p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="fa-solid fa-filter"></i> filter</a>
+
+              <div class="ms-offcanvas offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+                <div class="offcanvas-header" style="color:white">
+                  <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"> Filtra per Valutazione</h5>
+                  <button style="color:white"  type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                
+
+                </div>
+                <div class="offcanvas-body">
+                  <p>Try scrolling the rest of the page to see this option in action.</p>
+                </div>
+              </div>
             </li>
+            <!-- /OFFCAnvas component -->
+
           </ul>
         </div>
       </nav>
@@ -136,6 +151,7 @@ export default {
   max-height: 200px;
   overflow-y: auto;
   top: 70%;
+  list-style: none;
 }
 
 .search-dropdown li {
@@ -145,6 +161,18 @@ export default {
 
 .search-dropdown li:hover {
   background-color: #f2f2f2;
+}
+
+// -----OffCanvas-----
+.ms-offcanvas{
+  background-color: #999;
+  
+}
+
+.ms-button-close{
+  color: white;
+  border: none;
+  background-image: none;
 }
 
 
@@ -189,24 +217,7 @@ nav {
     }
   }
 
-  // mixin error scss
-
-  // .navbar_layout {
-  //   ul {
-  //     @include reset-list;
-  //     @include link_reset;
-  //     display: flex;
-  //     li {
-  //       margin-left: 20px;
-  //       cursor: pointer;
-  //       padding: 13px;
-  //       &:hover {
-  //         // color: #E0154A
-  //         color: #f3e7c6;
-  //       }
-  //     }
-  //   }
-  // }
+ 
 }
 
 /* -------------------
