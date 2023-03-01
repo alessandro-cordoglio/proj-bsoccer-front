@@ -467,7 +467,7 @@ nav {
 
       @media screen and (max-width: 1100px) {
         background-color: #111111;
-        padding: 1.875rem 0;
+        // padding: 1.875rem 0;
         font-size: 0.875rem;
         width: 100%;
         text-align: center;
@@ -476,7 +476,7 @@ nav {
     @media screen and (max-width: 1100px) {
       flex-direction: column;
       position: fixed;
-      top: 95px;
+      top: 80px;
       right: -270px;
       width: 240px;
       box-shadow: -10px 7px 10px 0px #000000;
