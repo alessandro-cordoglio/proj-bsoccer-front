@@ -1,11 +1,14 @@
 <script>
+import { store } from "../../store";
 export default {
   name: "CommonPlayerCard",
   props: {
     data: Object,
   },
   data() {
-    return {};
+    return {
+      store,
+    };
   },
   computed: {
     mediaRating() {
@@ -22,7 +25,7 @@ export default {
 
 <template>
   <router-link :to="{ name: 'show-player', params: { id: data.id } }">
-    <div class="card">
+    <div class="card" v-if="Number(mediaRating) >= this.store.selectedRating">
       <div class="card-top">
         <img
           :src="data.profile_photo"
