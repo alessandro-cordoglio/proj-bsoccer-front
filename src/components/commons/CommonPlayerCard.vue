@@ -1,11 +1,14 @@
 <script>
+import { store } from "../../store";
 export default {
   name: "CommonPlayerCard",
   props: {
     data: Object,
   },
   data() {
-    return {};
+    return {
+      store,
+    };
   },
   computed: {
     mediaRating() {
@@ -21,7 +24,10 @@ export default {
 </script>
 
 <template>
-  <router-link :to="{ name: 'show-player', params: { id: data.id } }">
+  <router-link
+    :to="{ name: 'show-player', params: { id: data.id } }"
+    :class="Number(mediaRating) >= this.store.selectedRating ? '' : 'd-none'"
+  >
     <div class="card">
       <div class="card-top">
         <img
