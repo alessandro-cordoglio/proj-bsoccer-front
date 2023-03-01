@@ -61,7 +61,7 @@ export default {
   <header>
     <section class="top_header">
       <nav
-        class="container d-flex justify-content-between align-items-center navbar"
+        class="container d-flex justify-content-between align-items-center"
       >
         <div class="header_left">
           <router-link :to="{ name: 'home' }" @click="clearSearch()">
@@ -107,15 +107,18 @@ export default {
           </div>
           <ul :class="{ 'show-ul': hamburgerAnimation }">
             <li @click="getAllPlayer">
-              <router-link :to="{ name: 'players' }" @click="clearSearch()">
-                <i class="fa-solid fa-futbol"></i>
+              <router-link class="d-flex align-items-center" :to="{ name: 'players' }" @click="clearSearch()">
+                <i class="me-2 fa-solid fa-futbol"></i>
                 Players
               </router-link>
             </li>
 
             <!-- OFFCAnvas component -->
             <li>
-              <a class="btn p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="fa-solid fa-filter"></i> filter</a>
+              <a class="btn p-0 d-flex align-items-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                <i class=" me-2 fa-solid fa-filter"></i> 
+                filter
+              </a>
 
               <div class="ms-offcanvas offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div class="offcanvas-header" style="color:white">
@@ -131,8 +134,14 @@ export default {
             </li>
             <!-- /OFFCAnvas component -->
 
+            <li class="d-flex align-items-center">
+              <i class="fa-solid fa-user"></i>
+              <a class="ms-2" href="http://127.0.0.1:8000/login">Login</a>
+            </li>
           </ul>
         </div>
+
+
       </nav>
     </section>
   </header>
