@@ -21,6 +21,7 @@ export default {
         name: "",
         content: "",
       },
+      rating: 0,
     };
   },
   created() {
@@ -68,6 +69,16 @@ export default {
           this.player.reviews.push(res.data);
           this.reviewData.name = "";
           this.reviewData.content = "";
+        });
+    },
+    addRating() {
+      axios
+        .post(`${this.store.api_url}/ratings/${this.player.id}`, {
+          rating: this.rating,
+        })
+        .then((res) => {
+          this.player.ratings.push(res.data);
+          this.rating = 0;
         });
     },
   },
@@ -297,6 +308,71 @@ export default {
           </div>
 
           <!-- Modale Recensione-->
+          <!-- recensioni stelle -->
+          <div class="mt-3">
+            <h3>Valuta il Giocatore</h3>
+            <div class="form-check form-check-inline">
+              <input
+                @click="addRating()"
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio1"
+                value="1"
+                v-model="rating"
+              />
+              <label class="form-check-label" for="inlineRadio1">1</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                @click="addRating()"
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio2"
+                value="2"
+                v-model="rating"
+              />
+              <label class="form-check-label" for="inlineRadio2">2</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                @click="addRating()"
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio3"
+                value="3"
+                v-model="rating"
+              />
+              <label class="form-check-label" for="inlineRadio3">3</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                @click="addRating()"
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio4"
+                value="4"
+                v-model="rating"
+              />
+              <label class="form-check-label" for="inlineRadio3">4</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                @click="addRating()"
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio5"
+                value="5"
+                v-model="rating"
+              />
+              <label class="form-check-label" for="inlineRadio3">5</label>
+            </div>
+          </div>
+          <!-- /recensioni stelle -->
         </div>
       </section>
       .
