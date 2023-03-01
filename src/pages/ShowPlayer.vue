@@ -81,7 +81,7 @@ export default {
       </div>
     </section>
     <section v-if="player.messages?.length > 0" class="messages-reviews">
-      <h2>Messaggi:</h2>
+      <!-- <h2>Messaggi:</h2>
       <div class="user-message">
         <div v-for="message in player.messages" class="message">
           <div class="user-img">
@@ -96,7 +96,7 @@ export default {
             <p>{{ message.content }}</p>
           </div>
         </div>
-      </div>
+      </div> -->
       <h2>Recensioni:</h2>
       <div class="user-review">
         <div v-for="review in player.reviews" class="message">
