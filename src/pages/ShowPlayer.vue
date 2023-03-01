@@ -20,11 +20,6 @@ export default {
     };
   },
   created() {
-    axios
-      .post(`${this.store.api_url}/messages/${this.$route.params.id}`)
-      .then((resp) => {
-        console.log(resp.data);
-      });
     this.getPlayer();
 
     this.$watch(
@@ -53,7 +48,10 @@ export default {
           content: this.formData.content,
         })
         .then((res) => {
-          console.log(res);
+          this.player.messages.push(res.data);
+          this.formData.name = "";
+          this.formData.email = "";
+          this.formData.content = "";
         });
     },
   },
@@ -145,7 +143,7 @@ export default {
           </div>
         </div>
       </div>
-      <form @submit.prevent="addMessage()" action="">
+      <form @submit.prevent="addMessage()" ref="formMessage" action="">
         <div class="mt-3">
           <label for="name">Nome</label>
           <input
@@ -162,6 +160,7 @@ export default {
             id="email"
             placeholder="Inserisci email*"
             v-model="formData.email"
+            required
           />
           <textarea
             class="form-control"
