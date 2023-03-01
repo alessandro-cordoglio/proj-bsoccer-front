@@ -129,7 +129,7 @@ export default {
             type="button"
             class="btn btn-primary"
             data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
+            data-bs-target="#messageModal"
           >
             invia Messaggio
           </button>
@@ -137,7 +137,7 @@ export default {
 
           <div
             class="modal fade"
-            id="exampleModal"
+            id="messageModal"
             tabindex="-1"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
@@ -227,14 +227,14 @@ export default {
             type="button"
             class="btn btn-secondary ms-4"
             data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
+            data-bs-target="#reviewModal"
           >
             invia Recensione
           </button>
           <!-- Button trigger modal -->
           <div
             class="modal fade"
-            id="exampleModal"
+            id="reviewModal"
             tabindex="-1"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
@@ -276,12 +276,32 @@ export default {
                         required
                       ></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">
-                      Aggiungi Recensione
-                    </button>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button
+                        type="submit"
+                        class="btn btn-primary"
+                        data-bs-dismiss="modal"
+                      >
+                        Aggiungi Recensione
+                      </button>
+                      <!-- <button
+                    type="submit"
+                    class="btn btn-primary"
+                    data-bs-dismiss="modal"
+                  >
+                    Save changes
+                  </button> -->
+                    </div>
                   </form>
                   <!-- Form Recensioni -->
-                </div>
+                  <!-- </div>
                 <div class="modal-footer">
                   <button
                     type="button"
@@ -290,13 +310,16 @@ export default {
                   >
                     Close
                   </button>
-                  <button
+                  <button type="submit" class="btn btn-primary">
+                    Aggiungi Recensione
+                  </button> -->
+                  <!-- <button
                     type="submit"
                     class="btn btn-primary"
                     data-bs-dismiss="modal"
                   >
                     Save changes
-                  </button>
+                  </button> -->
                 </div>
               </div>
             </div>
