@@ -18,4 +18,5 @@ export const store = reactive({
     "Attaccante Destro",
   ],
   selectedRating: 0,
+  howManyReviews: 0,
 });
