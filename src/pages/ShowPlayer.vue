@@ -17,6 +17,10 @@ export default {
         email: "",
         content: "",
       },
+      reviewData: {
+        name: "",
+        content: "",
+      },
     };
   },
   created() {
@@ -52,6 +56,18 @@ export default {
           this.formData.name = "";
           this.formData.email = "";
           this.formData.content = "";
+        });
+    },
+    addReview() {
+      axios
+        .post(`${this.store.api_url}/reviews/${this.player.id}`, {
+          name: this.reviewData.name,
+          content: this.reviewData.content,
+        })
+        .then((res) => {
+          this.player.reviews.push(res.data);
+          this.reviewData.name = "";
+          this.reviewData.content = "";
         });
     },
   },
@@ -130,19 +146,11 @@ export default {
           <div class="comment-details">
             <h4 v-if="review.name">{{ review.name }}</h4>
             <h4 v-else>Unknown</h4>
-            <i
-              class="fa-solid fa-star"
-              v-for="n in (this.randomNumber =
-                Math.floor(Math.random() * 5) + 1)"
-            ></i>
-            <i
-              class="fa-regular fa-star"
-              v-for="n in 5 - this.randomNumber"
-            ></i>
             <p>{{ review.content }}</p>
           </div>
         </div>
       </div>
+      <h2>Aggiungi Commento</h2>
       <form @submit.prevent="addMessage()" ref="formMessage" action="">
         <div class="mt-3">
           <label for="name">Nome</label>
@@ -177,6 +185,35 @@ export default {
           Aggiungi Messaggio
         </button>
       </form>
+      <!-- Form Recensioni -->
+      <h2>Aggiungi Recensione</h2>
+      <form @submit.prevent="addReview()" action="">
+        <div class="mt-3">
+          <label for="name">Nome</label>
+          <input
+            class="form-control"
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Inserisci nome"
+            v-model="reviewData.name"
+          />
+          <textarea
+            class="form-control"
+            name="content"
+            id="content"
+            cols="30"
+            rows="10"
+            placeholder="Inserisci messaggio*"
+            v-model="reviewData.content"
+            required
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          Aggiungi Recensione
+        </button>
+      </form>
+      <!-- /Form Recensioni -->
     </section>
   </section>
 </template>
