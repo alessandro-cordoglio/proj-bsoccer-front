@@ -36,7 +36,7 @@ export default {
   methods: {
     getPlayer() {
       axios
-        .get(`http://localhost:8000/api/players/${this.$route.params.id}`)
+        .get(`${this.store.api_url}/players/${this.$route.params.id}`)
         .then((resp) => {
           this.player = resp.data;
         })
@@ -89,7 +89,7 @@ export default {
     <section v-if="player.user">
       <section class="player-info row g-0 gy-4">
         <div class="card-content col-sm-12 col-lg-6">
-          <div class="card ">
+          <div class="card">
             <div class="card-top">
               <img
                 v-if="player.user"
@@ -106,7 +106,10 @@ export default {
               </h5>
               <h5>
                 RATING:
-                <i class="fa-solid fa-star" v-for="n in Number(mediaRating)"></i>
+                <i
+                  class="fa-solid fa-star"
+                  v-for="n in Number(mediaRating)"
+                ></i>
                 <i
                   class="fa-regular fa-star"
                   v-for="n in 5 - Number(mediaRating)"
@@ -119,27 +122,46 @@ export default {
           <h2>Descrizione Giocatore</h2>
           <p>{{ player.description }}</p>
 
-          
-         
-          
           <!-- Modal Messaggi -->
 
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
             invia Messaggio
           </button>
           <!-- Button trigger modal -->
 
-          <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Modal title
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
                 </div>
                 <div class="modal-body">
                   <!-- Form Messaggio -->
-                  <form @submit.prevent="addMessage()" ref="formMessage" action="">
+                  <form
+                    @submit.prevent="addMessage()"
+                    ref="formMessage"
+                    action=""
+                  >
                     <div class="mt-1">
                       <label for="name">Nome</label>
                       <input
@@ -175,11 +197,22 @@ export default {
                     </button>
                   </form>
                   <!-- Form Messaggio -->
-
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Save changes</button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    data-bs-dismiss="modal"
+                  >
+                    Save changes
+                  </button>
                 </div>
               </div>
             </div>
@@ -187,23 +220,39 @@ export default {
 
           <!-- Modale Messaggi -->
 
-
           <!-- Modal Recensione-->
 
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-secondary  ms-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button
+            type="button"
+            class="btn btn-secondary ms-4"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
             invia Recensione
           </button>
           <!-- Button trigger modal -->
-          <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Modal title
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
                 </div>
                 <div class="modal-body">
-                  
                   <!-- Form Recensioni -->
                   <form @submit.prevent="addReview()" action="">
                     <div class="mt-3">
@@ -232,26 +281,35 @@ export default {
                     </button>
                   </form>
                   <!-- Form Recensioni -->
-
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Save changes</button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    data-bs-dismiss="modal"
+                  >
+                    Save changes
+                  </button>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Modale Recensione-->
-
-
-
-
-          
         </div>
       </section>
       .
-      <section v-if="player.messages?.length > 0" class="messages-reviews ms-container">
+      <section
+        v-if="player.messages?.length > 0"
+        class="messages-reviews ms-container"
+      >
         <h2>Messaggi:</h2>
         <div class="user-message">
           <div v-for="message in player.messages" class="message">
@@ -284,30 +342,22 @@ export default {
             </div>
           </div>
         </div>
-       
-        
-        
       </section>
     </section>
-
   </div>
 </template>
 
 <style lang="scss" scoped>
-.ms-container{
+.ms-container {
   width: 1200px;
   max-width: 100%;
   margin: auto;
-  
 }
 .player-info {
-  
   padding: 15%;
-  padding-top:10%;
-  
+  padding-top: 10%;
 }
 .card {
-  
   width: 80%;
   height: 100%;
   border-radius: 1.875rem;
@@ -353,19 +403,16 @@ export default {
 }
 .description {
   padding: 0 10px;
-  h2{
+  h2 {
     font-size: 40px;
     font-weight: 900;
   }
-  p{
+  p {
     font-size: 35px;
   }
-  
 }
 .messages-reviews {
- 
   margin: auto;
- 
 }
 .user-review,
 .user-message {

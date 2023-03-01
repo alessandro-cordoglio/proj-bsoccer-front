@@ -19,7 +19,7 @@ export default {
     },
     getPlayersByRole() {
       axios
-        .get("http://localhost:8000/api/players", {
+        .get(`${this.store.api_url}/players`, {
           params: {
             role: this.store.selectedRole,
           },
@@ -32,7 +32,7 @@ export default {
         });
     },
     getAllPlayer() {
-      axios.get("http://localhost:8000/api/players").then((resp) => {
+      axios.get(`${this.store.api_url}/players`).then((resp) => {
         this.store.players = resp.data;
         this.$router.push({ name: "players" });
       });
@@ -60,9 +60,7 @@ export default {
 <template>
   <header>
     <section class="top_header">
-      <nav
-        class="container d-flex justify-content-between align-items-center"
-      >
+      <nav class="container d-flex justify-content-between align-items-center">
         <div class="header_left">
           <router-link :to="{ name: 'home' }" @click="clearSearch()">
             <img src="src/assets/pngwing.com.png" alt="" />
@@ -112,7 +110,11 @@ export default {
           </div>
           <ul :class="{ 'show-ul': hamburgerAnimation }">
             <li @click="getAllPlayer">
-              <router-link class="d-flex align-items-center" :to="{ name: 'players' }" @click="clearSearch()">
+              <router-link
+                class="d-flex align-items-center"
+                :to="{ name: 'players' }"
+                @click="clearSearch()"
+              >
                 <i class="me-2 fa-solid fa-futbol"></i>
                 Players
               </router-link>
@@ -126,7 +128,8 @@ export default {
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasWithBothOptions"
                 aria-controls="offcanvasWithBothOptions"
-                ><i class="me-2 fa-solid fa-filter"></i> filter</a>
+                ><i class="me-2 fa-solid fa-filter"></i> filter</a
+              >
 
               <div
                 class="ms-offcanvas offcanvas offcanvas-start"
@@ -135,7 +138,10 @@ export default {
                 id="offcanvasWithBothOptions"
                 aria-labelledby="offcanvasWithBothOptionsLabel"
               >
-                <div class="offcanvas-header" style="background-color: white; color: black;">
+                <div
+                  class="offcanvas-header"
+                  style="background-color: white; color: black"
+                >
                   <h5
                     class="offcanvas-title"
                     id="offcanvasWithBothOptionsLabel"
@@ -150,7 +156,7 @@ export default {
                     aria-label="Close"
                   ></button>
                 </div>
-                <div style="background-color: black;" class="offcanvas-body ">
+                <div style="background-color: black" class="offcanvas-body">
                   <!-- Filtro per numero di stelle -->
                   <div>
                     <p>Scegli il player con un numero minimo di stelle</p>
