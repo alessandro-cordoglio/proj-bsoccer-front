@@ -135,12 +135,12 @@ export default {
                 id="offcanvasWithBothOptions"
                 aria-labelledby="offcanvasWithBothOptionsLabel"
               >
-                <div class="offcanvas-header" style="color: white">
+                <div class="offcanvas-header" style="background-color: white; color: black;">
                   <h5
                     class="offcanvas-title"
                     id="offcanvasWithBothOptionsLabel"
                   >
-                    Filtra per Valutazione
+                    Filtri disponibili
                   </h5>
                   <button
                     style="color: white"
@@ -150,7 +150,7 @@ export default {
                     aria-label="Close"
                   ></button>
                 </div>
-                <div class="offcanvas-body">
+                <div style="background-color: black;" class="offcanvas-body ">
                   <!-- Filtro per numero di stelle -->
                   <div>
                     <p>Scegli il player con un numero minimo di stelle</p>
