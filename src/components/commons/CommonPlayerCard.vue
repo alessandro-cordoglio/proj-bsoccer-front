@@ -27,6 +27,7 @@ export default {
   <router-link
     :to="{ name: 'show-player', params: { id: data.id } }"
     :class="Number(mediaRating) >= this.store.selectedRating ? '' : 'd-none'"
+    v-if="data.reviews.length > this.store.howManyReviews"
   >
     <div class="card">
       <div class="card-top">
@@ -39,11 +40,14 @@ export default {
         <h3 class="text-center">
           {{ data.user.name }} {{ data.user.surname }}
         </h3>
-        <h5>
-          RUOLO:<span v-for="role in data.roles" class="ms-2">{{ role.name }} -</span>
-        </h5>
-        <h5 class="d-flex align-items-center">
-          RATING:
+        <div class="d-flex align-items-center">
+          <h5>RUOLO:</h5>
+          <ul class="list-unstyled mb-0">
+            <li v-for="role in data.roles" class="ms-2">{{ role.name }}</li>
+          </ul>
+        </div>
+        <div class="d-flex align-items-center">
+          <h5>RATING:</h5>
           <div v-if="data.stars.length" class="ms-2">
             <i class="fa-solid fa-star" v-for="n in Number(mediaRating)"></i>
             <i
@@ -51,11 +55,9 @@ export default {
               v-for="n in 5 - Number(mediaRating)"
             ></i>
           </div>
-          <div v-else>
-            //
-          </div>
-        </h5>
-
+          <div v-else>//</div>
+        </div>
+        <p>Reviews: {{ data.reviews.length }}</p>
       </div>
       <div class="left-corner"></div>
       <div class="right-corner"></div>

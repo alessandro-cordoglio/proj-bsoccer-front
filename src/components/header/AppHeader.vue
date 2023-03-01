@@ -6,14 +6,14 @@ export default {
   data() {
     return {
       store,
-      filteredRoles:[],
+      filteredRoles: [],
       hamburgerAnimation: false,
     };
   },
   methods: {
     clearSearch() {
-        this.store.selectedRole = '';
-      },
+      this.store.selectedRole = "";
+    },
     animateBurger() {
       this.hamburgerAnimation = !this.hamburgerAnimation;
     },
@@ -34,7 +34,7 @@ export default {
     getAllPlayer() {
       axios.get("http://localhost:8000/api/players").then((resp) => {
         this.store.players = resp.data;
-          this.$router.push({ name: "players" });
+        this.$router.push({ name: "players" });
       });
     },
     updateFilteredRoles() {
@@ -42,14 +42,14 @@ export default {
         role.toLowerCase().includes(this.store.selectedRole.toLowerCase())
       );
     },
-     watch: {
+    watch: {
       "store.selectedRole"(newValue) {
         this.updateFilteredRoles();
       },
     },
     goToFilteredPlayers(role) {
       this.store.selectedRole = role;
-      this.filteredRoles= [];
+      this.filteredRoles = [];
 
       this.getPlayersByRole();
     },
@@ -60,9 +60,7 @@ export default {
 <template>
   <header>
     <section class="top_header">
-      <nav
-        class="container d-flex justify-content-between align-items-center"
-      >
+      <nav class="container d-flex justify-content-between align-items-center">
         <div class="header_left">
           <router-link :to="{ name: 'home' }" @click="clearSearch()">
             <img src="src/assets/pngwing.com.png" alt="" />
@@ -86,11 +84,16 @@ export default {
               v-model="store.selectedRole"
               @input="updateFilteredRoles"
             />
-            <div class="dropdown-text-search">
-
-            </div>
-            <ul class="search-dropdown" v-if="store.selectedRole.length > 0 && filteredRoles.length > 0">
-              <li  v-for="role in filteredRoles" @click="goToFilteredPlayers(role)" :key="role">
+            <div class="dropdown-text-search"></div>
+            <ul
+              class="search-dropdown"
+              v-if="store.selectedRole.length > 0 && filteredRoles.length > 0"
+            >
+              <li
+                v-for="role in filteredRoles"
+                @click="goToFilteredPlayers(role)"
+                :key="role"
+              >
                 {{ role }}
               </li>
             </ul>
@@ -107,7 +110,11 @@ export default {
           </div>
           <ul :class="{ 'show-ul': hamburgerAnimation }">
             <li @click="getAllPlayer">
-              <router-link class="d-flex align-items-center" :to="{ name: 'players' }" @click="clearSearch()">
+              <router-link
+                class="d-flex align-items-center"
+                :to="{ name: 'players' }"
+                @click="clearSearch()"
+              >
                 <i class="me-2 fa-solid fa-futbol"></i>
                 Players
               </router-link>
@@ -115,40 +122,196 @@ export default {
 
             <!-- OFFCAnvas component -->
             <li>
-              <a class="btn p-0 d-flex align-items-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
-                <i class=" me-2 fa-solid fa-filter"></i> 
+              <a
+                class="btn p-0 d-flex align-items-center"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasWithBothOptions"
+                aria-controls="offcanvasWithBothOptions"
+              >
+                <i class="me-2 fa-solid fa-filter"></i>
                 filter
               </a>
 
-              <div class="ms-offcanvas offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+              <!-- <div class="ms-offcanvas offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div class="offcanvas-header" style="color:white">
                   <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"> Filtra per Valutazione</h5>
-                  <button style="color:white"  type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                
+                  <button style="color:white"  type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
 
+              <a
+                class="btn p-0"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasWithBothOptions"
+                aria-controls="offcanvasWithBothOptions"
+                ><i class="fa-solid fa-filter"></i> filter</a
+              >
+
+              <div
+                class="ms-offcanvas offcanvas offcanvas-start"
+                data-bs-scroll="true"
+                tabindex="-1"
+                id="offcanvasWithBothOptions"
+                aria-labelledby="offcanvasWithBothOptionsLabel"
+              >
+                <div class="offcanvas-header" style="color: white">
+                  <h5
+                    class="offcanvas-title"
+                    id="offcanvasWithBothOptionsLabel"
+                  >
+                    Filtra per Valutazione
+                  </h5>
+                  <button
+                    style="color: white"
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                  ></button>
                 </div>
                 <div class="offcanvas-body">
-                  <p>Try scrolling the rest of the page to see this option in action.</p>
+                  <!-- Filtro per numero di stelle -->
+                  <div>
+                    <p>Scegli il player con un numero minimo di stelle</p>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio1"
+                        value="0"
+                        checked
+                        v-model="this.store.selectedRating"
+                      />
+                      <label class="form-check-label" for="inlineRadio1"
+                        >All</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio1"
+                        value="1"
+                        v-model="this.store.selectedRating"
+                      />
+                      <label class="form-check-label" for="inlineRadio1"
+                        >1</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio2"
+                        value="2"
+                        v-model="this.store.selectedRating"
+                      />
+                      <label class="form-check-label" for="inlineRadio2"
+                        >2</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio3"
+                        value="3"
+                        v-model="this.store.selectedRating"
+                      />
+                      <label class="form-check-label" for="inlineRadio3"
+                        >3</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio3"
+                        value="4"
+                        v-model="this.store.selectedRating"
+                      />
+                      <label class="form-check-label" for="inlineRadio4"
+                        >4</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio3"
+                        value="5"
+                        v-model="this.store.selectedRating"
+                      />
+                      <label class="form-check-label" for="inlineRadio5"
+                        >5</label
+                      >
+                    </div>
+                  </div>
+                  <!-- /Filtro per numero di stelle -->
+
+                  <!-- Filtro per numero di recensioni -->
+                  <div class="reviews-filter">
+                    <p>Filtra per numero minimo di recensioni</p>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="flexRadioDefault"
+                        id="flexRadioDefault1"
+                        value="0"
+                        v-model="this.store.howManyReviews"
+                        checked
+                      />
+                      <label class="form-check-label" for="flexRadioDefault1">
+                        Tutti i Players
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="flexRadioDefault"
+                        id="flexRadioDefault1"
+                        value="5"
+                        v-model="this.store.howManyReviews"
+                      />
+                      <label class="form-check-label" for="flexRadioDefault1">
+                        > di 5
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="flexRadioDefault"
+                        id="flexRadioDefault2"
+                        value="15"
+                        v-model="this.store.howManyReviews"
+                      />
+                      <label class="form-check-label" for="flexRadioDefault2">
+                        > di 15
+                      </label>
+                    </div>
+                  </div>
+                  <!-- /Filtro per numero di recensioni -->
                 </div>
               </div>
             </li>
             <!-- /OFFCAnvas component -->
-
-            <li class="d-flex align-items-center">
-              <i class="fa-solid fa-user"></i>
-              <a class="ms-2" href="http://127.0.0.1:8000/login">Login</a>
-            </li>
           </ul>
         </div>
-
-
       </nav>
     </section>
   </header>
 </template>
 
 <style lang="scss" scoped>
-
 .search-dropdown {
   position: absolute;
   z-index: 50;
@@ -173,17 +336,15 @@ export default {
 }
 
 // -----OffCanvas-----
-.ms-offcanvas{
+.ms-offcanvas {
   background-color: #999;
-  
 }
 
-.ms-button-close{
+.ms-button-close {
   color: white;
   border: none;
   background-image: none;
 }
-
 
 header {
   position: sticky;
@@ -225,8 +386,6 @@ nav {
       width: 80px;
     }
   }
-
- 
 }
 
 /* -------------------
@@ -305,7 +464,7 @@ nav {
   UL-ANIMATION
 --------------------*/
 
-.header_right{
+.header_right {
   display: flex;
   ul {
     display: flex;
@@ -313,13 +472,13 @@ nav {
     list-style: none;
     z-index: 100;
     transition: right 0.4s ease-out;
-  
+
     li {
       cursor: pointer;
       padding: 10px;
       transition: all 0.3s ease-out;
       margin-right: 1.875rem;
-  
+
       @media screen and (max-width: 1100px) {
         background-color: #111111;
         padding: 1.875rem 0;
@@ -341,6 +500,7 @@ nav {
     right: -10px;
   }
 }
-
-
+.reviews-filter {
+  margin-top: 1.875rem;
+}
 </style>
