@@ -60,7 +60,9 @@ export default {
 <template>
   <header>
     <section class="top_header">
-      <nav class="container d-flex justify-content-between align-items-center">
+      <nav
+        class="container d-flex justify-content-between align-items-center navbar"
+      >
         <div class="header_left">
           <router-link :to="{ name: 'home' }" @click="clearSearch()">
             <img src="src/assets/pngwing.com.png" alt="" />
@@ -110,34 +112,14 @@ export default {
           </div>
           <ul :class="{ 'show-ul': hamburgerAnimation }">
             <li @click="getAllPlayer">
-              <router-link
-                class="d-flex align-items-center"
-                :to="{ name: 'players' }"
-                @click="clearSearch()"
-              >
-                <i class="me-2 fa-solid fa-futbol"></i>
+              <router-link :to="{ name: 'players' }" @click="clearSearch()">
+                <i class="fa-solid fa-futbol"></i>
                 Players
               </router-link>
             </li>
 
             <!-- OFFCAnvas component -->
             <li>
-              <a
-                class="btn p-0 d-flex align-items-center"
-                type="button"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasWithBothOptions"
-                aria-controls="offcanvasWithBothOptions"
-              >
-                <i class="me-2 fa-solid fa-filter"></i>
-                filter
-              </a>
-
-              <!-- <div class="ms-offcanvas offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-                <div class="offcanvas-header" style="color:white">
-                  <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"> Filtra per Valutazione</h5>
-                  <button style="color:white"  type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
-
               <a
                 class="btn p-0"
                 type="button"
