@@ -13,6 +13,11 @@ export default {
     };
   },
   created() {
+    axios
+      .post(`http://localhost:8000/api/messages/${this.$route.params.id}`)
+      .then((resp) => {
+        console.log(resp.data);
+      });
     this.getPlayer();
 
     this.$watch(
