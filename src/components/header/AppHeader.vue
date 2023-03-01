@@ -286,6 +286,11 @@ export default {
               </div>
             </li>
             <!-- /OFFCAnvas component -->
+
+            <li class="d-flex align-items-center">
+              <i class="fa-solid fa-user"></i>
+              <a class="ms-2" href="http://127.0.0.1:8000/login">Login</a>
+            </li>
           </ul>
         </div>
       </nav>
