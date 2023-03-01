@@ -127,7 +127,7 @@ export default {
           <!-- Button trigger modal -->
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn btn-danger"
             data-bs-toggle="modal"
             data-bs-target="#messageModal"
           >
@@ -146,7 +146,7 @@ export default {
               <div class="modal-content">
                 <div class="modal-header">
                   <h1 class="modal-title fs-5" id="exampleModalLabel">
-                    Modal title
+                    Manda un messaggio a {{ player.user.name }}
                   </h1>
                   <button
                     type="button"
@@ -192,27 +192,24 @@ export default {
                         required
                       ></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">
-                      Aggiungi Messaggio
-                    </button>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button
+                        type="submit"
+                        class="btn btn-success"
+                        data-bs-dismiss="modal"
+                      >
+                        Manda Messaggio
+                      </button>
+                    </div>
                   </form>
                   <!-- Form Messaggio -->
-                </div>
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button
-                    type="submit"
-                    class="btn btn-primary"
-                    data-bs-dismiss="modal"
-                  >
-                    Save changes
-                  </button>
                 </div>
               </div>
             </div>
@@ -225,11 +222,11 @@ export default {
           <!-- Button trigger modal -->
           <button
             type="button"
-            class="btn btn-secondary ms-4"
+            class="btn btn-danger ms-4"
             data-bs-toggle="modal"
             data-bs-target="#reviewModal"
           >
-            invia Recensione
+            Scrivi Recensione
           </button>
           <!-- Button trigger modal -->
           <div
@@ -243,7 +240,7 @@ export default {
               <div class="modal-content">
                 <div class="modal-header">
                   <h1 class="modal-title fs-5" id="exampleModalLabel">
-                    Modal title
+                    Scrivi una recensione su {{ player.user.name }}
                   </h1>
                   <button
                     type="button"
@@ -258,7 +255,7 @@ export default {
                     <div class="mt-3">
                       <label for="name">Nome</label>
                       <input
-                        class="form-control"
+                        class="form-control mb-2"
                         type="text"
                         name="name"
                         id="name"
@@ -286,40 +283,14 @@ export default {
                       </button>
                       <button
                         type="submit"
-                        class="btn btn-primary"
+                        class="btn btn-success"
                         data-bs-dismiss="modal"
                       >
                         Aggiungi Recensione
                       </button>
-                      <!-- <button
-                    type="submit"
-                    class="btn btn-primary"
-                    data-bs-dismiss="modal"
-                  >
-                    Save changes
-                  </button> -->
                     </div>
                   </form>
                   <!-- Form Recensioni -->
-                  <!-- </div>
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button type="submit" class="btn btn-primary">
-                    Aggiungi Recensione
-                  </button> -->
-                  <!-- <button
-                    type="submit"
-                    class="btn btn-primary"
-                    data-bs-dismiss="modal"
-                  >
-                    Save changes
-                  </button> -->
                 </div>
               </div>
             </div>
