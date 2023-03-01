@@ -61,7 +61,7 @@ export default {
   <header>
     <section class="top_header">
       <nav
-        class="container d-flex justify-content-between align-items-center navbar"
+        class="container d-flex justify-content-between align-items-center"
       >
         <div class="header_left">
           <router-link :to="{ name: 'home' }" @click="clearSearch()">
@@ -112,8 +112,8 @@ export default {
           </div>
           <ul :class="{ 'show-ul': hamburgerAnimation }">
             <li @click="getAllPlayer">
-              <router-link :to="{ name: 'players' }" @click="clearSearch()">
-                <i class="fa-solid fa-futbol"></i>
+              <router-link class="d-flex align-items-center" :to="{ name: 'players' }" @click="clearSearch()">
+                <i class="me-2 fa-solid fa-futbol"></i>
                 Players
               </router-link>
             </li>
@@ -121,13 +121,12 @@ export default {
             <!-- OFFCAnvas component -->
             <li>
               <a
-                class="btn p-0"
+                class="d-flex align-items-center btn p-0"
                 type="button"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasWithBothOptions"
                 aria-controls="offcanvasWithBothOptions"
-                ><i class="fa-solid fa-filter"></i> filter</a
-              >
+                ><i class="me-2 fa-solid fa-filter"></i> filter</a>
 
               <div
                 class="ms-offcanvas offcanvas offcanvas-start"
