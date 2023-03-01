@@ -12,6 +12,31 @@ export default {
       store,
     };
   },
+  mounted() {
+    if (this.store.selectedRole) {
+      this.getPlayersByRole();
+    } else {
+      this.getAllPlayers();
+    }
+  },
+  methods: {
+    getPlayersByRole() {
+      axios
+        .get("http://localhost:8000/api/players", {
+          params: {
+            role: this.store.selectedRole,
+          },
+        })
+        .then((response) => {
+          this.store.players = response.data;
+        });
+    },
+    getAllPlayers() {
+      axios.get("http://localhost:8000/api/players").then((resp) => {
+        this.store.players = resp.data;
+      });
+    },
+  },
 };
 </script>
 
@@ -22,7 +47,8 @@ export default {
         v-for="(player, index) in this.store.players"
         :data="player"
         class="players-list"
-      />
+        :key="player.id"
+        />
     </div>
   </section>
 </template>
