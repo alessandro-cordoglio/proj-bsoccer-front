@@ -85,155 +85,231 @@ export default {
 </script>
 
 <template>
-  <section v-if="player.user">
-    <section class="player-info">
-      <div class="card">
-        <div class="card-top">
-          <img
-            v-if="player.user"
-            :src="player.profile_photo"
-            :alt="(player.user.name, player.user.surname)"
-          />
+  <div class="ms-container">
+    <section v-if="player.user">
+      <section class="player-info row g-0 gy-4">
+        <div class="card-content col-sm-12 col-lg-6">
+          <div class="card ">
+            <div class="card-top">
+              <img
+                v-if="player.user"
+                :src="player.profile_photo"
+                :alt="(player.user.name, player.user.surname)"
+              />
+            </div>
+            <div class="card-bottom">
+              <h3 class="text-center">
+                {{ player.user.name }} {{ player.user.surname }}
+              </h3>
+              <h5>
+                RUOLO:<span v-for="role in player.roles">{{ role.name }}-</span>
+              </h5>
+              <h5>
+                RATING:
+                <i class="fa-solid fa-star" v-for="n in Number(mediaRating)"></i>
+                <i
+                  class="fa-regular fa-star"
+                  v-for="n in 5 - Number(mediaRating)"
+                ></i>
+              </h5>
+            </div>
+          </div>
         </div>
-        <div class="card-bottom">
-          <h3 class="text-center">
-            {{ player.user.name }} {{ player.user.surname }}
-          </h3>
-          <h5>
-            RUOLO:<span v-for="role in player.roles">{{ role.name }}-</span>
-          </h5>
-          <h5>
-            RATING:
-            <i class="fa-solid fa-star" v-for="n in Number(mediaRating)"></i>
-            <i
-              class="fa-regular fa-star"
-              v-for="n in 5 - Number(mediaRating)"
-            ></i>
-          </h5>
+        <div class="description col-sm-12 col-lg-6">
+          <h2>Descrizione Giocatore</h2>
+          <p>{{ player.description }}</p>
+
+          
+         
+          
+          <!-- Modal Messaggi -->
+
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            invia Messaggio
+          </button>
+          <!-- Button trigger modal -->
+
+          <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <!-- Form Messaggio -->
+                  <form @submit.prevent="addMessage()" ref="formMessage" action="">
+                    <div class="mt-1">
+                      <label for="name">Nome</label>
+                      <input
+                        class="form-control mb-2"
+                        type="text"
+                        id="name"
+                        placeholder="Inserisci nome"
+                        v-model="formData.name"
+                      />
+                      <label for="email">Email</label>
+                      <input
+                        class="form-control mb-2"
+                        type="text"
+                        id="email"
+                        placeholder="Inserisci email*"
+                        v-model="formData.email"
+                        required
+                      />
+                      <label for="content">Testo</label>
+                      <textarea
+                        class="form-control mb-2"
+                        name="content"
+                        id="content"
+                        cols="30"
+                        rows="10"
+                        placeholder="Inserisci messaggio*"
+                        v-model="formData.content"
+                        required
+                      ></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                      Aggiungi Messaggio
+                    </button>
+                  </form>
+                  <!-- Form Messaggio -->
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modale Messaggi -->
+
+
+          <!-- Modal Recensione-->
+
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-secondary  ms-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            invia Recensione
+          </button>
+          <!-- Button trigger modal -->
+          <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  
+                  <!-- Form Recensioni -->
+                  <form @submit.prevent="addReview()" action="">
+                    <div class="mt-3">
+                      <label for="name">Nome</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        name="name"
+                        id="name"
+                        placeholder="Inserisci nome"
+                        v-model="reviewData.name"
+                      />
+                      <textarea
+                        class="form-control"
+                        name="content"
+                        id="content"
+                        cols="30"
+                        rows="10"
+                        placeholder="Inserisci messaggio*"
+                        v-model="reviewData.content"
+                        required
+                      ></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                      Aggiungi Recensione
+                    </button>
+                  </form>
+                  <!-- Form Recensioni -->
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modale Recensione-->
+
+
+
+
+          
         </div>
-      </div>
-      <div class="description">
-        <h2>Descrizione Giocatore:</h2>
-        <p>{{ player.description }}</p>
-      </div>
+      </section>
+      .
+      <section v-if="player.messages?.length > 0" class="messages-reviews ms-container">
+        <h2>Messaggi:</h2>
+        <div class="user-message">
+          <div v-for="message in player.messages" class="message">
+            <div class="user-img">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
+                alt="user-img"
+              />
+            </div>
+            <div class="comment-details">
+              <h4 v-if="message.name">{{ message.name }}</h4>
+              <h4 v-else>Unknown</h4>
+              <p>{{ message.content }}</p>
+            </div>
+          </div>
+        </div>
+        <h2>Recensioni:</h2>
+        <div class="user-review">
+          <div v-for="review in player.reviews" class="message">
+            <div class="user-img">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
+                alt="user-img"
+              />
+            </div>
+            <div class="comment-details">
+              <h4 v-if="review.name">{{ review.name }}</h4>
+              <h4 v-else>Unknown</h4>
+              <p>{{ review.content }}</p>
+            </div>
+          </div>
+        </div>
+       
+        
+        
+      </section>
     </section>
-    <section v-if="player.messages?.length > 0" class="messages-reviews">
-      <h2>Messaggi:</h2>
-      <div class="user-message">
-        <div v-for="message in player.messages" class="message">
-          <div class="user-img">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
-              alt="user-img"
-            />
-          </div>
-          <div class="comment-details">
-            <h4 v-if="message.name">{{ message.name }}</h4>
-            <h4 v-else>Unknown</h4>
-            <p>{{ message.content }}</p>
-          </div>
-        </div>
-      </div>
-      <h2>Recensioni:</h2>
-      <div class="user-review">
-        <div v-for="review in player.reviews" class="message">
-          <div class="user-img">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
-              alt="user-img"
-            />
-          </div>
-          <div class="comment-details">
-            <h4 v-if="review.name">{{ review.name }}</h4>
-            <h4 v-else>Unknown</h4>
-            <p>{{ review.content }}</p>
-          </div>
-        </div>
-      </div>
-      <h2>Aggiungi Commento</h2>
-      <form @submit.prevent="addMessage()" ref="formMessage" action="">
-        <div class="mt-3">
-          <label for="name">Nome</label>
-          <input
-            class="form-control"
-            type="text"
-            id="name"
-            placeholder="Inserisci nome"
-            v-model="formData.name"
-          />
-          <label for="email">Email</label>
-          <input
-            class="form-control"
-            type="text"
-            id="email"
-            placeholder="Inserisci email*"
-            v-model="formData.email"
-            required
-          />
-          <textarea
-            class="form-control"
-            name="content"
-            id="content"
-            cols="30"
-            rows="10"
-            placeholder="Inserisci messaggio*"
-            v-model="formData.content"
-            required
-          ></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">
-          Aggiungi Messaggio
-        </button>
-      </form>
-      <!-- Form Recensioni -->
-      <h2>Aggiungi Recensione</h2>
-      <form @submit.prevent="addReview()" action="">
-        <div class="mt-3">
-          <label for="name">Nome</label>
-          <input
-            class="form-control"
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Inserisci nome"
-            v-model="reviewData.name"
-          />
-          <textarea
-            class="form-control"
-            name="content"
-            id="content"
-            cols="30"
-            rows="10"
-            placeholder="Inserisci messaggio*"
-            v-model="reviewData.content"
-            required
-          ></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">
-          Aggiungi Recensione
-        </button>
-      </form>
-      <!-- /Form Recensioni -->
-    </section>
-  </section>
+
+  </div>
 </template>
 
 <style lang="scss" scoped>
-section {
-  margin: 2.5rem 0;
+.ms-container{
+  width: 1200px;
+  max-width: 100%;
+  margin: auto;
+  
 }
 .player-info {
-  max-width: 75rem;
-  margin: auto;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-bottom: 2.5rem;
+  
+  padding: 15%;
+  padding-top:10%;
+  
 }
 .card {
-  position: relative;
-  width: 18.75rem;
-  height: 25rem;
+  
+  width: 80%;
+  height: 100%;
   border-radius: 1.875rem;
   overflow: hidden;
   cursor: pointer;
@@ -276,13 +352,20 @@ section {
   }
 }
 .description {
-  width: 50%;
-  margin: 0.625rem 0;
+  padding: 0 10px;
+  h2{
+    font-size: 40px;
+    font-weight: 900;
+  }
+  p{
+    font-size: 35px;
+  }
+  
 }
 .messages-reviews {
-  max-width: 56.25rem;
+ 
   margin: auto;
-  padding-bottom: 3.125rem;
+ 
 }
 .user-review,
 .user-message {
