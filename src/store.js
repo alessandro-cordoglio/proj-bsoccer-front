@@ -17,4 +17,5 @@ export const store = reactive({
     "Attaccante Sinistro",
     "Attaccante Destro",
   ],
+  selectedRating: 0,
 });

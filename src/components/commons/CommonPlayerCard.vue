@@ -24,8 +24,11 @@ export default {
 </script>
 
 <template>
-  <router-link :to="{ name: 'show-player', params: { id: data.id } }">
-    <div class="card" v-if="Number(mediaRating) >= this.store.selectedRating">
+  <router-link
+    :to="{ name: 'show-player', params: { id: data.id } }"
+    :class="Number(mediaRating) >= this.store.selectedRating ? '' : 'd-none'"
+  >
+    <div class="card">
       <div class="card-top">
         <img
           :src="data.profile_photo"
