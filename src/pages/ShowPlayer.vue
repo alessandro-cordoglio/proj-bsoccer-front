@@ -376,7 +376,6 @@ export default {
           <!-- /recensioni stelle -->
         </div>
       </section>
-      .
       <section
         v-if="player.messages?.length > 0"
         class="messages-reviews ms-container"
