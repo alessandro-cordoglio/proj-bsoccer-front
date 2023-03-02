@@ -2,10 +2,15 @@
 import axios from "axios";
 import CommonPlayerCard from "../components/commons/CommonPlayerCard.vue";
 import { store } from "../store";
+
+
+
+
 export default {
   name: "ShowPlayer",
   components: {
     CommonPlayerCard,
+    
     randomNumber: 0,
   },
   data() {
@@ -45,20 +50,47 @@ export default {
           this.$router.push({ name: "page-404" });
         });
     },
+
     addMessage() {
-      axios
-        .post(`${this.store.api_url}/messages/${this.player.id}`, {
-          name: this.formData.name,
-          email: this.formData.email,
-          content: this.formData.content,
-        })
-        .then((res) => {
-          this.player.messages.push(res.data);
-          this.formData.name = "";
-          this.formData.email = "";
-          this.formData.content = "";
-        });
-    },
+  // Controlla se tutti i campi obbligatori sono stati compilati
+    if (!this.formData.name || !this.formData.email || !this.formData.content) {
+      alert("Si prega di compilare tutti i campi obbligatori");
+      return;
+    }
+
+    // Invia la richiesta POST utilizzando Axios
+    axios.post(`${this.store.api_url}/messages/${this.player.id}`, {
+      name: this.formData.name,
+      email: this.formData.email,
+      content: this.formData.content,
+    })
+    .then((res) => {
+      // Aggiungi il messaggio alla lista del giocatore
+      this.player.messages.push(res.data);
+      // Svuota i campi del modulo
+      this.formData.name = "";
+      this.formData.email = "";
+      this.formData.content = "";
+      
+      // Chiudi la modale manualmente
+      let myModal = new bootstrap.Modal(document.getElementById('messageModal'));
+      myModal.hide();
+
+    })
+    .catch((error) => {
+      // Gestisci eventuali errori qui
+      console.log(error);
+    });
+  },
+
+
+  
+  
+
+   
+
+
+
     addReview() {
       axios
         .post(`${this.store.api_url}/reviews/${this.player.id}`, {
@@ -82,6 +114,7 @@ export default {
         });
     },
   },
+
   computed: {
     mediaRating() {
       const sum = this.player.stars.reduce(
@@ -93,6 +126,8 @@ export default {
     },
   },
 };
+
+
 </script>
 
 <template>
@@ -147,17 +182,17 @@ export default {
           <!-- Button trigger modal -->
 
           <div
-            class="modal fade"
+            class="modal fade "
             id="messageModal"
             tabindex="-1"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
           >
-            <div class="modal-dialog">
+            <div id="myModal" class="modal-dialog ">
               <div class="modal-content">
                 <div class="modal-header">
                   <h1 class="modal-title fs-5" id="exampleModalLabel">
-                    Manda un messaggio a {{ player.user.name }}
+                    Invia un messaggio a {{ player.user.name }}
                   </h1>
                   <button
                     type="button"
@@ -167,66 +202,38 @@ export default {
                   ></button>
                 </div>
                 <div class="modal-body">
+
+                  
                   <!-- Form Messaggio -->
-                  <form
-                    @submit.prevent="addMessage()"
-                    ref="formMessage"
-                    action=""
-                  >
+                  <form @submit.prevent="addMessage()" ref="formMessage">
                     <div class="mt-1">
                       <label for="name">Nome*</label>
-                      <input
-                        class="form-control mb-2"
-                        type="text"
-                        id="name"
-                        placeholder="Inserisci nome"
-                        v-model="formData.name"
-                      />
+                      <input class="form-control mb-2" type="text" id="name" placeholder="Inserisci nome" v-model="formData.name" required>
                       <label for="email">Email*</label>
-                      <input
-                        class="form-control mb-2"
-                        type="text"
-                        id="email"
-                        placeholder="Inserisci email*"
-                        v-model="formData.email"
-                        required
-                      />
+                      <input class="form-control mb-2" type="email" id="email" placeholder="Inserisci email" v-model="formData.email" required>
                       <label for="content">Messaggio*</label>
-                      <textarea
-                        class="form-control mb-2"
-                        name="content"
-                        id="content"
-                        cols="30"
-                        rows="10"
-                        placeholder="Inserisci messaggio*"
-                        v-model="formData.content"
-                        required
-                      ></textarea>
+                      <textarea class="form-control mb-2" name="content" id="content" cols="30" rows="10" placeholder="Inserisci messaggio" v-model="formData.content" required></textarea>
                     </div>
                     <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-bs-dismiss="modal"
-                      >
-                        Close
-                      </button>
-                      <button
-                        type="submit"
-                        class="btn btn-success"
-                        data-bs-dismiss="modal"
-                      >
-                        Manda Messaggio
-                      </button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                      <button type="submit" class="btn btn-success">Invia Messaggio</button>
                     </div>
                   </form>
+
                   <!-- Form Messaggio -->
+                  
                 </div>
               </div>
             </div>
           </div>
+           <!-- Modale Messaggi fine -->
 
-          <!-- Modale Messaggi -->
+
+
+         
+
+
+         
 
           <!-- Modal Recensione-->
 
@@ -418,6 +425,16 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+
+.toast {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999;
+  max-width: 350px;
+  min-width: 250px;
+}
+
 .ms-container {
   width: 1200px;
   max-width: 100%;
