@@ -72,10 +72,6 @@ export default {
         </div>
         <p>Reviews: {{ data.reviews.length }}</p>
       </div>
-      <div class="left-corner"></div>
-      <div class="right-corner"></div>
-      <div class="bottom-left"></div>
-      <div class="bottom-right"></div>
     </div>
   </router-link>
 </template>
@@ -84,11 +80,14 @@ export default {
 a {
   text-decoration: none;
   color: inherit;
+  opacity: 1 ;
   &:hover {
     color: inherit;
   }
 }
 .card {
+  overflow: hidden;
+  border-radius: 40px 0 40px 0;
   position: relative;
   width: 18.75rem;
   height: 31.25rem;

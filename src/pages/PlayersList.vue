@@ -54,10 +54,13 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+.all-players::-webkit-scrollbar {
+    display: none;
+  }
 .all-players {
   background-image: url("http://www.asdbassabresciana.it/wp-content/uploads/2016/06/Sfondo-HD-calcio-sport.jpeg");
   max-height: 100vh;
-  min-width: 100vw;
+  min-width: 100%;
   overflow: auto;
   background-size: cover;
   background-position: top right;

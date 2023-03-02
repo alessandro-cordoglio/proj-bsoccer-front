@@ -293,7 +293,26 @@ export default {
                         ></textarea>
                       </div>
                       <!-- recensioni stelle -->
-                      <div class="my-3">
+                      
+                      <!-- /recensioni stelle -->
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <button
+                          type="submit"
+                          class="btn btn-success"
+                          data-bs-dismiss="modal"
+                        >
+                          Aggiungi Recensione
+                        </button>
+                      </div>
+                    </form>
+                    <div class="my-3">
                         <h3>Valuta il Giocatore</h3>
                         <div
                           class="form-check form-check-inline mx-0 position-relative"
@@ -393,24 +412,6 @@ export default {
                           Invia Valutazione
                         </button>
                       </div>
-                      <!-- /recensioni stelle -->
-                      <div class="modal-footer">
-                        <button
-                          type="button"
-                          class="btn btn-secondary"
-                          data-bs-dismiss="modal"
-                        >
-                          Close
-                        </button>
-                        <button
-                          type="submit"
-                          class="btn btn-success"
-                          data-bs-dismiss="modal"
-                        >
-                          Aggiungi Recensione
-                        </button>
-                      </div>
-                    </form>
                     <!-- Form Recensioni -->
                   </div>
                 </div>
@@ -462,10 +463,13 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+.background::-webkit-scrollbar {
+    display: none;
+  }
 .background {
   background-image: url("https://assets.fubles.com/images/landing/custom_backgrounds/generica.jpg");
   max-height: 100vh;
-  min-width: 100vw;
+  min-width: 100%;
   overflow: auto;
   background-size: cover;
   background-position: top right;
@@ -474,15 +478,7 @@ export default {
   max-width: 1100px;
   width: 100%;
   // background-color: grey;
-  background-image: linear-gradient(
-    to right bottom,
-    #f8f8f8,
-    #d8d8d8,
-    #b9b9b9,
-    #9b9b9b,
-    #7e7e7e
-  );
-  opacity: 0.9;
+  background-color: var(--common-card-color);
   padding: 0 1.875rem;
   margin: auto;
 }
@@ -545,6 +541,7 @@ export default {
   }
 }
 .messages-reviews {
+  background-color: transparent;
   margin: auto;
 }
 .user-review,
