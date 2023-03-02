@@ -104,7 +104,11 @@ export default {
             <div class="card-top">
               <img
                 v-if="player.user"
-                :src="player.profile_photo"
+                :src="
+                  player.profile_photo.includes('https')
+                    ? player.profile_photo
+                    : player.image_url
+                "
                 :alt="(player.user.name, player.user.surname)"
               />
             </div>
@@ -285,6 +289,105 @@ export default {
                         required
                       ></textarea>
                     </div>
+                    <!-- recensioni stelle -->
+                    <div class="my-3">
+                      <h3>Valuta il Giocatore</h3>
+                      <div
+                        class="form-check form-check-inline mx-0 position-relative"
+                      >
+                        <input
+                          class="form-check-input ms-input-style"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio1"
+                          value="1"
+                          v-model="rating"
+                        />
+                        <label class="form-check-label" for="inlineRadio1">
+                          <i
+                            class="fas fa-star"
+                            :class="{ selected: rating >= 1 }"
+                          ></i>
+                        </label>
+                      </div>
+                      <div
+                        class="form-check form-check-inline mx-0 position-relative"
+                      >
+                        <input
+                          class="form-check-input ms-input-style"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio2"
+                          value="2"
+                          v-model="rating"
+                        />
+                        <label class="form-check-label" for="inlineRadio2">
+                          <i
+                            class="fas fa-star"
+                            :class="{ selected: rating >= 2 }"
+                          ></i>
+                        </label>
+                      </div>
+                      <div
+                        class="form-check form-check-inline mx-0 position-relative"
+                      >
+                        <input
+                          class="form-check-input ms-input-style"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio3"
+                          value="3"
+                          v-model="rating"
+                        />
+                        <label class="form-check-label" for="inlineRadio3">
+                          <i
+                            class="fas fa-star"
+                            :class="{ selected: rating >= 3 }"
+                          ></i>
+                        </label>
+                      </div>
+                      <div
+                        class="form-check form-check-inline mx-0 position-relative"
+                      >
+                        <input
+                          class="form-check-input ms-input-style"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio4"
+                          value="4"
+                          v-model="rating"
+                          selected
+                        />
+                        <label class="form-check-label" for="inlineRadio4">
+                          <i
+                            class="fas fa-star"
+                            :class="{ selected: rating >= 4 }"
+                          ></i>
+                        </label>
+                      </div>
+                      <div
+                        class="form-check form-check-inline mx-0 position-relative"
+                      >
+                        <input
+                          class="form-check-input ms-input-style"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio5"
+                          value="5"
+                          v-model="rating"
+                        />
+                        <label class="form-check-label" for="inlineRadio5">
+                          <i
+                            class="fas fa-star"
+                            :class="{ selected: rating >= 5 }"
+                          ></i>
+                        </label>
+                      </div>
+                      <button @click="addRating()" class="btn btn-primary ms-3">
+                        Invia Valutazione
+                      </button>
+                    </div>
+                    <!-- /recensioni stelle -->
                     <div class="modal-footer">
                       <button
                         type="button"
@@ -307,73 +410,7 @@ export default {
               </div>
             </div>
           </div>
-
           <!-- Modale Recensione-->
-          <!-- recensioni stelle -->
-          <div class="mt-3">
-            <h3>Valuta il Giocatore</h3>
-            <div class="form-check form-check-inline">
-              <input
-                @click="addRating()"
-                class="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
-                id="inlineRadio1"
-                value="1"
-                v-model="rating"
-              />
-              <label class="form-check-label" for="inlineRadio1">1</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                @click="addRating()"
-                class="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
-                id="inlineRadio2"
-                value="2"
-                v-model="rating"
-              />
-              <label class="form-check-label" for="inlineRadio2">2</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                @click="addRating()"
-                class="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
-                id="inlineRadio3"
-                value="3"
-                v-model="rating"
-              />
-              <label class="form-check-label" for="inlineRadio3">3</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                @click="addRating()"
-                class="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
-                id="inlineRadio4"
-                value="4"
-                v-model="rating"
-              />
-              <label class="form-check-label" for="inlineRadio3">4</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                @click="addRating()"
-                class="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
-                id="inlineRadio5"
-                value="5"
-                v-model="rating"
-              />
-              <label class="form-check-label" for="inlineRadio3">5</label>
-            </div>
-          </div>
-          <!-- /recensioni stelle -->
         </div>
       </section>
       <section
@@ -515,5 +552,22 @@ export default {
       object-fit: cover;
     }
   }
+}
+.ms-input-style {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  opacity: 0;
+  width: 1.875rem;
+  height: 1.875rem;
+  z-index: 100;
+}
+.fa-star {
+  transition: all 0.2s linear;
+}
+.selected {
+  color: gold;
+  transform: scale(1.5);
 }
 </style>

@@ -9,7 +9,7 @@ export default {
     Hero,
     Sponsorship,
     AppSectionIcon,
-},
+  },
   data() {
     return {};
   },
@@ -24,11 +24,10 @@ export default {
   <section class="app-icons">
     <AppSectionIcon />
   </section>
-  
+
   <section class="sponsored_player">
     <Sponsorship />
   </section>
-  
 </template>
 
 <style lang="scss" scoped>

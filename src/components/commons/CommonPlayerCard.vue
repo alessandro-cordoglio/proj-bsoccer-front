@@ -10,6 +10,15 @@ export default {
       store,
     };
   },
+  methods: {
+    // getPlayerPhoto() {
+    //   if (data.profile_photo.includes("uploads")) {
+    //     return data.image_url;
+    //   } else {
+    //     return data.profile_photo;
+    //   }
+    // },
+  },
   computed: {
     mediaRating() {
       const sum = this.data.stars.reduce(
@@ -32,7 +41,11 @@ export default {
     <div class="card">
       <div class="card-top">
         <img
-          :src="data.profile_photo"
+          :src="
+            data.profile_photo.includes('https')
+              ? data.profile_photo
+              : data.image_url
+          "
           :alt="(data.user.name, data.user.surname)"
         />
       </div>
