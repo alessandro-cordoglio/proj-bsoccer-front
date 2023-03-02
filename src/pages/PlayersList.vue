@@ -16,25 +16,46 @@ export default {
     if (this.store.selectedRole) {
       this.getPlayersByRole();
     } else {
-      this.getAllPlayers();
+      this.getPlayers();
     }
+    
   },
   methods: {
-    getPlayersByRole() {
-      axios
-        .get(`${this.store.api_url}/players`, {
+    getPlayers() {
+      axios.get(`${this.store.api_url}/players`, {
+        params: {
+          page: this.store.currentPage,
+          perPage: this.store.prePage
+        }
+      })
+      .then(res => {
+        console.log(res.data);
+        this.store.players = res.data.data;
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    },
+    changePage(num) {
+      this.store.currentPage += num;
+      this.getPlayers();
+    },
+
+  getPlayersByRole() {
+      axios.get(`${this.store.api_url}/players`, {
           params: {
             role: this.store.selectedRole,
-          },
+            page: this.store.currentPage,
+            perPage: this.store.prePage
+          }
         })
-        .then((response) => {
-          this.store.players = response.data;
-        });
-    },
-    getAllPlayers() {
-      axios.get(`${this.store.api_url}/players`).then((resp) => {
-        this.store.players = resp.data;
-      });
+        .then(res => {
+          console.log(res.data)
+          this.store.players = res.data.data;
+        })
+        .catch(error => {
+          console.log(error);
+        })
     },
   },
 };
@@ -47,8 +68,12 @@ export default {
         v-for="(player, index) in this.store.players"
         :data="player"
         class="players-list"
-        :key="player.id"
+        :key="player.id "
       />
+    </div>
+    <div class="btn-wrapper">
+      <button class="btn" type="button" :disabled="store.currentPage === 1" @click="changePage(-1)">-- Prev</button>
+      <button class="btn" type="button" :disabled="store.currentPage === 5" @click="changePage(1)">Next --</button>
     </div>
   </section>
 </template>
