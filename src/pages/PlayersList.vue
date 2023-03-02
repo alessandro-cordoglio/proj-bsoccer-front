@@ -22,7 +22,7 @@ export default {
   methods: {
     getPlayersByRole() {
       axios
-        .get("http://localhost:8000/api/players", {
+        .get(`${this.store.api_url}/players`, {
           params: {
             role: this.store.selectedRole,
           },
@@ -32,7 +32,7 @@ export default {
         });
     },
     getAllPlayers() {
-      axios.get("http://localhost:8000/api/players").then((resp) => {
+      axios.get(`${this.store.api_url}/players`).then((resp) => {
         this.store.players = resp.data;
       });
     },
@@ -48,7 +48,7 @@ export default {
         :data="player"
         class="players-list"
         :key="player.id"
-        />
+      />
     </div>
   </section>
 </template>

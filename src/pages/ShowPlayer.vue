@@ -21,6 +21,7 @@ export default {
         name: "",
         content: "",
       },
+      rating: 0,
     };
   },
   created() {
@@ -36,7 +37,7 @@ export default {
   methods: {
     getPlayer() {
       axios
-        .get(`http://localhost:8000/api/players/${this.$route.params.id}`)
+        .get(`${this.store.api_url}/players/${this.$route.params.id}`)
         .then((resp) => {
           this.player = resp.data;
         })
@@ -70,6 +71,16 @@ export default {
           this.reviewData.content = "";
         });
     },
+    addRating() {
+      axios
+        .post(`${this.store.api_url}/ratings/${this.player.id}`, {
+          rating: this.rating,
+        })
+        .then((res) => {
+          this.player.ratings.push(res.data);
+          this.rating = 0;
+        });
+    },
   },
   computed: {
     mediaRating() {
@@ -89,7 +100,7 @@ export default {
     <section v-if="player.user">
       <section class="player-info row g-0 gy-4">
         <div class="card-content col-sm-12 col-lg-6">
-          <div class="card ">
+          <div class="card">
             <div class="card-top">
               <img
                 v-if="player.user"
@@ -106,7 +117,10 @@ export default {
               </h5>
               <h5>
                 RATING:
-                <i class="fa-solid fa-star" v-for="n in Number(mediaRating)"></i>
+                <i
+                  class="fa-solid fa-star"
+                  v-for="n in Number(mediaRating)"
+                ></i>
                 <i
                   class="fa-regular fa-star"
                   v-for="n in 5 - Number(mediaRating)"
@@ -116,137 +130,256 @@ export default {
           </div>
         </div>
         <div class="description col-sm-12 col-lg-6">
-          <div class="description-content w-100">
+          <h2>Descrizione Giocatore</h2>
+          <p>{{ player.description }}</p>
 
-            <h2>Descrizione Giocatore</h2>
-            <p>{{ player.description }}</p>
-  
-            <!-- Modal Messaggi -->
-  
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              invia Messaggio
-            </button>
-            <!-- Button trigger modal -->
-  
-            <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <!-- Form Messaggio -->
-                    <form @submit.prevent="addMessage()" ref="formMessage" action="">
-                      <div class="mt-1">
-                        <label for="name">Nome</label>
-                        <input
-                          class="form-control mb-2"
-                          type="text"
-                          id="name"
-                          placeholder="Inserisci nome"
-                          v-model="formData.name"
-                        />
-                        <label for="email">Email</label>
-                        <input
-                          class="form-control mb-2"
-                          type="text"
-                          id="email"
-                          placeholder="Inserisci email*"
-                          v-model="formData.email"
-                          required
-                        />
-                        <label for="content">Testo</label>
-                        <textarea
-                          class="form-control mb-2"
-                          name="content"
-                          id="content"
-                          cols="30"
-                          rows="10"
-                          placeholder="Inserisci messaggio*"
-                          v-model="formData.content"
-                          required
-                        ></textarea>
-                      </div>
-                      <button type="submit" class="btn btn-primary">
-                        Aggiungi Messaggio
+          <!-- Modal Messaggi -->
+
+          <!-- Button trigger modal -->
+          <button
+            type="button"
+            class="btn btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#messageModal"
+          >
+            invia Messaggio
+          </button>
+          <!-- Button trigger modal -->
+
+          <div
+            class="modal fade"
+            id="messageModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Manda un messaggio a {{ player.user.name }}
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <!-- Form Messaggio -->
+                  <form
+                    @submit.prevent="addMessage()"
+                    ref="formMessage"
+                    action=""
+                  >
+                    <div class="mt-1">
+                      <label for="name">Nome</label>
+                      <input
+                        class="form-control mb-2"
+                        type="text"
+                        id="name"
+                        placeholder="Inserisci nome"
+                        v-model="formData.name"
+                      />
+                      <label for="email">Email</label>
+                      <input
+                        class="form-control mb-2"
+                        type="text"
+                        id="email"
+                        placeholder="Inserisci email*"
+                        v-model="formData.email"
+                        required
+                      />
+                      <label for="content">Testo</label>
+                      <textarea
+                        class="form-control mb-2"
+                        name="content"
+                        id="content"
+                        cols="30"
+                        rows="10"
+                        placeholder="Inserisci messaggio*"
+                        v-model="formData.content"
+                        required
+                      ></textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
                       </button>
-                    </form>
-                    <!-- Form Messaggio -->
-  
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Save changes</button>
-                  </div>
+                      <button
+                        type="submit"
+                        class="btn btn-success"
+                        data-bs-dismiss="modal"
+                      >
+                        Manda Messaggio
+                      </button>
+                    </div>
+                  </form>
+                  <!-- Form Messaggio -->
                 </div>
               </div>
             </div>
-  
-            <!-- Modale Messaggi -->
-  
-  
-            <!-- Modal Recensione-->
-  
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-secondary  ms-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              invia Recensione
-            </button>
-            <!-- Button trigger modal -->
-            <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    
-                    <!-- Form Recensioni -->
-                    <form @submit.prevent="addReview()" action="">
-                      <div class="mt-3">
-                        <label for="name">Nome</label>
-                        <input
-                          class="form-control"
-                          type="text"
-                          name="name"
-                          id="name"
-                          placeholder="Inserisci nome"
-                          v-model="reviewData.name"
-                        />
-                        <textarea
-                          class="form-control"
-                          name="content"
-                          id="content"
-                          cols="30"
-                          rows="10"
-                          placeholder="Inserisci messaggio*"
-                          v-model="reviewData.content"
-                          required
-                        ></textarea>
-                      </div>
-                      <button type="submit" class="btn btn-primary">
+          </div>
+
+          <!-- Modale Messaggi -->
+
+          <!-- Modal Recensione-->
+
+          <!-- Button trigger modal -->
+          <button
+            type="button"
+            class="btn btn-danger ms-4"
+            data-bs-toggle="modal"
+            data-bs-target="#reviewModal"
+          >
+            Scrivi Recensione
+          </button>
+          <!-- Button trigger modal -->
+          <div
+            class="modal fade"
+            id="reviewModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Scrivi una recensione su {{ player.user.name }}
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <!-- Form Recensioni -->
+                  <form @submit.prevent="addReview()" action="">
+                    <div class="mt-3">
+                      <label for="name">Nome</label>
+                      <input
+                        class="form-control mb-2"
+                        type="text"
+                        name="name"
+                        id="name"
+                        placeholder="Inserisci nome"
+                        v-model="reviewData.name"
+                      />
+                      <textarea
+                        class="form-control"
+                        name="content"
+                        id="content"
+                        cols="30"
+                        rows="10"
+                        placeholder="Inserisci messaggio*"
+                        v-model="reviewData.content"
+                        required
+                      ></textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button
+                        type="submit"
+                        class="btn btn-success"
+                        data-bs-dismiss="modal"
+                      >
                         Aggiungi Recensione
                       </button>
-                    </form>
-                    <!-- Form Recensioni -->
-  
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Save changes</button>
-                  </div>
+                    </div>
+                  </form>
+                  <!-- Form Recensioni -->
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Modale Recensione-->
+          <!-- recensioni stelle -->
+          <div class="mt-3">
+            <h3>Valuta il Giocatore</h3>
+            <div class="form-check form-check-inline">
+              <input
+                @click="addRating()"
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio1"
+                value="1"
+                v-model="rating"
+              />
+              <label class="form-check-label" for="inlineRadio1">1</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                @click="addRating()"
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio2"
+                value="2"
+                v-model="rating"
+              />
+              <label class="form-check-label" for="inlineRadio2">2</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                @click="addRating()"
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio3"
+                value="3"
+                v-model="rating"
+              />
+              <label class="form-check-label" for="inlineRadio3">3</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                @click="addRating()"
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio4"
+                value="4"
+                v-model="rating"
+              />
+              <label class="form-check-label" for="inlineRadio3">4</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                @click="addRating()"
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio5"
+                value="5"
+                v-model="rating"
+              />
+              <label class="form-check-label" for="inlineRadio3">5</label>
+            </div>
+          </div>
+          <!-- /recensioni stelle -->
         </div>
       </section>
       .
-      <section v-if="player.messages?.length > 0" class="messages-reviews ms-container">
+      <section
+        v-if="player.messages?.length > 0"
+        class="messages-reviews ms-container"
+      >
         <h2>Messaggi:</h2>
         <div class="user-message">
           <div v-for="message in player.messages" class="message">
@@ -279,34 +412,22 @@ export default {
             </div>
           </div>
         </div>
-       
-        
-        
       </section>
     </section>
-
   </div>
 </template>
 
 <style lang="scss" scoped>
-
-.description-content {
-  height: 100%;
-}
-.ms-container{
+.ms-container {
   width: 1200px;
   max-width: 100%;
   margin: auto;
-  
 }
 .player-info {
-  
   padding: 15%;
-  padding-top:10%;
-  
+  padding-top: 10%;
 }
 .card {
-  
   width: 80%;
   height: 100%;
   border-radius: 1.875rem;
@@ -352,19 +473,16 @@ export default {
 }
 .description {
   padding: 0 10px;
-  h2{
+  h2 {
     font-size: 40px;
     font-weight: 900;
   }
-  p{
+  p {
     font-size: 35px;
   }
-  
 }
 .messages-reviews {
- 
   margin: auto;
- 
 }
 .user-review,
 .user-message {
