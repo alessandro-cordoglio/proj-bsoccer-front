@@ -116,138 +116,133 @@ export default {
           </div>
         </div>
         <div class="description col-sm-12 col-lg-6">
-          <h2>Descrizione Giocatore</h2>
-          <p>{{ player.description }}</p>
+          <div class="description-content w-100">
 
-          
-         
-          
-          <!-- Modal Messaggi -->
-
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            invia Messaggio
-          </button>
-          <!-- Button trigger modal -->
-
-          <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <!-- Form Messaggio -->
-                  <form @submit.prevent="addMessage()" ref="formMessage" action="">
-                    <div class="mt-1">
-                      <label for="name">Nome</label>
-                      <input
-                        class="form-control mb-2"
-                        type="text"
-                        id="name"
-                        placeholder="Inserisci nome"
-                        v-model="formData.name"
-                      />
-                      <label for="email">Email</label>
-                      <input
-                        class="form-control mb-2"
-                        type="text"
-                        id="email"
-                        placeholder="Inserisci email*"
-                        v-model="formData.email"
-                        required
-                      />
-                      <label for="content">Testo</label>
-                      <textarea
-                        class="form-control mb-2"
-                        name="content"
-                        id="content"
-                        cols="30"
-                        rows="10"
-                        placeholder="Inserisci messaggio*"
-                        v-model="formData.content"
-                        required
-                      ></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                      Aggiungi Messaggio
-                    </button>
-                  </form>
-                  <!-- Form Messaggio -->
-
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Save changes</button>
+            <h2>Descrizione Giocatore</h2>
+            <p>{{ player.description }}</p>
+  
+            <!-- Modal Messaggi -->
+  
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              invia Messaggio
+            </button>
+            <!-- Button trigger modal -->
+  
+            <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <!-- Form Messaggio -->
+                    <form @submit.prevent="addMessage()" ref="formMessage" action="">
+                      <div class="mt-1">
+                        <label for="name">Nome</label>
+                        <input
+                          class="form-control mb-2"
+                          type="text"
+                          id="name"
+                          placeholder="Inserisci nome"
+                          v-model="formData.name"
+                        />
+                        <label for="email">Email</label>
+                        <input
+                          class="form-control mb-2"
+                          type="text"
+                          id="email"
+                          placeholder="Inserisci email*"
+                          v-model="formData.email"
+                          required
+                        />
+                        <label for="content">Testo</label>
+                        <textarea
+                          class="form-control mb-2"
+                          name="content"
+                          id="content"
+                          cols="30"
+                          rows="10"
+                          placeholder="Inserisci messaggio*"
+                          v-model="formData.content"
+                          required
+                        ></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary">
+                        Aggiungi Messaggio
+                      </button>
+                    </form>
+                    <!-- Form Messaggio -->
+  
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Save changes</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          <!-- Modale Messaggi -->
-
-
-          <!-- Modal Recensione-->
-
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-secondary  ms-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            invia Recensione
-          </button>
-          <!-- Button trigger modal -->
-          <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  
-                  <!-- Form Recensioni -->
-                  <form @submit.prevent="addReview()" action="">
-                    <div class="mt-3">
-                      <label for="name">Nome</label>
-                      <input
-                        class="form-control"
-                        type="text"
-                        name="name"
-                        id="name"
-                        placeholder="Inserisci nome"
-                        v-model="reviewData.name"
-                      />
-                      <textarea
-                        class="form-control"
-                        name="content"
-                        id="content"
-                        cols="30"
-                        rows="10"
-                        placeholder="Inserisci messaggio*"
-                        v-model="reviewData.content"
-                        required
-                      ></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                      Aggiungi Recensione
-                    </button>
-                  </form>
-                  <!-- Form Recensioni -->
-
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Save changes</button>
+  
+            <!-- Modale Messaggi -->
+  
+  
+            <!-- Modal Recensione-->
+  
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-secondary  ms-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              invia Recensione
+            </button>
+            <!-- Button trigger modal -->
+            <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    
+                    <!-- Form Recensioni -->
+                    <form @submit.prevent="addReview()" action="">
+                      <div class="mt-3">
+                        <label for="name">Nome</label>
+                        <input
+                          class="form-control"
+                          type="text"
+                          name="name"
+                          id="name"
+                          placeholder="Inserisci nome"
+                          v-model="reviewData.name"
+                        />
+                        <textarea
+                          class="form-control"
+                          name="content"
+                          id="content"
+                          cols="30"
+                          rows="10"
+                          placeholder="Inserisci messaggio*"
+                          v-model="reviewData.content"
+                          required
+                        ></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary">
+                        Aggiungi Recensione
+                      </button>
+                    </form>
+                    <!-- Form Recensioni -->
+  
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Save changes</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Modale Recensione-->
-
-
-
-
-          
         </div>
       </section>
       .
@@ -294,6 +289,10 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+
+.description-content {
+  height: 100%;
+}
 .ms-container{
   width: 1200px;
   max-width: 100%;
