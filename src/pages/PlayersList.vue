@@ -54,11 +54,21 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+.all-players::-webkit-scrollbar {
+    display: none;
+  }
 .all-players {
-  background-color: var(--common-card-color);
+  background-image: url("http://www.asdbassabresciana.it/wp-content/uploads/2016/06/Sfondo-HD-calcio-sport.jpeg");
+  max-height: 100vh;
+  min-width: 100%;
+  overflow: auto;
+  background-size: cover;
+  background-position: top right;
   .players-container {
-    max-width: 62.5rem;
+    background-color: var(--common-card-color);
+    max-width: 75rem;
     margin: auto;
+    padding: 0px 0px 0 1.25rem;
     display: flex;
     flex-wrap: wrap;
     .players-list {
