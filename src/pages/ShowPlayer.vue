@@ -84,13 +84,6 @@ export default {
   },
 
 
-  
-  
-
-   
-
-
-
     addReview() {
       axios
         .post(`${this.store.api_url}/reviews/${this.player.id}`, {
@@ -245,179 +238,82 @@ export default {
             <!-- Modal Recensione-->
 
             <!-- Button trigger modal -->
-            <button
-              type="button"
-              class="btn btn-danger ms-4"
-              data-bs-toggle="modal"
-              data-bs-target="#reviewModal"
-            >
+            <button type="button" class="btn btn-danger ms-4" data-bs-toggle="modal" data-bs-target="#reviewModal">
               Scrivi Recensione
             </button>
             <!-- Button trigger modal -->
-            <div
-              class="modal fade"
-              id="reviewModal"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
+            <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                      Scrivi una recensione su {{ player.user.name }}
-                    </h1>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Scrivi una recensione su {{ player.user.name }}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
+
                     <!-- Form Recensioni -->
                     <form @submit.prevent="addReview()" action="">
                       <div class="mt-3">
                         <label for="name">Nome*</label>
-                        <input
-                          class="form-control mb-2"
-                          type="text"
-                          name="name"
-                          id="name"
-                          placeholder="Inserisci nome"
-                          v-model="reviewData.name"
-                        />
+                        <input class="form-control mb-2" type="text" name="name" id="name" placeholder="Inserisci nome" v-model="reviewData.name" required/>
                         <label for="content">Recensione*</label>
-                        <textarea
-                          class="form-control"
-                          name="content"
-                          id="content"
-                          cols="30"
-                          rows="10"
-                          placeholder="Inserisci messaggio*"
-                          v-model="reviewData.content"
-                          required
-                        ></textarea>
+                        <textarea class="form-control" name="content" id="content" cols="30" rows="10" placeholder="Inserisci recensione" v-model="reviewData.content" required></textarea>
                       </div>
                       <!-- recensioni stelle -->
-                      
+
                       <!-- /recensioni stelle -->
                       <div class="modal-footer">
-                        <button
-                          type="button"
-                          class="btn btn-secondary"
-                          data-bs-dismiss="modal"
-                        >
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                           Close
                         </button>
-                        <button
-                          type="submit"
-                          class="btn btn-success"
-                          data-bs-dismiss="modal"
-                        >
+                        <button type="submit" class="btn btn-success" >
                           Aggiungi Recensione
                         </button>
                       </div>
                     </form>
+
+                    <!-- Form Recensioni -->
+
+                    
                     <div class="my-3">
                         <h3>Valuta il Giocatore</h3>
-                        <div
-                          class="form-check form-check-inline mx-0 position-relative"
-                        >
-                          <input
-                            class="form-check-input ms-input-style"
-                            type="radio"
-                            name="inlineRadioOptions"
-                            id="inlineRadio1"
-                            value="1"
-                            v-model="rating"
-                          />
+                        <div class="form-check form-check-inline mx-0 position-relative">
+                          <input class="form-check-input ms-input-style" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" v-model="rating"/>
                           <label class="form-check-label" for="inlineRadio1">
-                            <i
-                              class="fas fa-star"
-                              :class="{ selected: rating >= 1 }"
-                            ></i>
+                            <i class="fas fa-star" :class="{ selected: rating >= 1 }"></i>
                           </label>
                         </div>
-                        <div
-                          class="form-check form-check-inline mx-0 position-relative"
-                        >
-                          <input
-                            class="form-check-input ms-input-style"
-                            type="radio"
-                            name="inlineRadioOptions"
-                            id="inlineRadio2"
-                            value="2"
-                            v-model="rating"
-                          />
+                        <div class="form-check form-check-inline mx-0 position-relative">
+                          <input class="form-check-input ms-input-style" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2" v-model="rating"/>
                           <label class="form-check-label" for="inlineRadio2">
-                            <i
-                              class="fas fa-star"
-                              :class="{ selected: rating >= 2 }"
-                            ></i>
+                            <i class="fas fa-star" :class="{ selected: rating >= 2 }"></i>
                           </label>
                         </div>
-                        <div
-                          class="form-check form-check-inline mx-0 position-relative"
-                        >
-                          <input
-                            class="form-check-input ms-input-style"
-                            type="radio"
-                            name="inlineRadioOptions"
-                            id="inlineRadio3"
-                            value="3"
-                            v-model="rating"
-                          />
+                        <div class="form-check form-check-inline mx-0 position-relative">
+                          <input class="form-check-input ms-input-style" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3" v-model="rating"/>
                           <label class="form-check-label" for="inlineRadio3">
-                            <i
-                              class="fas fa-star"
-                              :class="{ selected: rating >= 3 }"
-                            ></i>
+                            <i class="fas fa-star" :class="{ selected: rating >= 3 }"></i>
                           </label>
                         </div>
-                        <div
-                          class="form-check form-check-inline mx-0 position-relative"
-                        >
-                          <input
-                            class="form-check-input ms-input-style"
-                            type="radio"
-                            name="inlineRadioOptions"
-                            id="inlineRadio4"
-                            value="4"
-                            v-model="rating"
-                            selected
-                          />
+
+                        <div class="form-check form-check-inline mx-0 position-relative">
+                          <input class="form-check-input ms-input-style" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="4" v-model="rating" selected/>
                           <label class="form-check-label" for="inlineRadio4">
-                            <i
-                              class="fas fa-star"
-                              :class="{ selected: rating >= 4 }"
-                            ></i>
+                            <i class="fas fa-star" :class="{ selected: rating >= 4 }"></i>
                           </label>
                         </div>
-                        <div
-                          class="form-check form-check-inline mx-0 position-relative"
-                        >
-                          <input
-                            class="form-check-input ms-input-style"
-                            type="radio"
-                            name="inlineRadioOptions"
-                            id="inlineRadio5"
-                            value="5"
-                            v-model="rating"
-                          />
+
+                        <div class="form-check form-check-inline mx-0 position-relative">
+                          <input class="form-check-input ms-input-style" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="5" v-model="rating" />
                           <label class="form-check-label" for="inlineRadio5">
-                            <i
-                              class="fas fa-star"
-                              :class="{ selected: rating >= 5 }"
-                            ></i>
+                            <i class="fas fa-star" :class="{ selected: rating >= 5 }"></i>
                           </label>
                         </div>
-                        <button
-                          @click="addRating()"
-                          class="btn btn-primary ms-3"
-                        >
+
+                        <button @click="addRating()" class="btn btn-primary ms-3">
                           Invia Valutazione
                         </button>
+
                       </div>
                     <!-- Form Recensioni -->
                   </div>
