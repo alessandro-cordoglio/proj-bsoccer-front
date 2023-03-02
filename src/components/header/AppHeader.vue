@@ -31,12 +31,6 @@ export default {
           this.$router.push({ name: "players" });
         });
     },
-    getAllPlayer() {
-      axios.get(`${this.store.api_url}/players`).then((resp) => {
-        this.store.players = resp.data;
-        this.$router.push({ name: "players" });
-      });
-    },
     updateFilteredRoles() {
       this.filteredRoles = this.store.roles.filter((role) =>
         role.toLowerCase().includes(this.store.selectedRole.toLowerCase())
@@ -109,7 +103,7 @@ export default {
             <!-- /Hamburger Menu -->
           </div>
           <ul :class="{ 'show-ul': hamburgerAnimation }">
-            <li @click="getAllPlayer">
+            <li>
               <router-link
                 class="d-flex align-items-center"
                 :to="{ name: 'players' }"
