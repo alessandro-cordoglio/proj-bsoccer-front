@@ -174,7 +174,7 @@ export default {
                     action=""
                   >
                     <div class="mt-1">
-                      <label for="name">Nome</label>
+                      <label for="name">Nome*</label>
                       <input
                         class="form-control mb-2"
                         type="text"
@@ -182,7 +182,7 @@ export default {
                         placeholder="Inserisci nome"
                         v-model="formData.name"
                       />
-                      <label for="email">Email</label>
+                      <label for="email">Email*</label>
                       <input
                         class="form-control mb-2"
                         type="text"
@@ -191,7 +191,7 @@ export default {
                         v-model="formData.email"
                         required
                       />
-                      <label for="content">Testo</label>
+                      <label for="content">Messaggio*</label>
                       <textarea
                         class="form-control mb-2"
                         name="content"
@@ -264,7 +264,7 @@ export default {
                   <!-- Form Recensioni -->
                   <form @submit.prevent="addReview()" action="">
                     <div class="mt-3">
-                      <label for="name">Nome</label>
+                      <label for="name">Nome*</label>
                       <input
                         class="form-control mb-2"
                         type="text"
@@ -273,6 +273,7 @@ export default {
                         placeholder="Inserisci nome"
                         v-model="reviewData.name"
                       />
+                      <label for="content">Recensione*</label>
                       <textarea
                         class="form-control"
                         name="content"
