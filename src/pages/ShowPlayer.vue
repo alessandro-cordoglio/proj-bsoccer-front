@@ -3,19 +3,20 @@ import axios from "axios";
 import CommonPlayerCard from "../components/commons/CommonPlayerCard.vue";
 import { store } from "../store";
 
-
-
-
 export default {
   name: "ShowPlayer",
   components: {
     CommonPlayerCard,
-    
+
     randomNumber: 0,
   },
   data() {
     return {
       store,
+      showCloseButton: false,
+      show: false,
+      message: "",
+      alertClass: "",
       player: {},
       formData: {
         name: "",
@@ -40,6 +41,34 @@ export default {
     );
   },
   methods: {
+    showAlert(message, type) {
+      this.show = true;
+      this.message = message;
+      switch (type) {
+        case "success":
+          this.alertClass = "alert-success";
+          break;
+        case "danger":
+          this.alertClass = "alert-danger";
+          break;
+        case "warning":
+          this.alertClass = "alert-warning";
+          break;
+        case "info":
+          this.alertClass = "alert-info";
+          break;
+        default:
+          this.alertClass = "";
+          break;
+      }
+      this.showCloseButton = true;
+    },
+    closeAlert() {
+      this.show = false;
+      this.message = "";
+      this.alertClass = "";
+      this.showCloseButton = false;
+    },
     getPlayer() {
       axios
         .get(`${this.store.api_url}/players/${this.$route.params.id}`)
@@ -52,37 +81,38 @@ export default {
     },
 
     addMessage() {
-  // Controlla se tutti i campi obbligatori sono stati compilati
-    if (!this.formData.name || !this.formData.email || !this.formData.content) {
-      alert("Si prega di compilare tutti i campi obbligatori");
-      return;
-    }
+      // Controlla se tutti i campi obbligatori sono stati compilati
+      if (
+        !this.formData.name ||
+        !this.formData.email ||
+        !this.formData.content
+      ) {
+        alert("Si prega di compilare tutti i campi obbligatori");
+        return;
+      }
 
-    // Invia la richiesta POST utilizzando Axios
-    axios.post(`${this.store.api_url}/messages/${this.player.id}`, {
-      name: this.formData.name,
-      email: this.formData.email,
-      content: this.formData.content,
-    })
-    .then((res) => {
-      // Aggiungi il messaggio alla lista del giocatore
-      this.player.messages.push(res.data);
-      // Svuota i campi del modulo
-      this.formData.name = "";
-      this.formData.email = "";
-      this.formData.content = "";
-      
-      // Chiudi la modale manualmente
-      let myModal = new bootstrap.Modal(document.getElementById('messageModal'));
-      myModal.hide();
-
-    })
-    .catch((error) => {
-      // Gestisci eventuali errori qui
-      console.log(error);
-    });
-  },
-
+      // Invia la richiesta POST utilizzando Axios
+      axios
+        .post(`${this.store.api_url}/messages/${this.player.id}`, {
+          name: this.formData.name,
+          email: this.formData.email,
+          content: this.formData.content,
+        })
+        .then((res) => {
+          // Aggiungi il messaggio alla lista del giocatore
+          this.player.messages.push(res.data);
+          // Svuota i campi del modulo
+          this.formData.name = "";
+          this.formData.email = "";
+          this.formData.content = "";
+          this.showAlert("Messaggio inviato con successo!", "success");
+          this.store.showMessageModal = false;
+        })
+        .catch((error) => {
+          // Gestisci eventuali errori qui
+          console.log(error);
+        });
+    },
 
     addReview() {
       axios
@@ -94,6 +124,8 @@ export default {
           this.player.reviews.push(res.data);
           this.reviewData.name = "";
           this.reviewData.content = "";
+          this.showAlert("Recensione inviata con successo!", "success");
+          this.store.showReviewModal = false;
         });
     },
     addRating() {
@@ -105,6 +137,18 @@ export default {
           this.player.ratings.push(res.data);
           this.rating = 0;
         });
+    },
+    toggleMessageModal() {
+      this.store.showReviewModal = false;
+      this.store.showMessageModal = !this.store.showMessageModal;
+    },
+    toggleReviewModal() {
+      this.store.showMessageModal = false;
+      this.store.showReviewModal = !this.store.showReviewModal;
+    },
+    closeMessageReviewModal() {
+      this.store.showMessageModal = false;
+      this.store.showReviewModal = false;
     },
   },
 
@@ -119,12 +163,10 @@ export default {
     },
   },
 };
-
-
 </script>
 
 <template>
-  <div class="background">
+  <div class="background" @click="closeMessageReviewModal">
     <div class="ms-container">
       <section v-if="player.user">
         <section class="player-info row g-0 gy-4">
@@ -163,186 +205,248 @@ export default {
                 </h5>
               </div>
             </div>
+            <!-- star review -->
+            <div class="my-3">
+              <h3>Valuta il Giocatore</h3>
+              <div class="form-check form-check-inline mx-0 position-relative">
+                <input
+                  class="form-check-input ms-input-style"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio1"
+                  value="1"
+                  v-model="rating"
+                />
+                <label class="form-check-label" for="inlineRadio1">
+                  <i class="fas fa-star" :class="{ selected: rating >= 1 }"></i>
+                </label>
+              </div>
+              <div class="form-check form-check-inline mx-0 position-relative">
+                <input
+                  class="form-check-input ms-input-style"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio2"
+                  value="2"
+                  v-model="rating"
+                />
+                <label class="form-check-label" for="inlineRadio2">
+                  <i class="fas fa-star" :class="{ selected: rating >= 2 }"></i>
+                </label>
+              </div>
+              <div class="form-check form-check-inline mx-0 position-relative">
+                <input
+                  class="form-check-input ms-input-style"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio3"
+                  value="3"
+                  v-model="rating"
+                />
+                <label class="form-check-label" for="inlineRadio3">
+                  <i class="fas fa-star" :class="{ selected: rating >= 3 }"></i>
+                </label>
+              </div>
+
+              <div class="form-check form-check-inline mx-0 position-relative">
+                <input
+                  class="form-check-input ms-input-style"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio4"
+                  value="4"
+                  v-model="rating"
+                  selected
+                />
+                <label class="form-check-label" for="inlineRadio4">
+                  <i class="fas fa-star" :class="{ selected: rating >= 4 }"></i>
+                </label>
+              </div>
+
+              <div class="form-check form-check-inline mx-0 position-relative">
+                <input
+                  class="form-check-input ms-input-style"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio5"
+                  value="5"
+                  v-model="rating"
+                />
+                <label class="form-check-label" for="inlineRadio5">
+                  <i class="fas fa-star" :class="{ selected: rating >= 5 }"></i>
+                </label>
+              </div>
+
+              <button @click="addRating()" class="btn btn-primary ms-3">
+                Invia Valutazione
+              </button>
+            </div>
+            <!-- /star review -->
           </div>
           <div class="description col-sm-12 col-lg-6">
+            <div class="alert" role="alert" :class="[alertClass]">
+              <button
+                v-if="showCloseButton"
+                type="button"
+                class="close"
+                @click="closeAlert"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+              {{ message }}
+            </div>
             <h2>Descrizione Giocatore</h2>
             <p>{{ player.description }}</p>
-
-            <!-- Modal Messaggi -->
-
+            <!-- modale messaggi -->
+            <div
+              class="ms-message-modal position-fixed"
+              :class="{ 'show-modal': this.store.showMessageModal }"
+            >
+              <div
+                class="ms-modale-header d-flex align-items-center justify-content-between py-3 px-3"
+              >
+                <h4 class="mb-0">
+                  Invia un messaggio a {{ player.user.name }}
+                </h4>
+                <div @click="this.store.showMessageModal = false">
+                  <i class="fa-solid fa-xmark"></i>
+                </div>
+              </div>
+              <div class="ms-modal-body py-4 px-2">
+                <!-- Inizio Form -->
+                <form @submit.prevent="addMessage()" ref="formMessage">
+                  <div class="mt-1">
+                    <label for="name">Nome*</label>
+                    <input
+                      class="form-control mb-2"
+                      type="text"
+                      id="name"
+                      placeholder="Inserisci nome"
+                      v-model="formData.name"
+                      required
+                    />
+                    <label for="email">Email*</label>
+                    <input
+                      class="form-control mb-2"
+                      type="email"
+                      id="email"
+                      placeholder="Inserisci email"
+                      v-model="formData.email"
+                      required
+                    />
+                    <label for="content">Messaggio*</label>
+                    <textarea
+                      class="form-control mb-2"
+                      name="content"
+                      id="content"
+                      cols="30"
+                      rows="10"
+                      placeholder="Inserisci messaggio"
+                      v-model="formData.content"
+                      required
+                    ></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      @click="this.store.showMessageModal = false"
+                    >
+                      Chiudi
+                    </button>
+                    <button type="submit" class="btn btn-success ms-3">
+                      Invia Messaggio
+                    </button>
+                  </div>
+                </form>
+                <!-- /Fine Form -->
+              </div>
+            </div>
+            <!-- /modale messaggi -->
             <!-- Button trigger modal -->
             <button
               type="button"
               class="btn btn-danger"
-              data-bs-toggle="modal"
-              data-bs-target="#messageModal"
+              @click.stop="toggleMessageModal"
             >
               invia Messaggio
             </button>
             <!-- Button trigger modal -->
+            <!-- Modale Messaggi fine -->
 
-          <div
-            class="modal fade "
-            id="messageModal"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div id="myModal" class="modal-dialog ">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">
-                    Invia un messaggio a {{ player.user.name }}
-                  </h1>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div class="modal-body">
-
-                  
-                  <!-- Form Messaggio -->
-                  <form @submit.prevent="addMessage()" ref="formMessage">
-                    <div class="mt-1">
-                      <label for="name">Nome*</label>
-                      <input class="form-control mb-2" type="text" id="name" placeholder="Inserisci nome" v-model="formData.name" required>
-                      <label for="email">Email*</label>
-                      <input class="form-control mb-2" type="email" id="email" placeholder="Inserisci email" v-model="formData.email" required>
-                      <label for="content">Messaggio*</label>
-                      <textarea class="form-control mb-2" name="content" id="content" cols="30" rows="10" placeholder="Inserisci messaggio" v-model="formData.content" required></textarea>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-                      <button type="submit" class="btn btn-success">Invia Messaggio</button>
-                    </div>
-                  </form>
-
-                  <!-- Form Messaggio -->
-                  
+            <!-- modale recensioni -->
+            <div
+              class="ms-message-modal position-fixed"
+              :class="{ 'show-modal': this.store.showReviewModal }"
+            >
+              <div
+                class="ms-modale-header d-flex align-items-center justify-content-between py-3 px-3"
+              >
+                <h4 class="mb-0">
+                  Invia una recensione a {{ player.user.name }}
+                </h4>
+                <div @click="this.store.showReviewModal = false">
+                  <i class="fa-solid fa-xmark"></i>
                 </div>
               </div>
+              <div class="ms-modal-body py-4 px-2">
+                <!-- Form Recensioni -->
+                <form @submit.prevent="addReview()" action="">
+                  <div class="mt-3">
+                    <label for="name">Nome*</label>
+                    <input
+                      class="form-control mb-2"
+                      type="text"
+                      name="name"
+                      id="name"
+                      placeholder="Inserisci nome"
+                      v-model="reviewData.name"
+                      required
+                    />
+                    <label for="content">Recensione*</label>
+                    <textarea
+                      class="form-control"
+                      name="content"
+                      id="content"
+                      cols="30"
+                      rows="10"
+                      placeholder="Inserisci recensione"
+                      v-model="reviewData.content"
+                      required
+                    ></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      @click="this.store.showReviewModal = false"
+                    >
+                      Close
+                    </button>
+                    <button type="submit" class="btn btn-success ms-3">
+                      Aggiungi Recensione
+                    </button>
+                  </div>
+                </form>
+                <!-- Form Recensioni -->
+              </div>
             </div>
-          </div>
-           <!-- Modale Messaggi fine -->
-
-
-
-         
-
-
-         
-
-            <!-- Modal Recensione-->
-
+            <!-- /modale recensioni -->
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-danger ms-4" data-bs-toggle="modal" data-bs-target="#reviewModal">
+            <button
+              type="button"
+              class="btn btn-danger ms-4"
+              @click.stop="toggleReviewModal"
+            >
               Scrivi Recensione
             </button>
             <!-- Button trigger modal -->
-            <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Scrivi una recensione su {{ player.user.name }}</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-
-                    <!-- Form Recensioni -->
-                    <form @submit.prevent="addReview()" action="">
-                      <div class="mt-3">
-                        <label for="name">Nome*</label>
-                        <input class="form-control mb-2" type="text" name="name" id="name" placeholder="Inserisci nome" v-model="reviewData.name" required/>
-                        <label for="content">Recensione*</label>
-                        <textarea class="form-control" name="content" id="content" cols="30" rows="10" placeholder="Inserisci recensione" v-model="reviewData.content" required></textarea>
-                      </div>
-                      <!-- recensioni stelle -->
-
-                      <!-- /recensioni stelle -->
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                          Close
-                        </button>
-                        <button type="submit" class="btn btn-success" >
-                          Aggiungi Recensione
-                        </button>
-                      </div>
-                    </form>
-
-                    <!-- Form Recensioni -->
-
-                    
-                    <div class="my-3">
-                        <h3>Valuta il Giocatore</h3>
-                        <div class="form-check form-check-inline mx-0 position-relative">
-                          <input class="form-check-input ms-input-style" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" v-model="rating"/>
-                          <label class="form-check-label" for="inlineRadio1">
-                            <i class="fas fa-star" :class="{ selected: rating >= 1 }"></i>
-                          </label>
-                        </div>
-                        <div class="form-check form-check-inline mx-0 position-relative">
-                          <input class="form-check-input ms-input-style" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2" v-model="rating"/>
-                          <label class="form-check-label" for="inlineRadio2">
-                            <i class="fas fa-star" :class="{ selected: rating >= 2 }"></i>
-                          </label>
-                        </div>
-                        <div class="form-check form-check-inline mx-0 position-relative">
-                          <input class="form-check-input ms-input-style" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3" v-model="rating"/>
-                          <label class="form-check-label" for="inlineRadio3">
-                            <i class="fas fa-star" :class="{ selected: rating >= 3 }"></i>
-                          </label>
-                        </div>
-
-                        <div class="form-check form-check-inline mx-0 position-relative">
-                          <input class="form-check-input ms-input-style" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="4" v-model="rating" selected/>
-                          <label class="form-check-label" for="inlineRadio4">
-                            <i class="fas fa-star" :class="{ selected: rating >= 4 }"></i>
-                          </label>
-                        </div>
-
-                        <div class="form-check form-check-inline mx-0 position-relative">
-                          <input class="form-check-input ms-input-style" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="5" v-model="rating" />
-                          <label class="form-check-label" for="inlineRadio5">
-                            <i class="fas fa-star" :class="{ selected: rating >= 5 }"></i>
-                          </label>
-                        </div>
-
-                        <button @click="addRating()" class="btn btn-primary ms-3">
-                          Invia Valutazione
-                        </button>
-
-                      </div>
-                    <!-- Form Recensioni -->
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Modale Recensione-->
           </div>
         </section>
         <section
-          v-if="player.messages?.length > 0"
+          v-if="player.reviews?.length > 0"
           class="messages-reviews ms-container"
         >
-          <h2>Messaggi:</h2>
-          <div class="user-message">
-            <div v-for="message in player.messages" class="message">
-              <div class="user-img">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
-                  alt="user-img"
-                />
-              </div>
-              <div class="comment-details">
-                <h4 v-if="message.name">{{ message.name }}</h4>
-                <h4 v-else>Unknown</h4>
-                <p>{{ message.content }}</p>
-              </div>
-            </div>
-          </div>
           <h2>Recensioni:</h2>
           <div class="user-review">
             <div v-for="review in player.reviews" class="message">
@@ -367,8 +471,8 @@ export default {
 
 <style lang="scss" scoped>
 .background::-webkit-scrollbar {
-    display: none;
-  }
+  display: none;
+}
 .background {
   background-image: url("https://assets.fubles.com/images/landing/custom_backgrounds/generica.jpg");
   max-height: 100vh;
@@ -457,14 +561,10 @@ export default {
   background-color: transparent;
   margin: auto;
 }
-.user-review,
-.user-message {
+.user-review {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-}
-.user-message {
-  margin-bottom: 1.25rem;
 }
 .message {
   width: 40%;
@@ -505,5 +605,77 @@ export default {
 .selected {
   color: gold;
   transform: scale(1.5);
+}
+.alert {
+  position: relative;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+
+  .close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    color: inherit;
+  }
+
+  &-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
+
+  &-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+
+  &-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+  }
+
+  &-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+  }
+}
+.ms-message-modal {
+  background-color: white;
+  max-width: 31.25rem;
+  width: 100%;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 0.0625rem solid lightgray;
+  border-radius: 0.625rem;
+  z-index: 999;
+  transition: top 0.2s ease;
+  .ms-modale-header {
+    border-bottom: 0.0625rem solid lightgray;
+    .fa-xmark {
+      font-size: 1.25rem;
+      padding: 0.3125rem 0.5625rem;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      &:hover {
+        background-color: lightgrey;
+      }
+      &:active {
+        font-size: 1.125rem;
+      }
+    }
+  }
+}
+.show-modal {
+  top: 0.9375rem !important;
+}
+.blur {
+  filter: blur(0.625rem);
 }
 </style>

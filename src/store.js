@@ -19,4 +19,6 @@ export const store = reactive({
   ],
   selectedRating: 0,
   howManyReviews: 0,
+  showMessageModal: false,
+  showReviewModal: false,
 });
