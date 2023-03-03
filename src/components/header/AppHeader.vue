@@ -8,6 +8,7 @@ export default {
       store,
       filteredRoles: [],
       hamburgerAnimation: false,
+      isSearchDropdownOpen: false,
     };
   },
   methods: {
@@ -21,7 +22,6 @@ export default {
       axios
         .get(`${this.store.api_url}/players`, {
           params: {
-            role: this.store.selectedRole,
             role: this.store.selectedRole,
             page: this.store.currentPage,
           },
@@ -42,6 +42,10 @@ export default {
       this.store.selectedRole = role;
       this.filteredRoles = [];
       this.getPlayersByRole();
+    },
+    toggleSearchDropdown() {
+      this.filteredRoles = this.store.roles;
+      this.isSearchDropdownOpen = !this.isSearchDropdownOpen;
     },
   },
 };
@@ -73,11 +77,12 @@ export default {
               placeholder="Ricerca per ruolo giocatore"
               v-model="store.selectedRole"
               @input="updateFilteredRoles"
+              @click="toggleSearchDropdown()"
             />
             <div class="dropdown-text-search"></div>
             <ul
               class="search-dropdown"
-              v-if="store.selectedRole.length > 0 && filteredRoles.length > 0"
+              v-show = "isSearchDropdownOpen"
             >
               <li
                 v-for="role in filteredRoles"
