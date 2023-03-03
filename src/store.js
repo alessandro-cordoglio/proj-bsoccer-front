@@ -20,5 +20,7 @@ export const store = reactive({
   selectedRating: 0,
   howManyReviews: 0,
   prePage: 5,
-  currentPage: 1
+  currentPage: 1,
+  showMessageModal: false,
+  showReviewModal: false,
 });
