@@ -22,18 +22,12 @@ export default {
   },
   computed: {
     isNextDisabled() {
-      const nextPage = this.store.currentPage + 1;
-      const totalPlayers = this.store.players.length;
-      const playersPerPage = this.store.prePage;
-      const nextIndex = nextPage * playersPerPage;
-      const hasNextPage = nextIndex < totalPlayers;
-
-      return !hasNextPage || totalPlayers === 0;
+      return this.store.currentPage >= Math.ceil(this.store.players.length / this.store.prePage) || 
+           this.store.players.length < this.store.prePage;
     },
   },
   methods: {
     getPlayers() {
-      this.store.players = [];
       axios.get(`${this.store.api_url}/players`, {
         params: {
           page: this.store.currentPage,
@@ -58,7 +52,6 @@ export default {
     },
 
   getPlayersByRole() {
-      this.store.players = [];
       axios.get(`${this.store.api_url}/players`, {
           params: {
             role: this.store.selectedRole,
@@ -88,14 +81,21 @@ export default {
         :key="player.id "
       />
     </div>
-    <div class="btn-wrapper">
-      <button class="btn" type="button" :disabled="store.currentPage === 1" @click="changePage(-1)">-- Prev</button>
-      <button class="btn" type="button"  :disabled="isNextDisabled" @click="changePage(1)">Next --</button>
+    <div class="ms_bt_container">
+        <button class="btn me-4 btn-info" type="button" :disabled="store.currentPage === 1" @click="changePage(-1)">-- Prev</button>
+        <button class="btn btn-info" type="button"  :disabled="isNextDisabled" @click="changePage(1)">Next --</button>
     </div>
   </section>
 </template>
 
 <style lang="scss" scoped>
+
+.ms_bt_container{
+  padding-top: 30px ;
+  padding-bottom: 30px ;
+  display: flex;
+  justify-content: center;
+}
 .all-players::-webkit-scrollbar {
     display: none;
   }
