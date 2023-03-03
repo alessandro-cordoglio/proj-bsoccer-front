@@ -8,10 +8,9 @@ export default {
       store,
       filteredRoles: [],
       hamburgerAnimation: false,
-      
     };
   },
- 
+
   methods: {
     clearSearch() {
       this.store.selectedRole = "";
@@ -117,8 +116,16 @@ export default {
             </li>
 
             <!-- OFFCAnvas component -->
-            <li>
-              <a v-if="$route.path === '/all-players'"    class="d-flex align-items-center btn p-0"    type="button"    data-bs-toggle="offcanvas"    data-bs-target="#offcanvasWithBothOptions"    aria-controls="offcanvasWithBothOptions">    <i class="me-2 fa-solid fa-filter"></i> filter </a>
+            <li v-if="$route.path === '/all-players'">
+              <a
+                class="d-flex align-items-center btn p-0"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasWithBothOptions"
+                aria-controls="offcanvasWithBothOptions"
+              >
+                <i class="me-2 fa-solid fa-filter"></i> filter
+              </a>
 
               <div
                 class="ms-offcanvas offcanvas offcanvas-start"
@@ -347,7 +354,7 @@ nav {
       border-radius: 10px 0 0 10px;
       color: black;
       background-color: white;
-      padding: 0px 10px 0px 10px;
+      padding: 7px;
       height: 100%;
     }
     input {
@@ -358,6 +365,7 @@ nav {
       border-left: 1px solid black;
       text-align: center;
       border-radius: 0px 10px 10px 0;
+      padding: 8px 0;
     }
   }
 
