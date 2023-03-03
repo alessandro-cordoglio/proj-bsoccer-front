@@ -23,7 +23,7 @@ export default {
   computed: {
     isNextDisabled() {
       return this.store.currentPage >= Math.ceil(this.store.players.length / this.store.prePage) || 
-           this.store.players.length < this.store.prePage;
+         this.store.players.length < 10;
     },
   },
   methods: {
@@ -66,6 +66,7 @@ export default {
         .catch(error => {
           console.log(error);
         })
+        this.store.currentPage = 1;
     },
   },
 };

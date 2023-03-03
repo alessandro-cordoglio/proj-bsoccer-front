@@ -25,6 +25,7 @@ export default {
           params: {
             role: this.store.selectedRole,
             page: this.store.currentPage,
+            perPage: this.store.prePage
           },
         })
         .then((res) => {
