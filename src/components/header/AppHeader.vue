@@ -8,6 +8,7 @@ export default {
       store,
       filteredRoles: [],
       hamburgerAnimation: false,
+      isSearchDropdownOpen: false,
     };
   },
 
@@ -23,11 +24,12 @@ export default {
         .get(`${this.store.api_url}/players`, {
           params: {
             role: this.store.selectedRole,
+            page: this.store.currentPage,
           },
         })
-        .then((response) => {
+        .then((res) => {
           this.store.players = [];
-          this.store.players = response.data;
+          this.store.players = res.data.data;
           // redirect sulla pagina dei players
           this.$router.push({ name: "players" });
         });
@@ -37,16 +39,15 @@ export default {
         role.toLowerCase().includes(this.store.selectedRole.toLowerCase())
       );
     },
-    watch: {
-      "store.selectedRole"(newValue) {
-        this.updateFilteredRoles();
-      },
-    },
     goToFilteredPlayers(role) {
       this.store.selectedRole = role;
       this.filteredRoles = [];
-
       this.getPlayersByRole();
+      this.isSearchDropdownOpen = !this.isSearchDropdownOpen;
+    },
+    toggleSearchDropdown() {
+      this.filteredRoles = this.store.roles;
+      this.isSearchDropdownOpen = !this.isSearchDropdownOpen;
     },
   },
 };
@@ -78,11 +79,12 @@ export default {
               placeholder="Ricerca per ruolo giocatore"
               v-model="store.selectedRole"
               @input="updateFilteredRoles"
+              @click="toggleSearchDropdown()"
             />
             <div class="dropdown-text-search"></div>
             <ul
               class="search-dropdown"
-              v-if="store.selectedRole.length > 0 && filteredRoles.length > 0"
+              v-show = "isSearchDropdownOpen"
             >
               <li
                 v-for="role in filteredRoles"
@@ -104,16 +106,6 @@ export default {
             <!-- /Hamburger Menu -->
           </div>
           <ul :class="{ 'show-ul': hamburgerAnimation }">
-            <li>
-              <router-link
-                class="d-flex align-items-center"
-                :to="{ name: 'players' }"
-                @click="clearSearch()"
-              >
-                <i class="me-2 fa-solid fa-futbol"></i>
-                Players
-              </router-link>
-            </li>
 
             <!-- OFFCAnvas component -->
             <li v-if="$route.path === '/all-players'">

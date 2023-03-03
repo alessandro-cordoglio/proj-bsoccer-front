@@ -16,25 +16,63 @@ export default {
     if (this.store.selectedRole) {
       this.getPlayersByRole();
     } else {
-      this.getAllPlayers();
+      this.getPlayers();
     }
+    
+  },
+  computed: {
+    isNextDisabled() {
+      const nextPage = this.store.currentPage + 1;
+      const totalPlayers = this.store.players.length;
+      const playersPerPage = this.store.prePage;
+      const nextIndex = nextPage * playersPerPage;
+      const hasNextPage = nextIndex < totalPlayers;
+
+      return !hasNextPage || totalPlayers === 0;
+    },
   },
   methods: {
-    getPlayersByRole() {
-      axios
-        .get(`${this.store.api_url}/players`, {
+    getPlayers() {
+      this.store.players = [];
+      axios.get(`${this.store.api_url}/players`, {
+        params: {
+          page: this.store.currentPage,
+          perPage: this.store.prePage
+        }
+      })
+      .then(res => {
+        console.log(res.data);
+        this.store.players = res.data.data;
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    },
+    changePage(num) {
+      this.store.currentPage += num;
+      if (this.store.selectedRole) {
+        this.getPlayersByRole();
+      } else {
+        this.getPlayers();
+  }
+    },
+
+  getPlayersByRole() {
+      this.store.players = [];
+      axios.get(`${this.store.api_url}/players`, {
           params: {
             role: this.store.selectedRole,
-          },
+            page: this.store.currentPage,
+            perPage: this.store.prePage
+          }
         })
-        .then((response) => {
-          this.store.players = response.data;
-        });
-    },
-    getAllPlayers() {
-      axios.get(`${this.store.api_url}/players`).then((resp) => {
-        this.store.players = resp.data;
-      });
+        .then(res => {
+          console.log(res.data)
+          this.store.players = res.data.data;
+        })
+        .catch(error => {
+          console.log(error);
+        })
     },
   },
 };
@@ -47,8 +85,12 @@ export default {
         v-for="(player, index) in this.store.players"
         :data="player"
         class="players-list"
-        :key="player.id"
+        :key="player.id "
       />
+    </div>
+    <div class="btn-wrapper">
+      <button class="btn" type="button" :disabled="store.currentPage === 1" @click="changePage(-1)">-- Prev</button>
+      <button class="btn" type="button"  :disabled="isNextDisabled" @click="changePage(1)">Next --</button>
     </div>
   </section>
 </template>
