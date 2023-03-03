@@ -22,4 +22,6 @@ export const store = reactive({
   totalPlayers: 0,
   currentPage: 1,
   lastPage: 0,
+  showMessageModal: false,
+  showReviewModal: false,
 });
