@@ -22,10 +22,13 @@ export default {
   },
   computed: {
     isNextDisabled() {
-      return (
-      this.store.currentPage >= Math.ceil(this.store.players.length / this.store.perPage) || 
-      this.store.players.length === 0
-    );
+      const nextPage = this.store.currentPage + 1;
+      const totalPlayers = this.store.players.length;
+      const playersPerPage = this.store.prePage;
+      const nextIndex = nextPage * playersPerPage;
+      const hasNextPage = nextIndex < totalPlayers;
+
+      return !hasNextPage || totalPlayers === 0;
     },
   },
   methods: {
