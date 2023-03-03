@@ -42,6 +42,7 @@ export default {
       this.store.selectedRole = role;
       this.filteredRoles = [];
       this.getPlayersByRole();
+      this.isSearchDropdownOpen = !this.isSearchDropdownOpen;
     },
     toggleSearchDropdown() {
       this.filteredRoles = this.store.roles;

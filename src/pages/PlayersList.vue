@@ -20,8 +20,17 @@ export default {
     }
     
   },
+  computed: {
+    isNextDisabled() {
+      return (
+      this.store.currentPage >= Math.ceil(this.store.players.length / this.store.perPage) || 
+      this.store.players.length === 0
+    );
+    },
+  },
   methods: {
     getPlayers() {
+      this.store.players = [];
       axios.get(`${this.store.api_url}/players`, {
         params: {
           page: this.store.currentPage,
@@ -38,10 +47,15 @@ export default {
     },
     changePage(num) {
       this.store.currentPage += num;
-      this.getPlayers();
+      if (this.store.selectedRole) {
+        this.getPlayersByRole();
+      } else {
+        this.getPlayers();
+  }
     },
 
   getPlayersByRole() {
+      this.store.players = [];
       axios.get(`${this.store.api_url}/players`, {
           params: {
             role: this.store.selectedRole,
@@ -73,7 +87,7 @@ export default {
     </div>
     <div class="btn-wrapper">
       <button class="btn" type="button" :disabled="store.currentPage === 1" @click="changePage(-1)">-- Prev</button>
-      <button class="btn" type="button" :disabled="store.currentPage === 5" @click="changePage(1)">Next --</button>
+      <button class="btn" type="button"  :disabled="isNextDisabled" @click="changePage(1)">Next --</button>
     </div>
   </section>
 </template>
