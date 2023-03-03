@@ -20,21 +20,28 @@ export default {
       this.hamburgerAnimation = !this.hamburgerAnimation;
     },
     getPlayersByRole() {
-      axios
-        .get(`${this.store.api_url}/players`, {
+      this.store.currentPage = 1;
+      axios.get(`http://127.0.0.1:8000/api/players?page=${this.store.currentPage}`, {
           params: {
             role: this.store.selectedRole,
             page: this.store.currentPage,
-            perPage: this.store.prePage
-          },
+            perPage: this.store.lastPage
+          }
         })
-        .then((res) => {
-          this.store.players = [];
+        .then(res => {
+          console.log(res.data)
+          this.store.lastPage= res.data.last_page;
           this.store.players = res.data.data;
-          // redirect sulla pagina dei players
-          this.$router.push({ name: "players" });
-        });
+          
+        })
+        .catch(error => {
+          console.log(error);
+        })
+        this.$router.push({name:'players'})
     },
+
+
+
     updateFilteredRoles() {
       this.filteredRoles = this.store.roles.filter((role) =>
         role.toLowerCase().includes(this.store.selectedRole.toLowerCase())

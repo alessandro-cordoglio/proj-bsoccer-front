@@ -19,6 +19,7 @@ export const store = reactive({
   ],
   selectedRating: 0,
   howManyReviews: 0,
-  prePage: 5,
-  currentPage: 1
+  totalPlayers: 0,
+  currentPage: 1,
+  lastPage: 0,
 });
