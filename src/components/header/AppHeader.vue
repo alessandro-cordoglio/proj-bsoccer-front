@@ -91,7 +91,10 @@ export default {
               @click="toggleSearchDropdown()"
             />
             <div class="dropdown-text-search"></div>
-            <ul class="search-dropdown ps-0" v-show="isSearchDropdownOpen">
+            <ul
+              class="search-dropdown ps-0"
+              :class="{ 'show-search-dropdown': isSearchDropdownOpen }"
+            >
               <li
                 v-for="role in filteredRoles"
                 @click="goToFilteredPlayers(role)"
@@ -299,16 +302,23 @@ export default {
 <style lang="scss" scoped>
 .search-dropdown {
   position: absolute;
+  display: block !important;
   z-index: 50;
   background-color: #fff;
   border: 1px solid #ddd;
   border-top: none;
   border-radius: 10px;
   width: 100%;
-  max-height: 200px;
+  max-height: 0;
+  opacity: 0;
   overflow-y: auto;
   top: 110%;
   list-style: none;
+  transition: all 0.2s ease;
+}
+.show-search-dropdown {
+  max-height: 200px !important;
+  opacity: 1;
 }
 
 .search-dropdown li {
