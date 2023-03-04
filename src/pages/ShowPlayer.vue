@@ -28,6 +28,8 @@ export default {
         content: "",
       },
       rating: 0,
+      isReview: false,
+      inputDisabled: false,
     };
   },
   created() {
@@ -41,6 +43,12 @@ export default {
     );
   },
   methods: {
+    showBannerReview() {
+      this.isReview = true;
+      setTimeout(() => {
+        this.isReview = false;
+      }, 2000);
+    },
     showAlert(message, type) {
       this.show = true;
       this.message = message;
@@ -129,6 +137,8 @@ export default {
         });
     },
     addRating() {
+      this.showBannerReview();
+      this.inputDisabled = true;
       axios
         .post(`${this.store.api_url}/ratings/${this.player.id}`, {
           rating: this.rating,
@@ -169,7 +179,7 @@ export default {
   <div class="background" @click="closeMessageReviewModal">
     <div class="ms-container">
       <section v-if="player.user">
-        <section class="player-info row g-0 gy-4 ">
+        <section class="player-info row g-0 gy-4">
           <div class="card-content col-sm-12 col-lg-6">
             <div class="card">
               <div class="card-top">
@@ -205,7 +215,6 @@ export default {
                 </h5>
               </div>
             </div>
-            
           </div>
           <div class="description col-sm-12 col-lg-6">
             <div class="alert" role="alert" :class="[alertClass]">
@@ -367,87 +376,123 @@ export default {
             <!-- Button trigger modal -->
           </div>
         </section>
-        <section class="valutazione py-3 d-flex justify-content-center ">
-          <div class="val-content d-flex flex-column align-items-center position-relative">
-              <h3>Esprimi la tua Valutazione sul Giocatore</h3>
-              <div class="star-content text-center d-flex justify-content-center">
-
-                <div class="form-check form-check-inline mx-0 position-relative fs-2 ps-0 pe-4 ">
-                  <input
-                    class="form-check-input ms-input-style"
-                    type="radio"
-                    name="inlineRadioOptions"
-                    id="inlineRadio1"
-                    value="1"
-                    v-model="rating"
-                  />
-                  <label class="form-check-label" for="inlineRadio1">
-                    <i class="fas fa-star" :class="{ selected: rating >= 1 }"></i>
-                  </label>
-                </div>
-                <div class="form-check form-check-inline mx-0 position-relative fs-2 ps-0 pe-4">
-                  <input
-                    class="form-check-input ms-input-style "
-                    type="radio"
-                    name="inlineRadioOptions"
-                    id="inlineRadio2"
-                    value="2"
-                    v-model="rating"
-                  />
-                  <label class="form-check-label" for="inlineRadio2">
-                    <i class="fas fa-star" :class="{ selected: rating >= 2 }"></i>
-                  </label>
-                </div>
-                <div class="form-check form-check-inline mx-0 position-relative fs-2 ps-0 pe-4">
-                  <input
-                    class="form-check-input ms-input-style"
-                    type="radio"
-                    name="inlineRadioOptions"
-                    id="inlineRadio3"
-                    value="3"
-                    v-model="rating"
-                  />
-                  <label class="form-check-label" for="inlineRadio3">
-                    <i class="fas fa-star" :class="{ selected: rating >= 3 }"></i>
-                  </label>
-                </div>
-  
-                <div class="form-check form-check-inline mx-0 position-relative fs-2 ps-0 pe-4">
-                  <input
-                    class="form-check-input ms-input-style"
-                    type="radio"
-                    name="inlineRadioOptions"
-                    id="inlineRadio4"
-                    value="4"
-                    v-model="rating"
-                    selected
-                  />
-                  <label class="form-check-label" for="inlineRadio4">
-                    <i class="fas fa-star" :class="{ selected: rating >= 4 }"></i>
-                  </label>
-                </div>
-  
-                <div class="form-check form-check-inline mx-0 position-relative fs-2 ps-0 pe-4">
-                  <input
-                    class="form-check-input ms-input-style"
-                    type="radio"
-                    name="inlineRadioOptions"
-                    id="inlineRadio5"
-                    value="5"
-                    v-model="rating"
-                  />
-                  <label class="form-check-label" for="inlineRadio5">
-                    <i class="fas fa-star" :class="{ selected: rating >= 5 }"></i>
-                  </label>
-                </div>
+        <!-- Star Review -->
+        <section class="star-review py-3 d-flex justify-content-center">
+          <div
+            class="val-content d-flex flex-column align-items-center position-relative"
+          >
+            <div
+              class="banner position-absolute"
+              :class="{ 'show-banner': isReview }"
+            >
+              Valutazione invita con successo!
+            </div>
+            <h3>Esprimi la tua Valutazione sul Giocatore</h3>
+            <div class="star-content text-center d-flex justify-content-center">
+              <div
+                class="form-check form-check-inline mx-0 position-relative fs-2 ps-0 pe-4"
+              >
+                <input
+                  class="form-check-input ms-input-style"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio1"
+                  value="1"
+                  :disabled="inputDisabled"
+                  :class="{ 'd-none': inputDisabled }"
+                  v-model="rating"
+                />
+                <label class="form-check-label" for="inlineRadio1">
+                  <i class="fas fa-star" :class="{ selected: rating >= 1 }"></i>
+                </label>
+              </div>
+              <div
+                class="form-check form-check-inline mx-0 position-relative fs-2 ps-0 pe-4"
+              >
+                <input
+                  class="form-check-input ms-input-style"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio2"
+                  value="2"
+                  :disabled="inputDisabled"
+                  :class="{ 'd-none': inputDisabled }"
+                  v-model="rating"
+                />
+                <label class="form-check-label" for="inlineRadio2">
+                  <i class="fas fa-star" :class="{ selected: rating >= 2 }"></i>
+                </label>
+              </div>
+              <div
+                class="form-check form-check-inline mx-0 position-relative fs-2 ps-0 pe-4"
+              >
+                <input
+                  class="form-check-input ms-input-style"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio3"
+                  value="3"
+                  :disabled="inputDisabled"
+                  :class="{ 'd-none': inputDisabled }"
+                  v-model="rating"
+                />
+                <label class="form-check-label" for="inlineRadio3">
+                  <i class="fas fa-star" :class="{ selected: rating >= 3 }"></i>
+                </label>
               </div>
 
-              <button @click="addRating()" class="btn btn-primary  mt-2 d-block ">
-                Invia 
-              </button>
+              <div
+                class="form-check form-check-inline mx-0 position-relative fs-2 ps-0 pe-4"
+              >
+                <input
+                  class="form-check-input ms-input-style"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio4"
+                  value="4"
+                  v-model="rating"
+                  :disabled="inputDisabled"
+                  :class="{ 'd-none': inputDisabled }"
+                  selected
+                />
+                <label class="form-check-label" for="inlineRadio4">
+                  <i class="fas fa-star" :class="{ selected: rating >= 4 }"></i>
+                </label>
+              </div>
+
+              <div
+                class="form-check form-check-inline mx-0 position-relative fs-2 ps-0 pe-4"
+              >
+                <input
+                  class="form-check-input ms-input-style"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio5"
+                  value="5"
+                  :disabled="inputDisabled"
+                  :class="{ 'd-none': inputDisabled }"
+                  v-model="rating"
+                />
+                <label class="form-check-label" for="inlineRadio5">
+                  <i class="fas fa-star" :class="{ selected: rating >= 5 }"></i>
+                </label>
+              </div>
             </div>
+
+            <button
+              @click="addRating()"
+              :disabled="inputDisabled"
+              class="btn btn-primary mt-2 d-block"
+            >
+              Invia
+            </button>
+          </div>
         </section>
-        <section v-if="player.reviews?.length > 0" class="messages-reviews ms-container">
+        <!-- /Star Review -->
+        <section
+          v-if="player.reviews?.length > 0"
+          class="messages-reviews ms-container"
+        >
           <h2>Recensioni:</h2>
           <div class="user-review">
             <div v-for="review in player.reviews" class="message">
@@ -471,19 +516,31 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.valutazione{
+.star-review {
   background-color: white;
   width: 100%;
+  .banner {
+    top: 0;
+    opacity: 0;
+    padding: 0.3125rem 0.625rem;
+    background-color: lightgreen;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+  }
 }
-.val-content{
-  h3{
+.show-banner {
+  top: -3.125rem !important;
+  opacity: 1 !important;
+}
+.val-content {
+  h3 {
     color: black;
     font-weight: 900;
     font-size: 35px;
   }
 }
 
-.white-star{
+.white-star {
   color: white;
 }
 .background::-webkit-scrollbar {
@@ -512,7 +569,7 @@ export default {
   width: 100%;
   // background-color: grey;
   background-color: var(--common-card-color);
-  
+
   margin: auto;
 }
 .player-info {
