@@ -24,4 +24,5 @@ export const store = reactive({
   lastPage: 0,
   showMessageModal: false,
   showReviewModal: false,
+  isSearchDropdownOpen: false,
 });

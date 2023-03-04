@@ -10,15 +10,7 @@ export default {
       store,
     };
   },
-  methods: {
-    // getPlayerPhoto() {
-    //   if (data.profile_photo.includes("uploads")) {
-    //     return data.image_url;
-    //   } else {
-    //     return data.profile_photo;
-    //   }
-    // },
-  },
+  methods: {},
   computed: {
     mediaRating() {
       const sum = this.data.stars.reduce(

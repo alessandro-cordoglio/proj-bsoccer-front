@@ -13,7 +13,7 @@ export default {
 </script>
 
 <template>
-  <main>
+  <main @click="this.store.isSearchDropdownOpen = false">
     <router-view></router-view>
   </main>
 </template>

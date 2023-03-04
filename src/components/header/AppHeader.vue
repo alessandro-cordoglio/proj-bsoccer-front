@@ -8,7 +8,6 @@ export default {
       store,
       filteredRoles: [],
       hamburgerAnimation: false,
-      isSearchDropdownOpen: false,
     };
   },
 
@@ -52,15 +51,15 @@ export default {
       this.isSearchDropdownOpen = !this.isSearchDropdownOpen;
     },
     toggleSearchDropdown() {
+      this.store.isSearchDropdownOpen = !this.store.isSearchDropdownOpen;
       this.filteredRoles = this.store.roles;
-      this.isSearchDropdownOpen = !this.isSearchDropdownOpen;
     },
   },
 };
 </script>
 
 <template>
-  <header>
+  <header @click="this.store.isSearchDropdownOpen = false">
     <section class="top_header">
       <nav class="container d-flex justify-content-between align-items-center">
         <div class="header_left">
@@ -85,12 +84,14 @@ export default {
               placeholder="Ricerca per ruolo giocatore"
               v-model="store.selectedRole"
               @input="updateFilteredRoles"
-              @click="toggleSearchDropdown()"
+              @click.stop="toggleSearchDropdown"
             />
             <div class="dropdown-text-search"></div>
             <ul
               class="search-dropdown ps-0"
-              :class="{ 'show-search-dropdown': isSearchDropdownOpen }"
+              :class="{
+                'show-search-dropdown': this.store.isSearchDropdownOpen,
+              }"
             >
               <li
                 v-for="role in filteredRoles"
