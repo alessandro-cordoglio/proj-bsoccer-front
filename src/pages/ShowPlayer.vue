@@ -160,6 +160,15 @@ export default {
       this.store.showMessageModal = false;
       this.store.showReviewModal = false;
     },
+    sortReviewsDesc() {
+      // Converto array
+      const orderReviews = [...this.player.reviews];
+      // Ordina le recensioni in ordine decrescente di data
+      orderReviews.sort(
+        (a, b) => new Date(b.date_message) - new Date(a.date_message)
+      );
+      return orderReviews;
+    },
   },
 
   computed: {
@@ -512,7 +521,7 @@ export default {
         >
           <h2>Recensioni:</h2>
           <div class="user-review">
-            <div v-for="review in player.reviews" class="message">
+            <div v-for="review in sortReviewsDesc()" class="message">
               <div class="user-img">
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
