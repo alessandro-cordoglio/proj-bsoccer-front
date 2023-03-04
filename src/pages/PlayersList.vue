@@ -17,9 +17,6 @@ export default {
   },
   mounted() {
     this.control();
-    // setTimeout(() => {
-    //   this.isLoading = false;
-    // }, 3000);
   },
   computed: {},
   methods: {
