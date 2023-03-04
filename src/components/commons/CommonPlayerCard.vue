@@ -26,8 +26,7 @@ export default {
         0
       );
       if (this.data.stars.length === 0) {
-        let average = 0;
-        return average;
+        return 0;
       }
       const average = sum / this.data.stars.length;
       return average.toFixed(0);
