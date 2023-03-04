@@ -2,18 +2,24 @@
 import axios from "axios";
 import { store } from "../store";
 import CommonPlayerCard from "../components/commons/CommonPlayerCard.vue";
+import LoadingPage from "../components/commons/LoadingPage.vue";
 export default {
   name: "PlayersList",
   components: {
     CommonPlayerCard,
+    LoadingPage,
   },
   data() {
     return {
       store,
+      isLoading: true,
     };
   },
   mounted() {
     this.control();
+    // setTimeout(() => {
+    //   this.isLoading = false;
+    // }, 3000);
   },
   computed: {},
   methods: {
@@ -44,21 +50,19 @@ export default {
     getPlayers() {
       this.store.currentPage = 1;
       axios
-        .get(
-          `http://127.0.0.1:8000/api/players?page=${this.store.currentPage}`,
-          {
-            params: {
-              page: this.store.currentPage,
-              perPage: this.store.lastPage,
-            },
-          }
-        )
+        .get(`${this.store.api_url}/players?page=${this.store.currentPage}`, {
+          params: {
+            page: this.store.currentPage,
+            perPage: this.store.lastPage,
+          },
+        })
         .then((res) => {
           this.store.lastPage = res.data.last_page;
           console.log(res.data);
           this.store.totalPlayers = res.data.total;
           this.store.players = res.data.data;
           console.log(res.data.total);
+          this.isLoading = false;
         })
         .catch((error) => {
           console.log(error);
@@ -67,15 +71,12 @@ export default {
 
     getPlayersButton() {
       axios
-        .get(
-          `http://127.0.0.1:8000/api/players?page=${this.store.currentPage}`,
-          {
-            params: {
-              page: this.store.currentPage,
-              perPage: this.store.lastPage,
-            },
-          }
-        )
+        .get(`${this.store.api_url}/players?page=${this.store.currentPage}`, {
+          params: {
+            page: this.store.currentPage,
+            perPage: this.store.lastPage,
+          },
+        })
         .then((res) => {
           this.store.lastPage = res.data.last_page;
           console.log(res.data);
@@ -101,20 +102,18 @@ export default {
     getPlayersByRole() {
       this.store.currentPage = 1;
       axios
-        .get(
-          `http://127.0.0.1:8000/api/players?page=${this.store.currentPage}`,
-          {
-            params: {
-              role: this.store.selectedRole,
-              page: this.store.currentPage,
-              perPage: this.store.lastPage,
-            },
-          }
-        )
+        .get(`${this.store.api_url}/players?page=${this.store.currentPage}`, {
+          params: {
+            role: this.store.selectedRole,
+            page: this.store.currentPage,
+            perPage: this.store.lastPage,
+          },
+        })
         .then((res) => {
           console.log(res.data);
           this.store.lastPage = res.data.last_page;
           this.store.players = res.data.data;
+          this.isLoading = false;
         })
         .catch((error) => {
           console.log(error);
@@ -122,16 +121,13 @@ export default {
     },
     getPlayersByRoleButton() {
       axios
-        .get(
-          `http://127.0.0.1:8000/api/players?page=${this.store.currentPage}`,
-          {
-            params: {
-              role: this.store.selectedRole,
-              page: this.store.currentPage,
-              perPage: this.store.lastPage,
-            },
-          }
-        )
+        .get(`${this.store.api_url}/players?page=${this.store.currentPage}`, {
+          params: {
+            role: this.store.selectedRole,
+            page: this.store.currentPage,
+            perPage: this.store.lastPage,
+          },
+        })
         .then((res) => {
           console.log(res.data);
           this.store.lastPage = res.data.last_page;
@@ -147,7 +143,10 @@ export default {
 
 <template>
   <section class="all-players">
-    <div class="players-container">
+    <div v-if="isLoading">
+      <LoadingPage />
+    </div>
+    <div v-else class="players-container">
       <CommonPlayerCard
         v-for="(player, index) in this.store.players"
         :data="player"

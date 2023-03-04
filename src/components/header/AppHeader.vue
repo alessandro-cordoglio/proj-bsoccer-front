@@ -22,16 +22,13 @@ export default {
     getPlayersByRole() {
       this.store.currentPage = 1;
       axios
-        .get(
-          `http://127.0.0.1:8000/api/players?page=${this.store.currentPage}`,
-          {
-            params: {
-              role: this.store.selectedRole,
-              page: this.store.currentPage,
-              perPage: this.store.lastPage,
-            },
-          }
-        )
+        .get(`${this.store.api_url}/players?page=${this.store.currentPage}`, {
+          params: {
+            role: this.store.selectedRole,
+            page: this.store.currentPage,
+            perPage: this.store.lastPage,
+          },
+        })
         .then((res) => {
           console.log(res.data);
           this.store.lastPage = res.data.last_page;
