@@ -25,6 +25,10 @@ export default {
         (total, star) => total + star.rating,
         0
       );
+      if (this.data.stars.length === 0) {
+        let average = 0;
+        return average;
+      }
       const average = sum / this.data.stars.length;
       return average.toFixed(0);
     },
@@ -35,8 +39,8 @@ export default {
 <template>
   <router-link
     :to="{ name: 'show-player', params: { id: data.id } }"
-    :class="Number(mediaRating) >= this.store.selectedRating ? '' : 'd-none'"
-    v-if="data.reviews.length > this.store.howManyReviews"
+    :class="mediaRating >= this.store.selectedRating ? '' : 'd-none'"
+    v-if="data.reviews.length >= this.store.howManyReviews"
   >
     <div class="card">
       <div class="card-top">
@@ -80,7 +84,7 @@ export default {
 a {
   text-decoration: none;
   color: inherit;
-  opacity: 1 ;
+  opacity: 1;
   &:hover {
     color: inherit;
   }
