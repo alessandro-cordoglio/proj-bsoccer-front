@@ -75,7 +75,7 @@ export default {
           <form
             action="GET"
             @submit.prevent="goToFilteredPlayers(role)"
-            class="d-flex align-items-center"
+            class="d-flex align-items-center position-relative"
           >
             <label for="search">
               <button class="button_layout w-100" type="submit">
@@ -91,7 +91,7 @@ export default {
               @click="toggleSearchDropdown()"
             />
             <div class="dropdown-text-search"></div>
-            <ul class="search-dropdown" v-show="isSearchDropdownOpen">
+            <ul class="search-dropdown ps-0" v-show="isSearchDropdownOpen">
               <li
                 v-for="role in filteredRoles"
                 @click="goToFilteredPlayers(role)"
@@ -304,10 +304,10 @@ export default {
   border: 1px solid #ddd;
   border-top: none;
   border-radius: 10px;
-  width: 60%;
+  width: 100%;
   max-height: 200px;
   overflow-y: auto;
-  top: 70%;
+  top: 110%;
   list-style: none;
 }
 

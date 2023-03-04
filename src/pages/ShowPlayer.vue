@@ -243,6 +243,7 @@ export default {
             <!-- modale messaggi -->
             <div
               class="ms-message-modal position-fixed"
+              @click.stop
               :class="{ 'show-modal': this.store.showMessageModal }"
             >
               <div
@@ -323,6 +324,7 @@ export default {
             <!-- modale recensioni -->
             <div
               class="ms-message-modal position-fixed"
+              @click.stop
               :class="{ 'show-modal': this.store.showReviewModal }"
             >
               <div
