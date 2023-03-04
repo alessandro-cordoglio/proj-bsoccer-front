@@ -146,31 +146,51 @@ export default {
     <div v-if="isLoading">
       <LoadingPage />
     </div>
-    <div v-else class="players-container">
-      <CommonPlayerCard
-        v-for="(player, index) in this.store.players"
-        :data="player"
-        class="players-list"
-        :key="player.id"
-      />
-    </div>
-    <div class="ms_bt_container">
-      <button
-        class="btn me-4 btn-info"
-        type="button"
-        :disabled="store.currentPage === 1"
-        @click="changePage(-1)"
-      >
-        -- Prev
-      </button>
-      <button
-        class="btn me-4 btn-info"
-        type="button"
-        :disabled="isNextDisabled()"
-        @click="changePage(1)"
-      >
-        -- Next
-      </button>
+    <div v-else>
+      <div class="ms_bt_container">
+        <button
+          class="btn me-4 btn-info"
+          type="button"
+          :disabled="store.currentPage === 1"
+          @click="changePage(-1)"
+        >
+          <i class="fa-solid fa-left-long"></i> Prev
+        </button>
+        <button
+          class="btn me-4 btn-info"
+          type="button"
+          :disabled="isNextDisabled()"
+          @click="changePage(1)"
+        >
+          Next <i class="fa-solid fa-right-long"></i>
+        </button>
+      </div>
+      <div class="players-container">
+        <CommonPlayerCard
+          v-for="(player, index) in this.store.players"
+          :data="player"
+          class="players-list"
+          :key="player.id"
+        />
+      </div>
+      <div class="ms_bt_container">
+        <button
+          class="btn me-4 btn-info"
+          type="button"
+          :disabled="store.currentPage === 1"
+          @click="changePage(-1)"
+        >
+          <i class="fa-solid fa-left-long"></i> Prev
+        </button>
+        <button
+          class="btn me-4 btn-info"
+          type="button"
+          :disabled="isNextDisabled()"
+          @click="changePage(1)"
+        >
+          Next <i class="fa-solid fa-right-long"></i>
+        </button>
+      </div>
     </div>
   </section>
 </template>
