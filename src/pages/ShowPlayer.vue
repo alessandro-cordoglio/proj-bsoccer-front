@@ -168,6 +168,9 @@ export default {
         (total, star) => total + star.rating,
         0
       );
+      if (this.player.stars.length === 0) {
+        return 0;
+      }
       const average = sum / this.player.stars.length;
       return average.toFixed(0);
     },
@@ -197,22 +200,29 @@ export default {
                 <h3 class="text-center">
                   {{ player.user.name }} {{ player.user.surname }}
                 </h3>
-                <h5>
-                  RUOLO:<span v-for="role in player.roles"
-                    >{{ role.name }}-</span
-                  >
-                </h5>
-                <h5>
-                  RATING:
-                  <i
-                    class="fa-solid fa-star"
-                    v-for="n in Number(mediaRating)"
-                  ></i>
-                  <i
-                    class="fa-regular fa-star"
-                    v-for="n in 5 - Number(mediaRating)"
-                  ></i>
-                </h5>
+                <div class="d-flex align-items-center">
+                  <h5>RUOLO:</h5>
+                  <ul class="list-unstyled mb-0">
+                    <li v-for="role in player.roles" class="ms-2">
+                      {{ role.name }}
+                    </li>
+                  </ul>
+                </div>
+                <div class="d-flex align-items-center">
+                  <h5>RATING:</h5>
+                  <div v-if="player.stars.length" class="ms-2">
+                    <i
+                      class="fa-solid fa-star"
+                      v-for="n in Number(mediaRating)"
+                    ></i>
+                    <i
+                      class="fa-regular fa-star"
+                      v-for="n in 5 - Number(mediaRating)"
+                    ></i>
+                  </div>
+                  <div v-else>//</div>
+                </div>
+                <p>Reviews: {{ player.reviews.length }}</p>
               </div>
             </div>
           </div>
@@ -251,6 +261,7 @@ export default {
                   <div class="mt-1">
                     <label for="name">Nome*</label>
                     <input
+                      @click.stop
                       class="form-control mb-2"
                       type="text"
                       id="name"
@@ -260,6 +271,7 @@ export default {
                     />
                     <label for="email">Email*</label>
                     <input
+                      @click.stop
                       class="form-control mb-2"
                       type="email"
                       id="email"
@@ -269,6 +281,7 @@ export default {
                     />
                     <label for="content">Messaggio*</label>
                     <textarea
+                      @click.stop
                       class="form-control mb-2"
                       name="content"
                       id="content"
@@ -328,6 +341,7 @@ export default {
                   <div class="mt-3">
                     <label for="name">Nome*</label>
                     <input
+                      @click.stop
                       class="form-control mb-2"
                       type="text"
                       name="name"
@@ -338,6 +352,7 @@ export default {
                     />
                     <label for="content">Recensione*</label>
                     <textarea
+                      @click.stop
                       class="form-control"
                       name="content"
                       id="content"
@@ -634,7 +649,7 @@ export default {
   background-color: transparent;
   margin: auto;
   padding: 10% 2%;
-  h2{
+  h2 {
     font-size: 35px;
     margin-bottom: 20px;
   }

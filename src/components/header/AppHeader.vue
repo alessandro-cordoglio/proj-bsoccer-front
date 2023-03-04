@@ -21,26 +21,27 @@ export default {
     },
     getPlayersByRole() {
       this.store.currentPage = 1;
-      axios.get(`http://127.0.0.1:8000/api/players?page=${this.store.currentPage}`, {
-          params: {
-            role: this.store.selectedRole,
-            page: this.store.currentPage,
-            perPage: this.store.lastPage
+      axios
+        .get(
+          `http://127.0.0.1:8000/api/players?page=${this.store.currentPage}`,
+          {
+            params: {
+              role: this.store.selectedRole,
+              page: this.store.currentPage,
+              perPage: this.store.lastPage,
+            },
           }
-        })
-        .then(res => {
-          console.log(res.data)
-          this.store.lastPage= res.data.last_page;
+        )
+        .then((res) => {
+          console.log(res.data);
+          this.store.lastPage = res.data.last_page;
           this.store.players = res.data.data;
-          
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
-        })
-        this.$router.push({name:'players'})
+        });
+      this.$router.push({ name: "players" });
     },
-
-
 
     updateFilteredRoles() {
       this.filteredRoles = this.store.roles.filter((role) =>
@@ -90,10 +91,7 @@ export default {
               @click="toggleSearchDropdown()"
             />
             <div class="dropdown-text-search"></div>
-            <ul
-              class="search-dropdown"
-              v-show = "isSearchDropdownOpen"
-            >
+            <ul class="search-dropdown" v-show="isSearchDropdownOpen">
               <li
                 v-for="role in filteredRoles"
                 @click="goToFilteredPlayers(role)"
@@ -114,7 +112,6 @@ export default {
             <!-- /Hamburger Menu -->
           </div>
           <ul :class="{ 'show-ul': hamburgerAnimation }">
-
             <!-- OFFCAnvas component -->
             <li v-if="$route.path === '/all-players'">
               <a
@@ -335,12 +332,14 @@ export default {
 }
 
 header {
+  height: 5rem;
   position: sticky;
   width: 100%;
   z-index: 500;
   top: 0;
 
   .top_header {
+    height: 100%;
     background-color: #111;
     box-shadow: 0px 15px 10px -15px #111;
   }
