@@ -13,14 +13,17 @@ export default {
     };
   },
   mounted() {
-    if (this.store.selectedRole) {
-      this.getPlayersByRole();
-    } else {
-      this.getPlayers();
-    }
+    this.control();
   },
   computed: {},
   methods: {
+    control() {
+      if (this.store.selectedRole) {
+        this.getPlayersByRole();
+      } else {
+        this.getPlayers();
+      }
+    },
     scrollToTop() {
       let allPlayers = document.querySelector(".all-players");
       allPlayers.scrollTo({
