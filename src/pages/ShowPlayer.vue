@@ -31,6 +31,7 @@ export default {
       isReview: false,
       inputDisabled: false,
       isLoading: true,
+      reviewsCount: 10,
     };
   },
   created() {
@@ -526,7 +527,10 @@ export default {
         >
           <h2>Recensioni:</h2>
           <div class="user-review">
-            <div v-for="review in sortReviewsDesc()" class="message">
+            <div
+              v-for="review in sortReviewsDesc().slice(0, this.reviewsCount)"
+              class="message"
+            >
               <div class="user-img">
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
@@ -540,6 +544,9 @@ export default {
               </div>
             </div>
           </div>
+          <button @click="this.reviewsCount += 10" class="btn btn-secondary">
+            Mostra altre recensioni
+          </button>
         </section>
       </section>
     </div>
