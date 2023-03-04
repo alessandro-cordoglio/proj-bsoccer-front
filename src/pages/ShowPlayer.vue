@@ -372,7 +372,7 @@ export default {
               <h3>Esprimi la tua Valutazione sul Giocatore</h3>
               <div class="star-content text-center d-flex justify-content-center">
 
-                <div class="form-check form-check-inline mx-0 position-relative fs-2 ps-0 pe-4 ">
+                <div class="form-check form-check-inline mx-0 position-relative fs-2 ps-4 pe-4 ">
                   <input
                     class="form-check-input ms-input-style"
                     type="radio"
@@ -448,7 +448,7 @@ export default {
             </div>
         </section>
         <section v-if="player.reviews?.length > 0" class="messages-reviews ms-container">
-          <h2>Recensioni:</h2>
+          <h2 class=" text-center fw-bolder ">Recensioni utenti</h2>
           <div class="user-review">
             <div v-for="review in player.reviews" class="message">
               <div class="user-img">
@@ -577,6 +577,10 @@ export default {
   background-color: transparent;
   margin: auto;
   padding: 10% 2%;
+  h2{
+    font-size: 35px;
+    margin-bottom: 20px;
+  }
 }
 .user-review {
   display: flex;
