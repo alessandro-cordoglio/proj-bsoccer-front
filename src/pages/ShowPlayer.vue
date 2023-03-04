@@ -748,11 +748,12 @@ export default {
   width: 100%;
   top: -100%;
   left: 50%;
+  opacity: 0;
   transform: translateX(-50%);
   border: 0.0625rem solid lightgray;
   border-radius: 0.625rem;
   z-index: 999;
-  transition: top 0.2s ease;
+  transition: top 0.2s ease, opacity 0.4s ease;
   .ms-modale-header {
     border-bottom: 0.0625rem solid lightgray;
     .fa-xmark {
@@ -772,6 +773,7 @@ export default {
 }
 .show-modal {
   top: 0.9375rem !important;
+  opacity: 1 !important;
 }
 .blur {
   filter: blur(0.625rem);
