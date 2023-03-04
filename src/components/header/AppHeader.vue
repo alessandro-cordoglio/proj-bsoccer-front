@@ -302,11 +302,11 @@ export default {
                         type="radio"
                         name="flexRadioDefault"
                         id="flexRadioDefault1"
-                        value="5"
+                        value="20"
                         v-model="this.store.howManyReviews"
                       />
                       <label class="form-check-label" for="flexRadioDefault1">
-                        > di 5
+                        > di 20
                       </label>
                     </div>
                     <div class="form-check">
@@ -315,11 +315,37 @@ export default {
                         type="radio"
                         name="flexRadioDefault"
                         id="flexRadioDefault2"
-                        value="15"
+                        value="80"
                         v-model="this.store.howManyReviews"
                       />
                       <label class="form-check-label" for="flexRadioDefault2">
-                        > di 15
+                        > di 80
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="flexRadioDefault"
+                        id="flexRadioDefault2"
+                        value="120"
+                        v-model="this.store.howManyReviews"
+                      />
+                      <label class="form-check-label" for="flexRadioDefault2">
+                        > di 120
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="flexRadioDefault"
+                        id="flexRadioDefault2"
+                        value="180"
+                        v-model="this.store.howManyReviews"
+                      />
+                      <label class="form-check-label" for="flexRadioDefault2">
+                        > di 180
                       </label>
                     </div>
                   </div>
