@@ -157,7 +157,7 @@ export default {
                   <div>
                     <p>Scegli il player con un numero minimo di stelle</p>
                     <div
-                      class="form-check form-check-inline mx-0 position-relative fs-2 ps-0 pe-4"
+                      class="form-check form-check-inline mx-0 position-relative fs-2 ps-0 pe-4 w-100 text-center"
                     >
                       <input
                         class="form-check-input ms-input-style"
@@ -168,7 +168,7 @@ export default {
                         v-model="this.store.selectedRating"
                       />
                       <label class="form-check-label" for="inlineRadio0"
-                        ><h4>All</h4></label
+                        ><h4 class="no-filter">All</h4></label
                       >
                     </div>
                     <div
@@ -392,6 +392,15 @@ export default {
   width: 1.875rem;
   height: 1.875rem;
   z-index: 100;
+}
+#inlineRadio0 {
+  right: 50%;
+}
+#inlineRadio0 ~ label {
+  transition: transform 0.2s ease;
+}
+#inlineRadio0:hover ~ label {
+  transform: scale(1.2);
 }
 .ms-offcanvas {
   background-color: #999;
