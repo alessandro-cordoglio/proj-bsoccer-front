@@ -1,14 +1,14 @@
 <script>
 import axios from "axios";
 import CommonPlayerCard from "../components/commons/CommonPlayerCard.vue";
+import LoadingPage from "../components/commons/LoadingPage.vue";
 import { store } from "../store";
 
 export default {
   name: "ShowPlayer",
   components: {
     CommonPlayerCard,
-
-    randomNumber: 0,
+    LoadingPage,
   },
   data() {
     return {
@@ -30,6 +30,7 @@ export default {
       rating: 0,
       isReview: false,
       inputDisabled: false,
+      isLoading: true,
     };
   },
   created() {
@@ -82,6 +83,7 @@ export default {
         .get(`${this.store.api_url}/players/${this.$route.params.id}`)
         .then((resp) => {
           this.player = resp.data;
+          this.isLoading = false;
         })
         .catch((err) => {
           this.$router.push({ name: "page-404" });
@@ -189,7 +191,10 @@ export default {
 
 <template>
   <div class="background" @click="closeMessageReviewModal">
-    <div class="ms-container">
+    <div v-if="isLoading">
+      <LoadingPage />
+    </div>
+    <div v-else class="ms-container">
       <section v-if="player.user">
         <section class="player-info row g-0 gy-4">
           <div class="card-content col-sm-12 col-lg-6">
