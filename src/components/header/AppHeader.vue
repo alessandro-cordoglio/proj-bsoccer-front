@@ -156,84 +156,127 @@ export default {
                   <!-- Filtro per numero di stelle -->
                   <div>
                     <p>Scegli il player con un numero minimo di stelle</p>
-                    <div class="form-check form-check-inline">
+                    <div
+                      class="form-check form-check-inline mx-0 position-relative fs-2 ps-0 pe-4"
+                    >
                       <input
-                        class="form-check-input"
+                        class="form-check-input ms-input-style"
                         type="radio"
                         name="inlineRadioOptions"
-                        id="inlineRadio1"
+                        id="inlineRadio0"
                         value="0"
-                        checked
                         v-model="this.store.selectedRating"
                       />
-                      <label class="form-check-label" for="inlineRadio1"
-                        >All</label
+                      <label class="form-check-label" for="inlineRadio0"
+                        ><h4>All</h4></label
                       >
                     </div>
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="inlineRadio1"
-                        value="1"
-                        v-model="this.store.selectedRating"
-                      />
-                      <label class="form-check-label" for="inlineRadio1"
-                        >1</label
+                    <div
+                      class="star-content text-center d-flex justify-content-center"
+                    >
+                      <div
+                        class="form-check form-check-inline mx-0 position-relative fs-2 ps-0 pe-4"
                       >
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="inlineRadio2"
-                        value="2"
-                        v-model="this.store.selectedRating"
-                      />
-                      <label class="form-check-label" for="inlineRadio2"
-                        >2</label
+                        <input
+                          class="form-check-input ms-input-style"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio1"
+                          value="1"
+                          v-model="this.store.selectedRating"
+                        />
+                        <label class="form-check-label" for="inlineRadio1">
+                          <i
+                            class="fas fa-star"
+                            :class="{
+                              selected: this.store.selectedRating >= 1,
+                            }"
+                          ></i>
+                        </label>
+                      </div>
+                      <div
+                        class="form-check form-check-inline mx-0 position-relative fs-2 ps-0 pe-4"
                       >
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="inlineRadio3"
-                        value="3"
-                        v-model="this.store.selectedRating"
-                      />
-                      <label class="form-check-label" for="inlineRadio3"
-                        >3</label
+                        <input
+                          class="form-check-input ms-input-style"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio2"
+                          value="2"
+                          v-model="this.store.selectedRating"
+                        />
+                        <label class="form-check-label" for="inlineRadio2">
+                          <i
+                            class="fas fa-star"
+                            :class="{
+                              selected: this.store.selectedRating >= 2,
+                            }"
+                          ></i>
+                        </label>
+                      </div>
+                      <div
+                        class="form-check form-check-inline mx-0 position-relative fs-2 ps-0 pe-4"
                       >
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="inlineRadio3"
-                        value="4"
-                        v-model="this.store.selectedRating"
-                      />
-                      <label class="form-check-label" for="inlineRadio4"
-                        >4</label
+                        <input
+                          class="form-check-input ms-input-style"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio3"
+                          value="3"
+                          v-model="this.store.selectedRating"
+                        />
+                        <label class="form-check-label" for="inlineRadio3">
+                          <i
+                            class="fas fa-star"
+                            :class="{
+                              selected: this.store.selectedRating >= 3,
+                            }"
+                          ></i>
+                        </label>
+                      </div>
+
+                      <div
+                        class="form-check form-check-inline mx-0 position-relative fs-2 ps-0 pe-4"
                       >
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="inlineRadio3"
-                        value="5"
-                        v-model="this.store.selectedRating"
-                      />
-                      <label class="form-check-label" for="inlineRadio5"
-                        >5</label
+                        <input
+                          class="form-check-input ms-input-style"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio4"
+                          value="4"
+                          v-model="this.store.selectedRating"
+                          selected
+                        />
+                        <label class="form-check-label" for="inlineRadio4">
+                          <i
+                            class="fas fa-star"
+                            :class="{
+                              selected: this.store.selectedRating >= 4,
+                            }"
+                          ></i>
+                        </label>
+                      </div>
+
+                      <div
+                        class="form-check form-check-inline mx-0 position-relative fs-2 ps-0 pe-4"
                       >
+                        <input
+                          class="form-check-input ms-input-style"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio5"
+                          value="5"
+                          v-model="this.store.selectedRating"
+                        />
+                        <label class="form-check-label" for="inlineRadio5">
+                          <i
+                            class="fas fa-star"
+                            :class="{
+                              selected: this.store.selectedRating >= 5,
+                            }"
+                          ></i>
+                        </label>
+                      </div>
                     </div>
                   </div>
                   <!-- /Filtro per numero di stelle -->
@@ -330,7 +373,26 @@ export default {
   background-color: #f2f2f2;
 }
 
-// -----OffCanvas-----
+/* -------------------
+  OFFCANVAS
+--------------------*/
+.fa-star {
+  transition: all 0.2s linear;
+}
+.selected {
+  color: gold;
+  transform: scale(1.5);
+}
+.ms-input-style {
+  position: absolute;
+  top: 0;
+  right: 1.75rem;
+  cursor: pointer;
+  opacity: 0;
+  width: 1.875rem;
+  height: 1.875rem;
+  z-index: 100;
+}
 .ms-offcanvas {
   background-color: #999;
 }
