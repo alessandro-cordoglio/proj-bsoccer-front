@@ -9,7 +9,9 @@ export default {
   data() {
     return {
       // giocatori: [],
+      startIndex: 0,
       activePlayer: 0,
+      interval: null,
       players: [
         {
           name: "Matteo Castori",
@@ -57,23 +59,14 @@ export default {
     };
   },
   methods: {
-    nextPlayer() {
-      if (this.activePlayer === this.players.length - 1) {
-        this.activePlayer = 0;
-      } else {
-        this.activePlayer++;
-      }
+    nextPlayers() {
+      this.startIndex = Math.min(this.startIndex + 1, this.players.length - 3);
     },
-    autoPlay() {
-      this.interval = setInterval(this.nextPlayer, 3000);
-    },
-    stopInterval() {
-      clearInterval(this.interval);
+    prevPlayers() {
+      this.startIndex = Math.max(this.startIndex - 1, 0);
     },
   },
-  mounted() {
-    this.autoPlay();
-  },
+  mounted() {},
   // created() {
   //   axios.get(`http://localhost:8000/api/players`).then((resp) => {
   //     resp.data.forEach((giocatore) => {
@@ -89,79 +82,75 @@ export default {
 <template>
   <div class="carousel_card">
     <div class="sponsor_card">
-      <PlayerCard
-        @mouseenter="stopInterval"
-        @mouseleave="autoPlay"
-        class="player_card"
-        :class="{ 'player-active': activePlayer === index }"
-        v-for="(player, index) in players"
-        :player="player"
-      />
-      <div
-        class="next-btn"
-        @click="nextPlayer(index)"
-        @mouseenter="stopInterval"
-        @mouseleave="autoPlay"
-      >
+      <div class="player_container">
+        <PlayerCard
+          class="player_card"
+          :class="{ 'player-active': activePlayer === index }"
+          v-for="(player, index) in players.slice(startIndex, startIndex + 3)"
+          :key="player.id"
+          :player="player"
+        />
+      </div>
+      <div class="prev-btn" @click="prevPlayers">
+        <i class="fa-solid fa-chevron-left"></i>
+      </div>
+      <div class="next-btn" @click="nextPlayers">
         <i class="fa-solid fa-chevron-right"></i>
       </div>
     </div>
   </div>
-  
 </template>
 
 <style lang="scss" scoped>
 .carousel_card {
   position: relative;
-  max-width: 31.25rem;
+  max-width: 75rem;
   margin: auto;
-  background-color: #e1e1e1;
-  .player_card {
-    position: absolute;
-    opacity: 0;
-    transition: opacity 0.1s;
-    transition-timing-function: cubic-bezier(0.33, 0.94, 0.76, 1.61);
-    .bottom-right {
-      background-color: white !important;
+  .sponsor_card {
+    position: relative;
+    overflow: hidden;
+    .player_container {
+      display: flex;
+      width: calc(
+        33.3333% * 3
+      ); // imposta la larghezza del contenitore delle card
+      transition: transform 0.3s ease; // transizione per l'animazione slider
+      @media screen and (max-width: 992px) {
+        flex-direction: column;
+      }
     }
   }
+
+  .prev-btn,
   .next-btn {
-    padding: 0.3125rem 0.75rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2rem;
+    height: 2rem;
     background-color: white;
     border-radius: 50%;
     cursor: pointer;
-    position: absolute;
-    top: 16.5625rem;
-    right: 3.125rem;
     color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    opacity: 0.5;
+    transition: opacity 0.3s;
   }
-}
-.player-active {
-  opacity: 1 !important;
-  animation: zoom-in 0.5s ease-in-out;
-}
 
-.hero_text {
-  padding-top: 50px;
-  padding-bottom: 100px;
-  padding-left: 100px;
-}
-
-/* ------------------------------
-    KEYFRAME
------------------------------- */
-@keyframes zoom-in {
-  0% {
-    transform: scale(0.7);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1);
+  .prev-btn:hover,
+  .next-btn:hover {
     opacity: 1;
+  }
+
+  .prev-btn {
+    left: 0;
+  }
+
+  .next-btn {
+    right: 0;
   }
 }
 </style>
