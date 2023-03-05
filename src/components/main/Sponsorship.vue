@@ -105,7 +105,10 @@ export default {
 </script>
 
 <template>
-  <div class="carousel_card">
+  <div class="carousel_card pt-4">
+    <h2 class="text-white text-center fs-1">
+      I nostri giocatori più ricercati
+    </h2>
     <div class="sponsor_card">
       <div
         class="player_container"
