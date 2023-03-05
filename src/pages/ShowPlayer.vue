@@ -514,7 +514,6 @@ export default {
                   v-model="rating"
                   :disabled="inputDisabled"
                   :class="{ 'd-none': inputDisabled }"
-                  checked
                 />
                 <label class="form-check-label" for="inlineRadio4">
                   <i class="fas fa-star" :class="{ selected: rating >= 4 }"></i>
