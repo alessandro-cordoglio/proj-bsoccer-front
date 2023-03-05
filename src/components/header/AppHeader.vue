@@ -55,6 +55,7 @@ export default {
       this.filteredRoles = this.store.roles;
     },
     goHome() {
+      this.store.welcomeActive = true;
       this.$router.push({ name: "home" });
     },
   },
@@ -66,10 +67,10 @@ export default {
     <section class="top_header">
       <nav class="container d-flex justify-content-between align-items-center">
         <div class="header_left" @click="clearSearch">
-            <li class="d-flex align-items-center" @click="goHome">
-              <i class="fa-solid fa-house"></i>
-              <span class="ms-2">HOME</span>
-            </li>
+          <li class="d-flex align-items-center" @click="goHome">
+            <i class="fa-solid fa-house"></i>
+            <span class="ms-2">HOME</span>
+          </li>
         </div>
         <div class="search_bar">
           <form
@@ -363,9 +364,13 @@ export default {
               <i class="fa-solid fa-user"></i>
               <a class="ms-2" href="http://127.0.0.1:8000/login">Login</a>
             </li>
-            <li v-if="$route.path === '/' || $route.path.startsWith('/blog/')" class="d-flex align-items-center" @click="goToFilteredPlayers(role)">
+            <li
+              v-if="$route.path === '/' || $route.path.startsWith('/blog/')"
+              class="d-flex align-items-center"
+              @click="goToFilteredPlayers(role)"
+            >
               <i class="fa-solid fa-futbol me-2"></i>
-                Players
+              Players
             </li>
           </ul>
         </div>
@@ -459,19 +464,17 @@ header {
   }
 }
 
-.header_left{
+.header_left {
   display: flex;
   align-items: center;
-  :hover{
+  :hover {
     transition: all 0.3s ease-out;
-      color: #F3E7C6;
-    }
-  li{
+    color: #f3e7c6;
+  }
+  li {
     cursor: pointer;
-    
-  }  
+  }
 }
-
 
 nav {
   color: grey;
@@ -495,7 +498,6 @@ nav {
       padding: 8px 0;
     }
   }
-
 }
 
 /* -------------------
@@ -574,8 +576,7 @@ nav {
   UL-ANIMATION
 --------------------*/
 
-
-.header_right{
+.header_right {
   display: flex;
   ul {
     display: flex;
