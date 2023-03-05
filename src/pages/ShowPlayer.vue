@@ -572,7 +572,7 @@ export default {
               </div>
             </div>
           </div>
-          <div class="text-center">
+          <div v-if="sortReviewsDesc().length > 10" class="text-center">
             <button
               v-if="this.reviewsCount >= sortReviewsDesc().length"
               @click="this.reviewsCount = 10"
