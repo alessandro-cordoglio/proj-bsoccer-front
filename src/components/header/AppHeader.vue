@@ -359,6 +359,10 @@ export default {
               <i class="fa-solid fa-user"></i>
               <a class="ms-2" href="http://127.0.0.1:8000/login">Login</a>
             </li>
+            <li v-if="$route.path === '/' || $route.path === '/blog'" class="d-flex align-items-center" @click="goToFilteredPlayers(role)">
+              <i class="fa-solid fa-futbol me-2"></i>
+                Players
+            </li>
           </ul>
         </div>
       </nav>
