@@ -257,71 +257,79 @@ export default {
             <p>{{ player.description }}</p>
             <!-- modale messaggi -->
             <div
-              class="ms-message-modal position-fixed"
-              @click.stop
-              :class="{ 'show-modal': this.store.showMessageModal }"
+              class="message-background"
+              :class="{
+                'message-background-active':
+                  this.store.showMessageModal || this.store.showReviewModal,
+              }"
             >
               <div
-                class="ms-modale-header d-flex align-items-center justify-content-between py-3 px-3"
+                class="ms-message-modal position-fixed"
+                @click.stop
+                :class="{ 'show-modal': this.store.showMessageModal }"
               >
-                <h4 class="mb-0">
-                  Invia un messaggio a {{ player.user.name }}
-                </h4>
-                <div @click="this.store.showMessageModal = false">
-                  <i class="fa-solid fa-xmark"></i>
+                <div
+                  class="ms-modale-header d-flex align-items-center justify-content-between py-3 px-3"
+                >
+                  <h4 class="mb-0">
+                    Invia un messaggio a {{ player.user.name }}
+                  </h4>
+                  <div @click="this.store.showMessageModal = false">
+                    <i class="fa-solid fa-xmark"></i>
+                  </div>
                 </div>
-              </div>
-              <div class="ms-modal-body py-4 px-2">
-                <!-- Inizio Form -->
-                <form @submit.prevent="addMessage()" ref="formMessage">
-                  <div class="mt-1">
-                    <label for="name">Nome*</label>
-                    <input
-                      @click.stop
-                      class="form-control mb-2"
-                      type="text"
-                      id="name"
-                      placeholder="Inserisci nome"
-                      v-model="formData.name"
-                      required
-                    />
-                    <label for="email">Email*</label>
-                    <input
-                      @click.stop
-                      class="form-control mb-2"
-                      type="email"
-                      id="email"
-                      placeholder="Inserisci email"
-                      v-model="formData.email"
-                      required
-                    />
-                    <label for="content">Messaggio*</label>
-                    <textarea
-                      @click.stop
-                      class="form-control mb-2"
-                      name="content"
-                      id="content"
-                      cols="30"
-                      rows="10"
-                      placeholder="Inserisci messaggio"
-                      v-model="formData.content"
-                      required
-                    ></textarea>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      @click="this.store.showMessageModal = false"
-                    >
-                      Chiudi
-                    </button>
-                    <button type="submit" class="btn btn-success ms-3">
-                      Invia Messaggio
-                    </button>
-                  </div>
-                </form>
-                <!-- /Fine Form -->
+                <div class="ms-modal-body py-4 px-2">
+                  <!-- Inizio Form -->
+                  <form @submit.prevent="addMessage()" ref="formMessage">
+                    <div class="mt-1">
+                      <label for="name">Nome*</label>
+                      <input
+                        @click.stop
+                        class="form-control mb-2"
+                        type="text"
+                        id="name"
+                        placeholder="Inserisci nome"
+                        v-model="formData.name"
+                        required
+                      />
+                      <label for="email">Email*</label>
+                      <input
+                        @click.stop
+                        class="form-control mb-2"
+                        type="email"
+                        id="email"
+                        placeholder="Inserisci email"
+                        v-model="formData.email"
+                        required
+                      />
+                      <label for="content">Messaggio*</label>
+                      <textarea
+                        @click.stop
+                        class="form-control mb-2"
+                        name="content"
+                        id="content"
+                        cols="30"
+                        rows="10"
+                        placeholder="Inserisci messaggio"
+                        v-model="formData.content"
+                        required
+                      ></textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        @click="this.store.showMessageModal = false"
+                      >
+                        Chiudi
+                      </button>
+                      <button type="submit" class="btn btn-success ms-3">
+                        Invia Messaggio
+                      </button>
+                    </div>
+                  </form>
+                  <!-- /Fine Form -->
+                </div>
               </div>
             </div>
             <!-- /modale messaggi -->
@@ -370,7 +378,7 @@ export default {
                     <label for="content">Recensione*</label>
                     <textarea
                       @click.stop
-                      class="form-control"
+                      class="form-control mb-2"
                       name="content"
                       id="content"
                       cols="30"
@@ -544,9 +552,22 @@ export default {
               </div>
             </div>
           </div>
-          <button @click="this.reviewsCount += 10" class="btn btn-secondary">
-            Mostra altre recensioni
-          </button>
+          <div class="text-center">
+            <button
+              v-if="this.reviewsCount >= sortReviewsDesc().length"
+              @click="this.reviewsCount = 10"
+              class="btn btn-secondary"
+            >
+              Chiudi recensioni <i class="fa-solid fa-arrow-up"></i>
+            </button>
+            <button
+              v-else
+              @click="this.reviewsCount += 10"
+              class="btn btn-secondary"
+            >
+              Mostra altre recensioni <i class="fa-solid fa-arrow-down"></i>
+            </button>
+          </div>
         </section>
       </section>
     </div>
@@ -762,6 +783,18 @@ export default {
     background-color: #d1ecf1;
     border-color: #bee5eb;
   }
+}
+.message-background {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0);
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+}
+.message-background-active {
+  background-color: rgba(0, 0, 0, 0.699);
+  height: 100%;
 }
 .ms-message-modal {
   background-color: white;
