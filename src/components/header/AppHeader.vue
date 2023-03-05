@@ -54,6 +54,9 @@ export default {
       this.store.isSearchDropdownOpen = !this.store.isSearchDropdownOpen;
       this.filteredRoles = this.store.roles;
     },
+    goHome() {
+      this.$router.push({ name: "home" });
+    },
   },
 };
 </script>
@@ -62,10 +65,11 @@ export default {
   <header @click="this.store.isSearchDropdownOpen = false">
     <section class="top_header">
       <nav class="container d-flex justify-content-between align-items-center">
-        <div class="header_left">
-          <router-link :to="{ name: 'home' }" @click="clearSearch()">
-            <img src="src/assets/pngwing.com.png" alt="" />
-          </router-link>
+        <div class="header_left" @click="clearSearch">
+            <li class="d-flex align-items-center" @click="goHome">
+              <i class="fa-solid fa-house"></i>
+              <span class="ms-2">HOME</span>
+            </li>
         </div>
         <div class="search_bar">
           <form
@@ -448,11 +452,26 @@ header {
   top: 0;
 
   .top_header {
+    padding: 20px;
     height: 100%;
     background-color: #111;
     box-shadow: 0px 15px 10px -15px #111;
   }
 }
+
+.header_left{
+  display: flex;
+  align-items: center;
+  :hover{
+    transition: all 0.3s ease-out;
+      color: #F3E7C6;
+    }
+  li{
+    cursor: pointer;
+    
+  }  
+}
+
 
 nav {
   color: grey;
@@ -477,12 +496,6 @@ nav {
     }
   }
 
-  .header_left {
-    width: min-content;
-    img {
-      width: 80px;
-    }
-  }
 }
 
 /* -------------------
@@ -561,7 +574,8 @@ nav {
   UL-ANIMATION
 --------------------*/
 
-.header_right {
+
+.header_right{
   display: flex;
   ul {
     display: flex;
