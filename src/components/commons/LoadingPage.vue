@@ -6,7 +6,7 @@ export default {
 
 <template>
   <section>
-    <div>
+    <div class="loading-box">
       <h2>Caricamento Pagina!</h2>
       <div class="loading-spinner"></div>
     </div>
@@ -21,6 +21,11 @@ section {
   align-items: center;
   width: 100%;
   height: calc(100vh - 80px);
+  .loading-box {
+    padding: 1.25rem;
+    background-color: rgba(240, 248, 255, 0.678);
+    border-radius: 1.25rem;
+  }
 }
 .loading-spinner {
   border: 4px solid rgba(0, 0, 0, 0.1);
