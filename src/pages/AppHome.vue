@@ -1,4 +1,5 @@
 <script>
+import WelcomePage from "../components/commons/WelcomePage.vue";
 import Hero from "../components/main/Hero.vue";
 import AppSectionIcon from "../components/main/AppSectionIcon.vue";
 import Sponsorship from "../components/main/Sponsorship.vue";
@@ -6,6 +7,7 @@ import Sponsorship from "../components/main/Sponsorship.vue";
 export default {
   name: "AppMain",
   components: {
+    WelcomePage,
     Hero,
     Sponsorship,
     AppSectionIcon,
@@ -17,6 +19,8 @@ export default {
 </script>
 
 <template>
+  <WelcomePage />
+
   <section class="hero-section">
     <Hero />
   </section>
