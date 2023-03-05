@@ -60,13 +60,38 @@ export default {
   },
   methods: {
     nextPlayers() {
-      this.startIndex = Math.min(this.startIndex + 1, this.players.length - 3);
+      if (this.startIndex >= this.players.length - 3) {
+        // se siamo arrivati alla fine della lista, ricominciamo dal primo
+        this.startIndex = 0;
+      } else {
+        // altrimenti, scorriamo di uno
+        this.startIndex = this.startIndex + 3;
+      }
     },
     prevPlayers() {
-      this.startIndex = Math.max(this.startIndex - 1, 0);
+      if (this.startIndex === 0) {
+        // se siamo all'inizio della lista, spostiamoci alla fine
+        this.startIndex = this.players.length - 3;
+      } else {
+        // altrimenti, torniamo indietro di 3
+        this.startIndex = Math.max(this.startIndex - 3, 0);
+      }
+    },
+    startAutoplay() {
+      // avviamo l'autoplay e salviamo l'ID dell'intervallo
+      this.intervalId = setInterval(() => {
+        // eseguiamo la funzione nextPlayers()
+        this.nextPlayers();
+      }, 3000);
+    },
+    stopAutoplay() {
+      // interrompiamo l'autoplay dei giocatori
+      clearInterval(this.intervalId);
     },
   },
-  mounted() {},
+  mounted() {
+    this.startAutoplay();
+  },
   // created() {
   //   axios.get(`http://localhost:8000/api/players`).then((resp) => {
   //     resp.data.forEach((giocatore) => {
@@ -82,7 +107,11 @@ export default {
 <template>
   <div class="carousel_card">
     <div class="sponsor_card">
-      <div class="player_container">
+      <div
+        class="player_container"
+        @mouseenter="stopAutoplay()"
+        @mouseleave="startAutoplay()"
+      >
         <PlayerCard
           class="player_card"
           :class="{ 'player-active': activePlayer === index }"
@@ -91,10 +120,20 @@ export default {
           :player="player"
         />
       </div>
-      <div class="prev-btn" @click="prevPlayers">
+      <div
+        class="prev-btn"
+        @click="prevPlayers"
+        @mouseenter="stopAutoplay()"
+        @mouseleave="startAutoplay()"
+      >
         <i class="fa-solid fa-chevron-left"></i>
       </div>
-      <div class="next-btn" @click="nextPlayers">
+      <div
+        class="next-btn"
+        @click="nextPlayers"
+        @mouseenter="stopAutoplay()"
+        @mouseleave="startAutoplay()"
+      >
         <i class="fa-solid fa-chevron-right"></i>
       </div>
     </div>
