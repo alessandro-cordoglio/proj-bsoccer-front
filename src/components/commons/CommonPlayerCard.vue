@@ -12,6 +12,18 @@ export default {
   },
   methods: {},
   computed: {
+    backgroundSponsorships() {
+      if (this.data.sponsorships[0].typology === "Base") {
+        console.log(this.data.sponsorships[0].typology);
+        return "background-color: brown";
+      } else if (this.data.sponsorships[0].typology === "Standard") {
+        console.log(this.data.sponsorships[0].typology);
+        return "background-color: silver";
+      } else {
+        console.log(this.data.sponsorships[0].typology);
+        return "background-color: gold";
+      }
+    },
     mediaRating() {
       const sum = this.data.stars.reduce(
         (total, star) => total + star.rating,
@@ -34,7 +46,14 @@ export default {
     v-if="data.reviews.length >= this.store.howManyReviews"
   >
     <div class="card">
-      <div class="card-top">
+      <div class="card-top position-relative">
+        <div
+          v-if="data.sponsorships.length > 0"
+          class="sponsored position-absolute"
+          :style="backgroundSponsorships"
+        >
+          <span>Sponsorizzato {{ data.sponsorships[0].typology }}</span>
+        </div>
         <img
           :src="
             data.profile_photo.includes('https')
@@ -129,6 +148,13 @@ a {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+    .sponsored {
+      top: 0;
+      width: 100%;
+      padding: 0.3125rem;
+      background-color: red;
+      text-align: center;
     }
   }
   .card-bottom {
