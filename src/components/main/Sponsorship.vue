@@ -105,6 +105,7 @@ export default {
 </script>
 
 <template>
+  <div class="carousel_card">
   <div class="carousel_card pt-4">
     <h2 class="text-white text-center fs-1">
       I nostri giocatori più ricercati
@@ -141,8 +142,8 @@ export default {
       </div>
     </div>
   </div>
+</div>
 </template>
-
 <style lang="scss" scoped>
 .carousel_card {
   position: relative;
@@ -162,7 +163,6 @@ export default {
       }
     }
   }
-
   .prev-btn,
   .next-btn {
     position: absolute;
@@ -181,16 +181,13 @@ export default {
     opacity: 0.5;
     transition: opacity 0.3s;
   }
-
   .prev-btn:hover,
   .next-btn:hover {
     opacity: 1;
   }
-
   .prev-btn {
     left: 0;
   }
-
   .next-btn {
     right: 0;
   }
