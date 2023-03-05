@@ -110,38 +110,6 @@ a {
   &:hover {
     transform: scale(1.04);
   }
-
-  .left-corner,
-  .right-corner {
-    position: absolute;
-    top: -1.5625rem;
-    width: 5rem;
-    height: 5rem;
-    border-radius: 50%;
-    background-color: var(--common-card-color);
-  }
-  .left-corner {
-    left: -2.1875rem;
-  }
-  .right-corner {
-    right: -2.1875rem;
-  }
-  .bottom-left,
-  .bottom-right {
-    position: absolute;
-    bottom: -0.125rem;
-    height: 3.75rem;
-    width: 50%;
-    background-color: var(--common-card-color);
-  }
-  .bottom-left {
-    left: -0.125rem;
-    border-radius: 0 100% 0 0;
-  }
-  .bottom-right {
-    right: -0.125rem;
-    border-radius: 100% 0 0 0;
-  }
   .card-top {
     height: 50%;
     img {
