@@ -24,6 +24,7 @@ export default {
   <div
     class="animation-container"
     :class="{ 'remove-welcome': this.store.welcomeActive }"
+    @click="this.store.welcomeActive = true"
   >
     <div class="ball"></div>
     <div class="logo-container">

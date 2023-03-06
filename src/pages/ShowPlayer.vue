@@ -385,7 +385,7 @@ export default {
                 <!-- Form Recensioni -->
                 <form @submit.prevent="addReview()" action="">
                   <div class="mt-3">
-                    <label for="name">Nome*</label>
+                    <label for="name">Nome</label>
                     <input
                       @click.stop
                       class="form-control mb-2"
@@ -394,7 +394,6 @@ export default {
                       id="name"
                       placeholder="Inserisci nome"
                       v-model="reviewData.name"
-                      required
                     />
                     <label for="content">Recensione*</label>
                     <textarea
