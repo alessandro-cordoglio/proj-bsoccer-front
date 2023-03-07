@@ -72,21 +72,9 @@ export default {
 .logo {
   font-size: 48px;
   font-weight: bold;
-  color: transparent;
-  background-image: linear-gradient(
-    to right,
-    #f00,
-    #ff0,
-    #0f0,
-    #0ff,
-    #00f,
-    #f0f,
-    #f00
-  );
+  color: white;
   background-clip: text;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: color 6s linear infinite;
 }
 
 @keyframes roll {
@@ -122,15 +110,6 @@ export default {
   }
   100% {
     transform: translate(-50%, -50%) scale(2.5);
-  }
-}
-
-@keyframes color {
-  0% {
-    background-position: 0%;
-  }
-  100% {
-    background-position: 800%;
   }
 }
 </style>
